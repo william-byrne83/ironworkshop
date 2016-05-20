@@ -5,13 +5,13 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="header-section">
-                    <h1>Members</h1>
+                    <h1>About Us</h1>
                 </div>
             </div>
             <div class="col-sm-6 hidden-xs">
                 <div class="header-section">
                     <ul class="breadcrumb breadcrumb-top">
-                        <li><a href="/backoffice/users/index">Members</a></li>
+                        <li><a href="/backoffice/about-us/index">About Us</a></li>
                         <li>Delete</li>
                     </ul>
                 </div>
@@ -23,19 +23,19 @@
     <div class="block">
         <!-- General Elements Title -->
         <div class="block-title">
-            <h2>Delete '<?php echo $this->selectedData[0]['email']; ?>'</h2>
+            <h2>Delete '<?php echo substr(FormInput::checkInput($this->selectedData[0]['text']), 0, 50)?>...'</h2>
         </div>
         <!-- END General Elements Title -->
 		<!-- General Elements Content -->
 		<div class="alert alert-danger alert-dismissable">
 	        <h4><strong>Warning</strong></h4>
-	        <p>Please note that this will remove this member. You can add them again at a later time.</p>
+	        <p>Please note that this will remove this About Us. You can add them again at a later time.</p>
 	    </div>
 		<form action="" method="post" class="form-horizontal form-bordered">
         	<input type="hidden" name="id" value="<?php echo $this->selectedData[0]['id']; ?>" />
 			<div class="form-group">
                 <div class="col-md-9">
-                    <p class="form-control-static">You are removing: <strong><?php echo $this->selectedData[0]['email']; ?></strong></p>
+                    <p class="form-control-static">You are removing: <strong><?php echo substr(FormInput::checkInput($this->selectedData[0]['text']), 0, 50)?>...</strong></p>
                 </div>
             </div>
 			<div class="form-group form-actions">

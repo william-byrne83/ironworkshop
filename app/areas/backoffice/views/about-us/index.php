@@ -5,13 +5,13 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="header-section">
-                    <h1>Users</h1>
+                    <h1>About Us</h1>
                 </div>
             </div>
             <div class="col-sm-6 hidden-xs">
                 <div class="header-section">
                     <ul class="breadcrumb breadcrumb-top">
-                        <li>Users</li>
+                        <li>About Us</li>
                     </ul>
                 </div>
             </div>
@@ -21,12 +21,11 @@
     <!-- Table Styles Block -->
     <div class="block full">
     	<div class="block-title">
-            <h2>Manage Users</h2>
+            <h2>Manage About Us</h2>
             <div class="block-options pull-right">
 	    		 <div id="esearch" class="dataTables_filter">
-		    		<form class="form-wrap" method='get' action='/backoffice/users/'>
+		    		<form class="form-wrap" method='get' action='/backoffice/about-us/index'>
                         <div class="input-group pull-right">
-					        <input type="text" class="form-control" placeholder="Search" name="keywords" id="search_term" <?php if (isset($_GET["keywords"])) {echo 'value="'.htmlentities($_GET["keywords"]).'"';}?>><span class="search-btn"><button type="submit" class="btn btn-effect-ripple btn-sm"><i class="fa fa-search"></i></button></span>
 					    </div>
 					</form>
 				</div>
@@ -44,8 +43,10 @@
 		        <div class="row">
 			       <div class="col-xs-12">
 				        <div class="pull-right">
-							<a href="/backoffice/users/add/" class="btn btn-success"><i class="fa fa-plus"></i> Add User</a>
-						</div>
+                            <?php if($this->countData[0]['total'] == 0) {?>
+                                <a href="/backoffice/about-us/add" class="btn btn-success"><i class="fa fa-plus"></i> Add About Us</a>
+                            <?php } ?>
+                        </div>
 					</div>
 				</div>
 				<?php if(!empty($this->getAllData)) {?>
@@ -54,25 +55,20 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>First Name</th>
-                                    <th>Surname</th>
-                                    <th>Email</th>
-                                    <th style="width: 130px; min-width:130px;" class="text-center"><i class="fa fa-flash"></i></th>
+                                    <th>Text</th>
+                                    <th style="width: 90px; min-width:90px;" class="text-center"><i class="fa fa-flash"></i></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach($this->getAllData as $data) {?>
-                                <tr <?php if($data['is_active'] == 0){ echo 'class="danger"'; } ?>>
-                                    <td><strong><?php echo $data['id']; ?></strong></td>
-                                    <td><strong><?php echo $data['firstname']; ?></strong></td>
-                                    <td><strong><?php echo $data['surname']; ?></strong></td>
-                                    <td><?php echo $data['email']; ?></td>
-                                    <td class="text-left">
-                                        <a href="/backoffice/users/edit/<?php echo $data['id']; ?>/" data-toggle="tooltip" title="Edit User" class="btn btn-effect-ripple btn-sm btn-success"><i class="fa fa-pencil"></i></a>
-                                        <a href="/backoffice/users/delete/<?php echo $data['id']; ?>/" data-toggle="tooltip" title="Delete this User" class="btn btn-effect-ripple btn-sm btn-danger"><i class="fa fa-times"></i></a>
-                                        <a href="/backoffice/users/login/<?php echo $data['id']; ?>/" data-toggle="tooltip" title="Login as this User" class="btn btn-effect-ripple btn-sm btn-primary" rel="external"><i class="gi gi-user"></i></a>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td><?php echo $data['id']?></td>
+                                        <td><?php echo substr($data['text'], 0, 50)?>...</td>
+                                        <td class="text-left">
+                                            <a href="/backoffice/about-us/edit/<?php echo $data['id']; ?>/" data-toggle="tooltip" title="Edit About Us" class="btn btn-effect-ripple btn-sm btn-success"><i class="fa fa-pencil"></i></a>
+                                            <a href="/backoffice/about-us/delete/<?php echo $data['id']; ?>/" data-toggle="tooltip" title="Delete About Us" class="btn btn-effect-ripple btn-sm btn-danger"><i class="fa fa-times"></i></a>
+                                        </td>
+                                    </tr>
                                 <?php } ?>
                             </tbody>
                         </table>
@@ -80,21 +76,22 @@
 	            <?php }else{ ?>
 		             <div class="row no-result">
 			            <div class="col-xs-12">
-							<p>There are no users to display.</p>
+							<p>There are no About Us to display.</p>
 			            </div>
 		            </div>
 			    <?php } ?>
                 <div class="pagination-wrap row">
                     <div class="pull-right">
-                        <a href="/backoffice/users/add/" class="btn btn-success"><i class="fa fa-plus"></i> Add User</a>
+                        <?php if($this->countData[0]['total'] == 0) {?>
+                            <a href="/backoffice/about-us/add" class="btn btn-success"><i class="fa fa-plus"></i> Add About Us</a>
+                        <?php } ?>
                     </div>
                     <?php if(!empty($this->page_links)){ ?>
-                    <div class="dataTables_paginate paging_bootstrap">
-                        <?php echo $this->page_links; ?>
-                    </div>
+                        <div class="dataTables_paginate paging_bootstrap">
+                            <?php echo $this->page_links; ?>
+                        </div>
                     <?php } ?>
                 </div>
-                
 	        </div>
         <!-- END Table Styles Content -->
     </div>

@@ -4,9 +4,9 @@ header('Content-Type: text/html; charset=utf-8');
 // ************ SETTINGS ************ //
 date_default_timezone_set('Europe/London'); // Set Timezone to UK
 define('SITE_STATUS', 'LOCAL'); // SITE STATUS (LIVE, DEV or LOCAL)
-define('SITE_NAME', "Temp");
+define('SITE_NAME', "Iron Workshop");
 define('SITE_EMAIL', "info@temp.com");
-define('ERROR_EMAIL', "william@outputdigital.com"); // Used for error reporting
+define('ERROR_EMAIL', "will_byrne56@hotmail.com"); // Used for error reporting
 define('ROOT', $_SERVER['DOCUMENT_ROOT'].'/'); // Site Document Root
 define('MAX_FILE_SIZE', 8388608); // Maximum Upload Size 8MB
 define('CURRENT_PAGE', basename($_SERVER['SCRIPT_NAME'])); // Used for nav active states
@@ -49,7 +49,7 @@ if(SITE_STATUS == 'LIVE'){
 	define('DB_USER', 'root');
  	define('DB_PASSWORD', '');
  	define('DB_HOST', 'localhost');
- 	define('DB_NAME', 'skelly');
+ 	define('DB_NAME', 'ironworkshop');
 }
 
 /** Format URL */

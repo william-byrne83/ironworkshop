@@ -27,5 +27,6 @@ function renderAdminJSBundle(){
     echo '<script src="/app/areas/backoffice/assets/js/plugins.js"></script>';
     echo '<script src="/app/areas/backoffice/assets/js/app.js"></script>';
     echo '<script src="/app/areas/backoffice/assets/js/general.js"></script>';
+    echo '<script src="/app/areas/backoffice/assets/js/ckeditor/ckeditor.js"></script>';
 }
 ?>
