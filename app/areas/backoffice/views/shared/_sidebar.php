@@ -30,16 +30,52 @@
 				</li>
 
                 <li>
-                    <a href="#" class="sidebar-nav-menu <?php echo isset($this->pageSection) && $this->pageSection == 'General' ? 'open' : ''; ?>">
+                    <a href="#" class="sidebar-nav-menu <?php echo isset($this->pageSection) && $this->pageSection == 'News' ? 'open' : ''; ?>">
 	                    <i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i>
-	                	<i class="fa fa-cog sidebar-nav-icon"></i>
-	                    <span class="sidebar-nav-mini-hide">General</span>
+	                	<i class="fa fa-newspaper-o sidebar-nav-icon"></i>
+	                    <span class="sidebar-nav-mini-hide">News</span>
 	                </a>
                     <ul>
-                        <li><a href="/backoffice/homepage/" <?php echo isset($this->pageSubSection) && $this->pageSubSection == 'Homepage' ? ' class="active"' : ''; ?>>Manage Homepage</a></li>
-                        <li><a href="/backoffice/meet-team/" <?php echo isset($this->pageSubSection) && $this->pageSubSection == 'Meet The Team' ? ' class="active"' : ''; ?>>Manage Meet The Team</a></li>
+                        <li><a href="/backoffice/news/" <?php echo isset($this->pageSubSection) && $this->pageSubSection == 'News Index' ? ' class="active"' : ''; ?>>Manage News</a></li>
+                        <li><a href="/backoffice/categories/" <?php echo isset($this->pageSubSection) && $this->pageSubSection == 'Category Index' ? ' class="active"' : ''; ?>>Manage News Categories</a></li>
                     </ul>
                 </li>
+
+                <li>
+                	<a href="/backoffice/contact-us/" <?php echo isset($this->pageSection) && $this->pageSection == 'Contact Us' ? ' class="active"' : ''; ?>>
+						<i class="fa fa-map-marker sidebar-nav-icon"></i>
+						<span class="sidebar-nav-mini-hide">Contact Us</span>
+					</a>
+				</li>
+
+                <li>
+                	<a href="/backoffice/emails/" <?php echo isset($this->pageSection) && $this->pageSection == 'Emails' ? ' class="active"' : ''; ?>>
+						<i class="fa fa-envelope-o sidebar-nav-icon"></i>
+						<span class="sidebar-nav-mini-hide">Newsletter Emails</span>
+					</a>
+				</li>
+
+                <li>
+                	<a href="/backoffice/faqs/" <?php echo isset($this->pageSection) && $this->pageSection == 'Faq' ? ' class="active"' : ''; ?>>
+						<i class="fa fa-question sidebar-nav-icon"></i>
+						<span class="sidebar-nav-mini-hide">Faqs</span>
+					</a>
+				</li>
+
+                <li>
+                	<a href="/backoffice/galleries/" <?php echo isset($this->pageSection) && $this->pageSection == 'Gallery' ? ' class="active"' : ''; ?>>
+						<i class="fa fa-picture-o sidebar-nav-icon"></i>
+						<span class="sidebar-nav-mini-hide">Gallery</span>
+					</a>
+				</li>
+
+                <li>
+                	<a href="/backoffice/results/" <?php echo isset($this->pageSection) && $this->pageSection == 'Results' ? ' class="active"' : ''; ?>>
+						<i class="fa fa-trophy  sidebar-nav-icon"></i>
+						<span class="sidebar-nav-mini-hide">Results</span>
+					</a>
+				</li>
+
             </ul><!-- END Sidebar Navigation -->
         </div><!-- END Sidebar Content -->
     </div><!-- END Wrapper for scrolling functionality -->

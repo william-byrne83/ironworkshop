@@ -20,6 +20,8 @@ function renderAdminCssBundle(){
 }
 function renderAdminHeadJSBundle(){
     echo '<script src="/app/areas/backoffice/assets/js/modernizr-2.8.3.min.js"></script>';
+    echo '<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>';
+
 }
 function renderAdminJSBundle(){
     echo '<script src="/app/areas/backoffice/assets/js/jquery-2.1.4.min.js"></script>';
