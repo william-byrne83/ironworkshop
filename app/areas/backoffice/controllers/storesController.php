@@ -1,31 +1,31 @@
 <?php
-/** Results Controller */
+/** Stores Controller */
 
-class ResultsController extends BaseController {
+class StoresController extends BaseController {
 
 	/** __construct */
 	public function __construct(){
 		parent::__construct();
 		// Load the User Model ($modelName, $area)
-		$this->_model = $this->loadModel('ResultsBackoffice', 'backoffice');
+		$this->_model = $this->loadModel('StoresBackoffice', 'backoffice');
 	}
 
     /**
-	 * PAGE: Results Index
-	 * GET: /backoffice/results/index
+	 * PAGE: Stores Index
+	 * GET: /backoffice/stores/index
 	 * This method handles the view awards page
 	 */
 	public function index(){
         Auth::checkAdminLogin();
 
 		// Set the Page Title ('pageName', 'pageSection', 'areaName')
-		$this->_view->pageTitle = array('Results');
+		$this->_view->pageTitle = array('Stores');
 		// Set Page Description
-		$this->_view->pageDescription = 'Results Index';
+		$this->_view->pageDescription = 'Stores Index';
 		// Set Page Section
-		$this->_view->pageSection = 'Results';
+		$this->_view->pageSection = 'Stores';
 		// Set Page Sub Section
-		$this->_view->pageSubSection = 'Results Index';
+		$this->_view->pageSubSection = 'Stores Index';
 
 		###### PAGINATION ######
         //sanitise or set keywords to false
@@ -40,16 +40,20 @@ class ResultsController extends BaseController {
         $this->_view->getAllData = $this->_model->getAllData($pages->get_limit(), $_GET['keywords']);
         $this->_view->countData = $this->_model->countAllData();
 
+        foreach($this->_view->getAllData as $key => $data){
+            $this->_view->getAllData[$key]['hero_image'] = $this->_model->getHeroImage($data['id']);
+        }
+
 		// Create the pagination nav menu
 		$this->_view->page_links = $pages->page_links();
 
 		// Render the view ($renderBody, $layout, $area)
-		$this->_view->render('results/index', 'layout', 'backoffice');
+		$this->_view->render('stores/index', 'layout', 'backoffice');
 	}
 
     /**
-	 * PAGE: Results Edit
-	 * GET: /backoffice/results/edit:id
+	 * PAGE: Stores Edit
+	 * GET: /backoffice/stores/edit:id
      * @param string $id The unique id for the award user
 	 * This method handles the edit award user page
 	 */
@@ -61,24 +65,24 @@ class ResultsController extends BaseController {
                 $this->_view->stored_data = $selectDataByID[0];
 
 			}else{
-                $this->_view->flash[] = "No Results matches this id";
+                $this->_view->flash[] = "No Stores matches this id";
                 Session::set('backofficeFlash', array($this->_view->flash, 'failure'));
-				Url::redirect('backoffice/results/');
+				Url::redirect('backoffice/stores/');
 			}
 		}else{
-            $this->_view->flash[] = "No ID provided for Results";
+            $this->_view->flash[] = "No ID provided for Stores";
             Session::set('backofficeFlash', array($this->_view->flash, 'failure'));
-			Url::redirect('backoffice/results/');
+			Url::redirect('backoffice/stores/');
 		}
 
 		// Set the Page Title ('pageName', 'pageSection', 'areaName')
-		$this->_view->pageTitle = array('Results');
+		$this->_view->pageTitle = array('Stores');
 		// Set Page Description
-		$this->_view->pageDescription = 'Results Edit';
+		$this->_view->pageDescription = 'Stores Edit';
 		// Set Page Section
-		$this->_view->pageSection = 'Results';
+		$this->_view->pageSection = 'Stores';
 		// Set Page Sub Section
-		$this->_view->pageSubSection = 'Results Index';
+		$this->_view->pageSubSection = 'Stores Index';
 
 		// Set Page Specific CSS
 		//$this->_view->pageCss = $pageCss;
@@ -89,22 +93,12 @@ class ResultsController extends BaseController {
 		// Set default variables
 		$this->_view->error = array();
 
-        $this->_trainerModel = $this->loadModel('TrainersBackoffice', 'backoffice');
-        $this->_view->trainers = $this->_trainerModel->getAllData(false, false, 1);
-
         // If Form has been submitted process it
 		if(!empty($_POST['save'])){
             $_POST['id'] = $id;
             $_POST['stored_title'] = $selectDataByID[0]['title'];
 
-            if(!isset($_FILES) || $_FILES['image']['name'] == null) {
-                $_POST['image'][0] = $this->_view->stored_data['image'];
-            }else{
-                //calls function that moves resourced documents
-                $this->uploadFile($_FILES);
-            }
-
-            // Update Results details
+            // Update Stores details
             $updateData = $this->_model->updateData($_POST);
 
             if(isset($updateData['error']) && $updateData['error'] != null){
@@ -112,117 +106,103 @@ class ResultsController extends BaseController {
                     $this->_view->error[$key] = $error;
                 }
             } else {
-                if (isset($_FILES) && $_FILES['image']['name'] != null) {
-                    //remove old file
-                    unlink(ROOT . UPLOAD_DIR . '/results/' . $this->_view->stored_data['image']);
-                }
 
-                $this->_view->flash[] = "Results updated successfully.";
+                $this->_view->flash[] = "Stores updated successfully.";
                 Session::set('backofficeFlash', array($this->_view->flash, 'success'));
-                Url::redirect('backoffice/results/index');
+                Url::redirect('backoffice/stores/index');
             }
 		}
 
 		if(!empty($_POST['cancel'])){
-			Url::redirect('backoffice/results/index');
+			Url::redirect('backoffice/stores/index');
 		}
 
 		// Render the view ($renderBody, $layout, $area)
-		$this->_view->render('results/add', 'layout', 'backoffice');
+		$this->_view->render('stores/add', 'layout', 'backoffice');
 	}
 
     /**
-     * PAGE: Results Delete
-     * GET: /backoffice/results/delete/:id
-     * This method handles the deletion of Results
-     * @param string $id The unique id for the Results
+     * PAGE: Stores Delete
+     * GET: /backoffice/stores/delete/:id
+     * This method handles the deletion of Stores
+     * @param string $id The unique id for the Stores
      */
     public function delete($id){
         Auth::checkAdminLogin();
         // Set the Page Title ('pageName', 'pageSection', 'areaName')
-		$this->_view->pageTitle = array('Results');
+		$this->_view->pageTitle = array('Stores');
 		// Set Page Description
-		$this->_view->pageDescription = 'Results Delete';
+		$this->_view->pageDescription = 'Stores Delete';
 		// Set Page Section
-		$this->_view->pageSection = 'Results';
+		$this->_view->pageSection = 'Stores';
 		// Set Page Sub Section
-		$this->_view->pageSubSection = 'Results Index';
+		$this->_view->pageSubSection = 'Stores Index';
 
         //Check we got ID
         if(!empty($id)){
 			$selectDataByID = $this->_model->selectDataByID($id);
             $this->_view->selectedData = $selectDataByID;
 
-            //Check ID returns an Results
+            //Check ID returns an Stores
 			if(isset($selectDataByID[0]['id']) && !empty($selectDataByID[0]['id'])){
                 if(isset($_POST) && !empty($_POST)) {
                     if (!empty($_POST['delete'])) {
                         $deleteAttempt = $this->_model->deleteData($id);
-                        //Check we have deleted Results
+                        //Check we have deleted Stores
                         if (!empty($deleteAttempt)) {
-                            unlink(ROOT.UPLOAD_DIR.'/results/'.$selectDataByID[0]['image']);
 
                             // Redirect to next page
-                            $this->_view->flash[] = "Results deleted successfully.";
+                            $this->_view->flash[] = "Stores deleted successfully.";
                             Session::set('backofficeFlash', array($this->_view->flash, 'success'));
-                            Url::redirect('backoffice/results/');
+                            Url::redirect('backoffice/stores/');
                         } else {
                             $this->_view->error[] = 'A problem has occurred when trying to delete this award.';
                         }
                     } elseif (!empty($_POST['cancel'])) {
-                        Url::redirect('backoffice/results/');
+                        Url::redirect('backoffice/stores/');
                     }
                 }
 			}else{
-                $this->_view->flash[] = "No Results matches this id";
+                $this->_view->flash[] = "No Stores matches this id";
                 Session::set('backofficeFlash', array($this->_view->flash, 'failure'));
-				Url::redirect('backoffice/results/');
+				Url::redirect('backoffice/stores/');
 			}
 		}else{
-            $this->_view->flash[] = "No ID provided for Results";
+            $this->_view->flash[] = "No ID provided for Stores";
             Session::set('backofficeFlash', array($this->_view->flash, 'failure'));
-			Url::redirect('backoffice/results/');
+			Url::redirect('backoffice/stores/');
 		}
         // Render the view ($renderBody, $layout, $area)
-		$this->_view->render('results/delete', 'layout', 'backoffice');
+		$this->_view->render('stores/delete', 'layout', 'backoffice');
     }
 
 
     /**
-     * PAGE: Results Add
-     * GET: /backoffice/results/add/:id
-     * This method handles the adding of results
+     * PAGE: Stores Add
+     * GET: /backoffice/stores/add/:id
+     * This method handles the adding of stores
      */
 	public function add(){
         Auth::checkAdminLogin();
 		// Set the Page Title ('pageName', 'pageSection', 'areaName')
-		$this->_view->pageTitle = array('Results');
+		$this->_view->pageTitle = array('Stores');
 		// Set Page Description
-		$this->_view->pageDescription = 'Results Add';
+		$this->_view->pageDescription = 'Stores Add';
 		// Set Page Section
-		$this->_view->pageSection = 'Results';
+		$this->_view->pageSection = 'Stores';
 		// Set Page Sub Section
-		$this->_view->pageSubSection = 'Results Index';
+		$this->_view->pageSubSection = 'Stores Index';
 
         $this->_view->error = array();
-
-        $this->_trainerModel = $this->loadModel('TrainersBackoffice', 'backoffice');
-        $this->_view->trainers = $this->_trainerModel->getAllData(false, false, 1);
 
         // If Form has been submitted process it
 		if(!empty($_POST)){
             //if user selected cancel
             if(!empty($_POST['cancel'])){
-			    Url::redirect('backoffice/results/index');
+			    Url::redirect('backoffice/stores/index');
 		    }
 
-            if(!isset($_FILES) || empty($_FILES['image']['name'])){
-                $_POST['image'] = null;
-            }else{
-                $this->uploadFile($_FILES);
-            }
-
-            // Create new Results
+            // Create new Stores
             $createData = $this->_model->createData($_POST);
             if(isset($createData['error']) && $createData['error'] != null){
                 foreach($createData['error'] as $key => $error){
@@ -232,13 +212,13 @@ class ResultsController extends BaseController {
                 $maxOrder = $this->_model->getMaxOrder();
                 $this->_model->updateSortOrder($createData, ($maxOrder[0]['max_order']+1));
 
-                $this->_view->flash[] = "Results added successfully.";
+                $this->_view->flash[] = "Stores added successfully.";
                 Session::set('backofficeFlash', array($this->_view->flash, 'success'));
-                Url::redirect('backoffice/results/index');
+                Url::redirect('backoffice/stores/index');
             }
 		}
 		// Render the view ($renderBody, $layout, $area)
-		$this->_view->render('results/add', 'layout', 'backoffice');
+		$this->_view->render('stores/add', 'layout', 'backoffice');
 	}
 
     /**
@@ -251,7 +231,7 @@ class ResultsController extends BaseController {
         // upload file
         try {
             if(isset($files['image'])){
-                $file = new Ps2_Upload(ROOT.UPLOAD_DIR.'/results/', 'image', true);
+                $file = new Ps2_Upload(ROOT.UPLOAD_DIR.'/stores/', 'image', true);
                 $file->addPermittedTypes(array(
                         'image/png', 'image/jpeg', 'image/gif',
                     )
@@ -268,8 +248,8 @@ class ResultsController extends BaseController {
     }
 
     /**
-	 * PAGE: Results image download
-	 * GET: /backoffice/results/download/:id/
+	 * PAGE: Stores image download
+	 * GET: /backoffice/stores/download/:id/
 	 * This method handles the download image action.
 	 */
     public function download($id){
@@ -282,25 +262,25 @@ class ResultsController extends BaseController {
                 header('Cache-Control: must-revalidate');
                 header('Content-Transfer-Encoding: binary');
                 header('Pragma: public');
-                header('Content-Length: ' . filesize(ROOT.'assets/uploads/results/'.$selectedData[0]['image']));
-                readfile(ROOT.'assets/uploads/results/'.$selectedData[0]['image']);
+                header('Content-Length: ' . filesize(ROOT.'assets/uploads/stores/'.$selectedData[0]['image']));
+                readfile(ROOT.'assets/uploads/stores/'.$selectedData[0]['image']);
                 exit;
             } else {
                 $this->_view->flash[] = "No data matches this ID";
                 Session::set('backofficeFlash', array($this->_view->flash, 'failure'));
-                Url::redirect('backoffice/results/');
+                Url::redirect('backoffice/stores/');
             }
         }else{
             $this->_view->flash[] = "No ID was provided";
             Session::set('backofficeFlash', array($this->_view->flash, 'failure'));
-            Url::redirect('backoffice/results/');
+            Url::redirect('backoffice/stores/');
         }
     }
 
     /**
-     * PAGE: results types sort
-     * GET: /backoffice/results/sort/:direction/:id
-     * This method handles the sorting of results
+     * PAGE: stores types sort
+     * GET: /backoffice/stores/sort/:direction/:id
+     * This method handles the sorting of stores
      * @param string $direction, int $id
      */
     public function sort($direction = null, $id= null, $order = null){
@@ -328,9 +308,9 @@ class ResultsController extends BaseController {
                 $this->_model->updateSortOrder($id, $order);
 
             }
-            Url::redirect('backoffice/results/');
+            Url::redirect('backoffice/stores/');
         }else{
-            Url::redirect('backoffice/results/');
+            Url::redirect('backoffice/stores/');
         }
     }
 }

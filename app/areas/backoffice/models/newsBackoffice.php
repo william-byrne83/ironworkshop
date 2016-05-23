@@ -30,6 +30,22 @@ class NewsBackoffice extends Model{
 					$temp = FormatUrl($temp);
                     $return['slug'] = $temp;
                 }
+
+                //unique
+                if($type != 'edit') {
+                    $temp = $this->selectDataByTitle($input);
+                    if (!empty($temp) || $temp != null) {
+                        $return['error'][$key] = "This Title already exists";
+                    }
+                }else{
+                    //if the edited title is different than their previous one, check its unique.
+                    if($input != $return['stored_title']){
+                        $temp = $this->selectDataByTitle($input);
+                        if (!empty($temp) || $temp != null) {
+                            $return['error'][$key] = "This Title already exists";
+                        }
+                    }
+                }
             }
 
             //text
@@ -201,4 +217,18 @@ class NewsBackoffice extends Model{
         $this->_db->delete($dbTable, $where);
 		return true;
     }
+
+    /**
+	 * FUNCTION: selectDataByTitle
+	 * This function gets date based on title
+	 * @param int $title
+	 */
+	public function selectDataByTitle($title){
+		$sql = "SELECT t1.id
+				FROM news t1
+				WHERE t1.title = :title";
+
+		return $this->_db->select($sql, array(':title' => $title));
+	}
+
 }?>

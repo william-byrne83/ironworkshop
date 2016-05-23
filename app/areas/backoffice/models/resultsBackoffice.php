@@ -57,12 +57,14 @@ class ResultsBackoffice extends Model{
 	 */
 	public function getAllData($limit = false, $keywords = false){
         $optLimit = $limit != false ? " LIMIT $limit" : "";
-        $optKeywords = $keywords != false ? " AND CONCAT(IF(isnull(t1.text),' ',CONCAT(LOWER(t1.text),' '))) LIKE '%$keywords%'" : "";
+        $optKeywords = $keywords != false ? " AND CONCAT(IF(isnull(t1.text),' ',CONCAT(LOWER(t1.text),' ')), IF(isnull(t2.name),' ',CONCAT(LOWER(t2.name),' '))) LIKE '%$keywords%'" : "";
 
-		$sql = "SELECT t1.id, t1.trainer_id, t1.image, t1.text, t1.sort, t1.is_active
+		$sql = "SELECT t1.id, t1.trainer_id, t1.image, t1.text, t1.sort, t1.is_active, t2.name
 				FROM results t1
+				  LEFT JOIN trainers t2 ON t1.trainer_id = t2.id
 				WHERE 1 = 1
 				".$optKeywords."
+                GROUP BY t1.id
 				ORDER BY t1.sort ASC
 				".$optLimit;
 
@@ -75,12 +77,14 @@ class ResultsBackoffice extends Model{
 	 * @param int $keywords
 	 */
 	public function countAllData($keywords = false){
-        $optKeywords = $keywords != false ? " AND CONCAT(IF(isnull(t1.text),' ',CONCAT(LOWER(t1.text),' '))) LIKE '%$keywords%'" : "";
+        $optKeywords = $keywords != false ? " AND CONCAT(IF(isnull(t1.text),' ',CONCAT(LOWER(t1.text),' ')), IF(isnull(t2.name),' ',CONCAT(LOWER(t2.name),' '))) LIKE '%$keywords%'" : "";
 
 		$sql = "SELECT COUNT(t1.id) AS total
 				FROM results t1
+                  LEFT JOIN trainers t2 ON t1.trainer_id = t2.id
 				WHERE 1 = 1
-				".$optKeywords;
+				".$optKeywords."
+                GROUP BY t1.id";
 		return $this->_db->select($sql);
 	}
 

@@ -1,5 +1,5 @@
 <?php
-class GalleriesBackoffice extends Model{
+class StoreImagesBackoffice extends Model{
 	/** __construct */
 	public function __construct(){
 		parent::__construct();
@@ -17,32 +17,19 @@ class GalleriesBackoffice extends Model{
             $input = is_array($input) ? FormInput::trimArray($input) : FormInput::checkInput($input);
             $return[$key] = $input;
 
+            //image
+            if($key == 'image'){
+                //required
+                if(empty($input) || $input == null){
+                    $return['error'][$key] = 'Image cannot be empty';
+                }
+            }
+
             //title
             if($key == 'title'){
                 //required
                 if(empty($input) || $input == null){
-                    $return['error'][$key] = 'Image Title cannot be empty';
-                }else{
-                    // Creating slug based off formatted title.
-                    $temp = Formatting::removeAccents($input);
-					$temp = FormatUrl($temp);
-                    $return['slug'] = $temp;
-                }
-
-                //unique
-                if($type != 'edit') {
-                    $temp = $this->selectDataByTitle($input);
-                    if (!empty($temp) || $temp != null) {
-                        $return['error'][$key] = "This Title already exists";
-                    }
-                }else{
-                    //if the edited title is different than their previous one, check its unique.
-                    if($input != $return['stored_title']){
-                        $temp = $this->selectDataByTitle($input);
-                        if (!empty($temp) || $temp != null) {
-                            $return['error'][$key] = "This Title already exists";
-                        }
-                    }
+                    $return['error'][$key] = 'Title cannot be empty';
                 }
             }
 
@@ -52,31 +39,34 @@ class GalleriesBackoffice extends Model{
 
     /**
 	 * FUNCTION: selectDataByID
-	 * This function gets galleries information for backoffice
+	 * This function gets store_images information for backoffice
 	 * @param int $id
 	 */
 	public function selectDataByID($id){
-		$sql = "SELECT t1.id, t1.title, t1.slug, t1.image, t1.video, t1.sort, t1.is_active
-				FROM galleries t1
+		$sql = "SELECT t1.id, t1.store_id, t1.sort, t1.image, t1.title, t1.is_active
+				FROM store_images t1
 				WHERE t1.id = :id
                 ";
-
 		return $this->_db->select($sql, array(':id' => $id));
 	}
 
     /**
 	 * FUNCTION: getAllData
-	 * This function returns the details for All galleries
+	 * This function returns the details for All store_images
 	 * @param int $limit, $keywords
 	 */
-	public function getAllData($limit = false, $keywords = false){
+	public function getAllData($limit = false, $keywords = false, $active = false, $id = false){
         $optLimit = $limit != false ? " LIMIT $limit" : "";
+        $optActive = $active != false ? " AND t1.is_active = $active" : "" ;
         $optKeywords = $keywords != false ? " AND CONCAT(IF(isnull(t1.title),' ',CONCAT(LOWER(t1.title),' '))) LIKE '%$keywords%'" : "";
+        $optStore = $id != false ? " AND t1.store_id = $id" : "";
 
-		$sql = "SELECT t1.id, t1.title, t1.slug, t1.image, t1.video, t1.sort, t1.is_active
-				FROM galleries t1
+		$sql = "SELECT t1.id, t1.store_id, t1.sort, t1.image, t1.title, t1.is_active
+				FROM store_images t1
 				WHERE 1 = 1
 				".$optKeywords."
+				".$optActive."
+				".$optStore."
 				ORDER BY t1.sort ASC
 				".$optLimit;
 
@@ -85,35 +75,37 @@ class GalleriesBackoffice extends Model{
 
     /**
 	 * FUNCTION: countAllData
-	 * This function returns the count for All galleries
+	 * This function returns the count for All store_images
 	 * @param int $keywords
 	 */
-	public function countAllData($keywords = false){
+	public function countAllData($keywords = false, $id = false){
         $optKeywords = $keywords != false ? " AND CONCAT(IF(isnull(t1.title),' ',CONCAT(LOWER(t1.title),' '))) LIKE '%$keywords%'" : "";
+        $optStore = $id != false ? " AND t1.store_id = $id" : "";
 
 		$sql = "SELECT COUNT(t1.id) AS total
-				FROM galleries t1
+				FROM store_images t1
 				WHERE 1 = 1
-				".$optKeywords;
+				".$optKeywords."
+				".$optStore."
+                ";
 		return $this->_db->select($sql);
 	}
 
     /**
 	 * FUNCTION: createData
-	 * This function adds a new galleries to the Database from backoffice
-	 * @param mixed $data Array of galleries Data
+	 * This function adds a new store_images to the Database from backoffice
+	 * @param mixed $data Array of store_images Data
 	 */
 	public function createData($data){
         $data = $this->validation($data, 'add');
         if(isset($data['error']) && $data['error'] != null){
             return $data;
         }else {
-            $dbTable = 'galleries';
+            $dbTable = 'store_images';
             $postData = array(
-                'title' => $data['title'],
-                'slug' => $data['slug'],
                 'image' => $data['image'][0],
-                'video' => $data['video'],
+                'title' => $data['title'],
+                'store_id' => $data['store_id'],
                 'is_active' => $data['is_active']
             );
 
@@ -126,7 +118,7 @@ class GalleriesBackoffice extends Model{
 
     /**
 	 * FUNCTION: updateData
-	 * This function updates galleries details for backoffice
+	 * This function updates store_images details for backoffice
 	 * @param mixed $data An array of data passed from the Controller
 	 */
 	public function updateData($data){
@@ -134,12 +126,11 @@ class GalleriesBackoffice extends Model{
         if(isset($data['error']) && $data['error'] != null){
             return $data;
         }else {
-            $dbTable = 'galleries';
+            $dbTable = 'store_images';
             $postData = array(
-                'title' => $data['title'],
-                'slug' => $data['slug'],
                 'image' => $data['image'][0],
-                'video' => $data['video'],
+                'title' => $data['title'],
+                'store_id' => $data['store_id'],
                 'is_active' => $data['is_active']
             );
             $where = "`id` = {$data['id']}";
@@ -151,11 +142,11 @@ class GalleriesBackoffice extends Model{
 
     /**
 	 * FUNCTION: deleteData
-	 * This function deletes an galleries
-	 * @param Int $id of an galleries
+	 * This function deletes an store_images
+	 * @param Int $id of an store_images
 	 */
     public function deleteData($id){
-        $dbTable = 'galleries';
+        $dbTable = 'store_images';
         $where = "`id` = $id";
         $this->_db->delete($dbTable, $where);
 		return true;
@@ -163,18 +154,18 @@ class GalleriesBackoffice extends Model{
 
     /**
 	 * FUNCTION: updateSortOrder
-	 * This function updates the galleries order field
+	 * This function updates the store_images order field
 	 * @param Int $id, int $order
 	 */
-    public function updateSortOrder($id, $order){
+    public function updateSortOrder($id, $order, $store_id){
         $id = FormInput::checkInput($id);
         $order = FormInput::checkInput($order);
 
-        $dbTable = 'galleries';
+        $dbTable = 'store_images';
         $postData = array(
             'sort' => $order,
         );
-        $where = "`id` = {$id}";
+        $where = "`id` = {$id} AND `store_id` = {$store_id}";
         $this->_db->update($dbTable, $postData, $where);
         return true;
     }
@@ -182,10 +173,10 @@ class GalleriesBackoffice extends Model{
 
     /**
 	 * FUNCTION: updateOldSortOrder
-	 * This function updates the galleries order field based on its order value
+	 * This function updates the store_images order field based on its order value
 	 * @param String $direction, Int $order
 	 */
-    public function updateOldSortOrder($direction = false, $order = false){
+    public function updateOldSortOrder($direction = false, $order = false, $store_id){
         $direction = FormInput::checkInput($direction);
         $order = FormInput::checkInput($order);
 
@@ -207,8 +198,8 @@ class GalleriesBackoffice extends Model{
             return false;
         }
 
-        $dbTable = 'galleries';
-        $where = "`sort` = {$order}";
+        $dbTable = 'store_images';
+        $where = "`sort` = {$order} AND `store_id` = {$store_id}";
         $this->_db->update($dbTable, $postData, $where);
         return true;
     }
@@ -219,22 +210,9 @@ class GalleriesBackoffice extends Model{
 	 */
     public function getMaxOrder(){
         $sql = "SELECT MAX(t1.sort) AS max_order
-				FROM galleries t1";
+				FROM store_images t1";
 
 		return $this->_db->select($sql);
     }
-
-    /**
-	 * FUNCTION: selectDataByTitle
-	 * This function gets date based on title
-	 * @param int $title
-	 */
-	public function selectDataByTitle($title){
-		$sql = "SELECT t1.id
-				FROM galleries t1
-				WHERE t1.title = :title";
-
-		return $this->_db->select($sql, array(':title' => $title));
-	}
 
 }?>

@@ -5,13 +5,13 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="header-section">
-                    <h1>Results</h1>
+                    <h1>Store Images</h1>
                 </div>
             </div>
             <div class="col-sm-6 hidden-xs">
                 <div class="header-section">
                     <ul class="breadcrumb breadcrumb-top">
-                        <li><a href="/backoffice/results/index">Results</a></li>
+                        <li><a href="/backoffice/store-images/index">Store Images</a></li>
                         <li><?php if(isset($this->stored_data['id'])){echo "Edit"; }else{ echo "Add";}?></li>
                     </ul>
                 </div>
@@ -23,7 +23,7 @@
     <div class="block">
         <!-- General Elements Title -->
         <div class="block-title">
-            <h2><?php if(isset($this->stored_data['id'])){echo "Edit"; }else{ echo "Add";}?> Results</h2>
+            <h2><?php if(isset($this->stored_data['id'])){echo "Edit"; }else{ echo "Add";}?> Store Images</h2>
         </div>
         <!-- END General Elements Title -->
         <?php if (!empty($this->error)) { ?>
@@ -37,31 +37,26 @@
         <?php } ?>
         <!-- General Elements Content -->
         <form action="" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
+            <input type="hidden" id="store_id" name="store_id" class="form-control" value="<?php echo $this->stored_id?>">
 
-            <div class="form-group <?php if ((!empty($this->error)) && array_key_exists('trainer_id', $this->error)) { echo 'has-error'; }?>">
-                <label class="col-md-2 control-label" for="country_id">Trainer</label>
+            <div class="form-group <?php if ((!empty($this->error)) && array_key_exists('title', $this->error)) { echo 'has-error'; }?>">
+                <label class="col-md-2 control-label" for="meta_title">Image Title <span class="text-danger">*</span></label>
                 <div class="col-md-5">
-                    <select id="trainer_id" name="trainer_id" class="form-control">
-                        <option value="0">-- Please Select Trainer --</option>
-                        <?php foreach($this->trainers as $key => $trainer){?>
-                            <option value="<?php echo $trainer['id']?>" <?php if ((!empty($this->missing) || !empty($this->error)) && ($_POST['trainer_id'] == $trainer['id'])) {echo 'selected="selected"';} elseif(!empty($this->stored_data['trainer_id']) && $this->stored_data['trainer_id'] == $trainer['id']){echo 'selected="selected"';}?> > <?php echo $trainer['name']?></option>
-                        <?php } ?>
-                    </select>
+                    <input type="text" id="title" name="title" class="form-control" value="<?php if (!empty($this->error)) { echo Formatting::utf8_htmlentities($_POST['title']);} elseif(!empty($this->stored_data['title'])){echo $this->stored_data['title'];}?>">
                 </div>
             </div>
 
-
             <?php if(isset($this->stored_data['id']) && $this->stored_data['id'] != null && !empty($this->stored_data['image'])){?>
                 <div class="form-group">
-                    <label class="col-md-2 control-label" for="current file">Current Image Image</label>
+                    <label class="col-md-2 control-label" for="current file">Current Store Image</label>
                     <div class="col-md-10 double-input">
                         <div class="col-md-5">
-                            <td><img src="/image.php?width=120&height=120&image=/assets/uploads/results/<?php echo $this->stored_data['image']?>" alt="<?php echo $this->stored_data['image']?>"></td>
+                            <td><img src="/image.php?width=120&height=120&image=/assets/uploads/store/<?php echo $this->stored_data['image']?>" alt="<?php echo $this->stored_data['image']?>"></td>
                         </div>
 
                         <div class="col-xs-6">
                             <div class="edit-download-wrap">
-                                <a href="/backoffice/results/download/<?php echo $this->stored_data['id'];?>/" class="btn btn-primary">Download Current Image Image <i class="fa fa-cloud-download"></i></a>
+                                <a href="/backoffice/store-images/download/<?php echo $this->stored_data['id'];?>/" class="btn btn-primary">Download Current Image Image <i class="fa fa-cloud-download"></i></a>
                             </div>
                         </div>
                     </div>
@@ -69,7 +64,7 @@
             <?php } ?>
 
             <div class="form-group <?php if ((!empty($this->error)) && array_key_exists('image', $this->error)) { echo 'has-error'; }?>">
-                <label class="col-md-2 control-label" for="file">Result Image <span class="text-danger">*</span></label>
+                <label class="col-md-2 control-label" for="file">Store Image </label>
                 <div class="col-md-5">
                     <input type="file" name="image" id="image">
                     <?php if(isset($this->stored_data['image']) && !empty($this->stored_data['image'])){?>
@@ -77,14 +72,6 @@
                     <?php } ?>
                 </div>
             </div>
-
-            <div class="form-group <?php if ((!empty($this->error)) && array_key_exists('text', $this->error)) { echo 'has-error'; }?>">
-                <label class="col-md-2 control-label" for="headline">Text <span class="text-danger">*</span></label>
-                <div class="col-md-5">
-                    <textarea id="text" name="text" rows="7" class="ckeditor" ><?php if ((!empty($this->missing)) || (!empty($this->error))) { echo  html_entity_decode($_POST['text']);}elseif(!empty($this->stored_data['text'])){echo $this->stored_data['text'];}?></textarea>
-                </div>
-            </div>
-
 
             <div class="form-group">
 				<label class="col-md-2 control-label" for="is_active">Is Active</label>

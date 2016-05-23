@@ -76,6 +76,20 @@
 					</a>
 				</li>
 
+                <li>
+                	<a href="/backoffice/stores/" <?php echo isset($this->pageSection) && $this->pageSection == 'Stores' ? ' class="active"' : ''; ?>>
+						<i class="fa fa-shopping-cart   sidebar-nav-icon"></i>
+						<span class="sidebar-nav-mini-hide">Stores</span>
+					</a>
+				</li>
+
+                <li>
+                	<a href="/backoffice/trainers/" <?php echo isset($this->pageSection) && $this->pageSection == 'Trainers' ? ' class="active"' : ''; ?>>
+						<i class="fa fa-users sidebar-nav-icon"></i>
+						<span class="sidebar-nav-mini-hide">Trainers</span>
+					</a>
+				</li>
+
             </ul><!-- END Sidebar Navigation -->
         </div><!-- END Sidebar Content -->
     </div><!-- END Wrapper for scrolling functionality -->
