@@ -41,7 +41,7 @@ class TrainersController extends BaseController {
         $this->_view->countData = $this->_model->countAllData();
 
         foreach($this->_view->getAllData as $key => $data){
-            $this->_view->getAllData[$key]['hero_image'] = $this->_model->getHeroImage($data['id']);
+            $this->_view->getAllData[$key]['hero_image'] = $this->_model->getHeroImage($data['id'], 1);
         }
 
 		// Create the pagination nav menu
@@ -147,6 +147,15 @@ class TrainersController extends BaseController {
 			if(isset($selectDataByID[0]['id']) && !empty($selectDataByID[0]['id'])){
                 if(isset($_POST) && !empty($_POST)) {
                     if (!empty($_POST['delete'])) {
+                        // Need to delete all the child images/files
+                        $this->_imagesModel = $this->loadModel('TrainerImagesBackoffice', 'backoffice');
+                        $images = $this->_imagesModel->getAllData(false, false, false, $id);
+                        if(!empty($images)){
+                            foreach($images as $image){
+                                unlink(ROOT . UPLOAD_DIR . '/trainers/' . $image['image']);
+                            }
+                        }
+
                         $deleteAttempt = $this->_model->deleteData($id);
                         //Check we have deleted Trainers
                         if (!empty($deleteAttempt)) {

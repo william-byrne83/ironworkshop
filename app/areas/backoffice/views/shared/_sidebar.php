@@ -23,9 +23,9 @@
 				</li>
 
                 <li>
-                	<a href="/backoffice/about-us/" <?php echo isset($this->pageSection) && $this->pageSection == 'About Us' ? ' class="active"' : ''; ?>>
-						<i class="fa fa-book sidebar-nav-icon"></i>
-						<span class="sidebar-nav-mini-hide">About Us</span>
+                	<a href="/backoffice/homepages/" <?php echo isset($this->pageSection) && $this->pageSection == 'Homepage' ? ' class="active"' : ''; ?>>
+						<i class="fa fa-home  sidebar-nav-icon"></i>
+						<span class="sidebar-nav-mini-hide">Homepage</span>
 					</a>
 				</li>
 
@@ -40,34 +40,6 @@
                         <li><a href="/backoffice/categories/" <?php echo isset($this->pageSubSection) && $this->pageSubSection == 'Category Index' ? ' class="active"' : ''; ?>>Manage News Categories</a></li>
                     </ul>
                 </li>
-
-                <li>
-                	<a href="/backoffice/contact-us/" <?php echo isset($this->pageSection) && $this->pageSection == 'Contact Us' ? ' class="active"' : ''; ?>>
-						<i class="fa fa-map-marker sidebar-nav-icon"></i>
-						<span class="sidebar-nav-mini-hide">Contact Us</span>
-					</a>
-				</li>
-
-                <li>
-                	<a href="/backoffice/emails/" <?php echo isset($this->pageSection) && $this->pageSection == 'Emails' ? ' class="active"' : ''; ?>>
-						<i class="fa fa-envelope-o sidebar-nav-icon"></i>
-						<span class="sidebar-nav-mini-hide">Newsletter Emails</span>
-					</a>
-				</li>
-
-                <li>
-                	<a href="/backoffice/faqs/" <?php echo isset($this->pageSection) && $this->pageSection == 'Faq' ? ' class="active"' : ''; ?>>
-						<i class="fa fa-question sidebar-nav-icon"></i>
-						<span class="sidebar-nav-mini-hide">Faqs</span>
-					</a>
-				</li>
-
-                <li>
-                	<a href="/backoffice/galleries/" <?php echo isset($this->pageSection) && $this->pageSection == 'Gallery' ? ' class="active"' : ''; ?>>
-						<i class="fa fa-picture-o sidebar-nav-icon"></i>
-						<span class="sidebar-nav-mini-hide">Gallery</span>
-					</a>
-				</li>
 
                 <li>
                 	<a href="/backoffice/results/" <?php echo isset($this->pageSection) && $this->pageSection == 'Results' ? ' class="active"' : ''; ?>>
@@ -87,6 +59,41 @@
                 	<a href="/backoffice/trainers/" <?php echo isset($this->pageSection) && $this->pageSection == 'Trainers' ? ' class="active"' : ''; ?>>
 						<i class="fa fa-users sidebar-nav-icon"></i>
 						<span class="sidebar-nav-mini-hide">Trainers</span>
+					</a>
+				</li>
+
+                <li>
+                	<a href="/backoffice/galleries/" <?php echo isset($this->pageSection) && $this->pageSection == 'Gallery' ? ' class="active"' : ''; ?>>
+						<i class="fa fa-picture-o sidebar-nav-icon"></i>
+						<span class="sidebar-nav-mini-hide">Gallery</span>
+					</a>
+				</li>
+
+                <li>
+                	<a href="/backoffice/about-us/" <?php echo isset($this->pageSection) && $this->pageSection == 'About Us' ? ' class="active"' : ''; ?>>
+						<i class="fa fa-book sidebar-nav-icon"></i>
+						<span class="sidebar-nav-mini-hide">About Us</span>
+					</a>
+				</li>
+
+                <li>
+                	<a href="/backoffice/contact-us/" <?php echo isset($this->pageSection) && $this->pageSection == 'Contact Us' ? ' class="active"' : ''; ?>>
+						<i class="fa fa-map-marker sidebar-nav-icon"></i>
+						<span class="sidebar-nav-mini-hide">Contact Us</span>
+					</a>
+				</li>
+
+                <li>
+                	<a href="/backoffice/faqs/" <?php echo isset($this->pageSection) && $this->pageSection == 'Faq' ? ' class="active"' : ''; ?>>
+						<i class="fa fa-question sidebar-nav-icon"></i>
+						<span class="sidebar-nav-mini-hide">Faqs</span>
+					</a>
+				</li>
+
+                <li>
+                	<a href="/backoffice/emails/" <?php echo isset($this->pageSection) && $this->pageSection == 'Emails' ? ' class="active"' : ''; ?>>
+						<i class="fa fa-envelope-o sidebar-nav-icon"></i>
+						<span class="sidebar-nav-mini-hide">Newsletter Emails</span>
 					</a>
 				</li>
 

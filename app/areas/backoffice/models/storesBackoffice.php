@@ -266,10 +266,13 @@ class StoresBackoffice extends Model{
 	 * This function gets the lowest sorted store_images
 	 * @param int $id
 	 */
-    public function getHeroImage($id){
+    public function getHeroImage($id, $active = false){
+        $optActive = $active != false ? " AND t1.is_active = $active" : "" ;
+
         $sql = "SELECT t1.store_id, t1.sort, t1.image, t1.title
 				FROM store_images t1
 				WHERE t1.store_id = :id
+				".$optActive."
 				ORDER BY t1.sort ASC
 				LIMIT 1";
 

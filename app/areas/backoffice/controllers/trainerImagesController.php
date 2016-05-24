@@ -1,31 +1,49 @@
 <?php
-/** Stores Controller */
+/** TrainerImages Controller */
 
-class StoresController extends BaseController {
+class TrainerImagesController extends BaseController {
 
 	/** __construct */
 	public function __construct(){
 		parent::__construct();
 		// Load the User Model ($modelName, $area)
-		$this->_model = $this->loadModel('StoresBackoffice', 'backoffice');
+		$this->_model = $this->loadModel('TrainerImagesBackoffice', 'backoffice');
+        $this->_trainersModel = $this->loadModel('TrainersBackoffice', 'backoffice');
+
 	}
 
     /**
-	 * PAGE: Stores Index
-	 * GET: /backoffice/stores/index
+	 * PAGE: Store Image Index
+	 * GET: /backoffice/trainer-images/index/:id
 	 * This method handles the view awards page
+     * @param int $id id of trainers page.
 	 */
-	public function index(){
+	public function index($id){
         Auth::checkAdminLogin();
 
+        if(!isset($id) || empty($id)){
+            $this->_view->flash[] = "No ID provided for Store Image";
+            Session::set('backofficeFlash', array($this->_view->flash, 'failure'));
+			Url::redirect('backoffice/trainers/');
+        }else{
+            $selectedStore = $this->_trainersModel->selectDataByID($id);
+            if(!isset($selectedStore) || empty($selectedStore[0])){
+                $this->_view->flash[] = "No Store matches this id";
+                Session::set('backofficeFlash', array($this->_view->flash, 'failure'));
+                Url::redirect('backoffice/trainers/');
+            }
+        }
+
+        $this->_view->parent_id = $id;
+
 		// Set the Page Title ('pageName', 'pageSection', 'areaName')
-		$this->_view->pageTitle = array('Stores');
+		$this->_view->pageTitle = array('Trainers');
 		// Set Page Description
-		$this->_view->pageDescription = 'Stores Index';
+		$this->_view->pageDescription = 'Trainers Index';
 		// Set Page Section
-		$this->_view->pageSection = 'Stores';
+		$this->_view->pageSection = 'Trainers';
 		// Set Page Sub Section
-		$this->_view->pageSubSection = 'Stores Index';
+		$this->_view->pageSubSection = 'Trainers Index';
 
 		###### PAGINATION ######
         //sanitise or set keywords to false
@@ -37,27 +55,23 @@ class StoresController extends BaseController {
 
         $totalItems = $this->_model->countAllData($_GET['keywords']);
         $pages = new Pagination(20,'keywords='.$_GET['keywords'].'&page', $totalItems[0]['total']);
-        $this->_view->getAllData = $this->_model->getAllData($pages->get_limit(), $_GET['keywords']);
-        $this->_view->countData = $this->_model->countAllData();
-
-        foreach($this->_view->getAllData as $key => $data){
-            $this->_view->getAllData[$key]['hero_image'] = $this->_model->getHeroImage($data['id'], 1);
-        }
+        $this->_view->getAllData = $this->_model->getAllData($pages->get_limit(), $_GET['keywords'], false, $id);
+        $this->_view->countData = $this->_model->countAllData(false, $id);
 
 		// Create the pagination nav menu
 		$this->_view->page_links = $pages->page_links();
 
 		// Render the view ($renderBody, $layout, $area)
-		$this->_view->render('stores/index', 'layout', 'backoffice');
+		$this->_view->render('trainer-images/index', 'layout', 'backoffice');
 	}
 
     /**
-	 * PAGE: Stores Edit
-	 * GET: /backoffice/stores/edit:id
+	 * PAGE: Store Image Edit
+	 * GET: /backoffice/trainer-images/edit:id
      * @param string $id The unique id for the award user
 	 * This method handles the edit award user page
 	 */
-	public function edit($id = false){
+	public function edit($id = false, $parent_id = false){
         Auth::checkAdminLogin();
 		if(!empty($id)){
 			$selectDataByID = $this->_model->selectDataByID($id);
@@ -65,24 +79,27 @@ class StoresController extends BaseController {
                 $this->_view->stored_data = $selectDataByID[0];
 
 			}else{
-                $this->_view->flash[] = "No Stores matches this id";
+                $this->_view->flash[] = "No Store Image matches this id";
                 Session::set('backofficeFlash', array($this->_view->flash, 'failure'));
-				Url::redirect('backoffice/stores/');
+				Url::redirect('backoffice/trainer-images/index/'.$parent_id.'/');
 			}
 		}else{
-            $this->_view->flash[] = "No ID provided for Stores";
+            $this->_view->flash[] = "No ID provided for Store Image";
             Session::set('backofficeFlash', array($this->_view->flash, 'failure'));
-			Url::redirect('backoffice/stores/');
+			Url::redirect('backoffice/trainer-images/index/'.$parent_id.'/');
 		}
 
 		// Set the Page Title ('pageName', 'pageSection', 'areaName')
-		$this->_view->pageTitle = array('Stores');
+		$this->_view->pageTitle = array('Trainers');
 		// Set Page Description
-		$this->_view->pageDescription = 'Stores Edit';
+		$this->_view->pageDescription = 'Trainers Index';
 		// Set Page Section
-		$this->_view->pageSection = 'Stores';
+		$this->_view->pageSection = 'Trainers';
 		// Set Page Sub Section
-		$this->_view->pageSubSection = 'Stores Index';
+		$this->_view->pageSubSection = 'Trainers Index';
+
+        $this->_view->parent_id = $parent_id;
+
 
 		// Set Page Specific CSS
 		//$this->_view->pageCss = $pageCss;
@@ -98,7 +115,14 @@ class StoresController extends BaseController {
             $_POST['id'] = $id;
             $_POST['stored_title'] = $selectDataByID[0]['title'];
 
-            // Update Stores details
+            if(!isset($_FILES) || $_FILES['image']['name'] == null) {
+                $_POST['image'][0] = $this->_view->stored_data['image'];
+            }else{
+                //calls function that moves resourced documents
+                $this->uploadFile($_FILES);
+            }
+
+            // Update Store Image details
             $updateData = $this->_model->updateData($_POST);
 
             if(isset($updateData['error']) && $updateData['error'] != null){
@@ -106,112 +130,118 @@ class StoresController extends BaseController {
                     $this->_view->error[$key] = $error;
                 }
             } else {
+                if (isset($_FILES) && $_FILES['image']['name'] != null) {
+                    //remove old file
+                    unlink(ROOT . UPLOAD_DIR . '/trainers/' . $this->_view->stored_data['image']);
+                }
 
-                $this->_view->flash[] = "Stores updated successfully.";
+                $this->_view->flash[] = "Store Image updated successfully.";
                 Session::set('backofficeFlash', array($this->_view->flash, 'success'));
-                Url::redirect('backoffice/stores/index');
+                Url::redirect('backoffice/trainer-images/index/'.$parent_id.'/');
             }
 		}
 
 		if(!empty($_POST['cancel'])){
-			Url::redirect('backoffice/stores/index');
+			Url::redirect('backoffice/trainer-images/index/'.$parent_id.'/');
 		}
 
 		// Render the view ($renderBody, $layout, $area)
-		$this->_view->render('stores/add', 'layout', 'backoffice');
+		$this->_view->render('trainer-images/add', 'layout', 'backoffice');
 	}
 
     /**
-     * PAGE: Stores Delete
-     * GET: /backoffice/stores/delete/:id
-     * This method handles the deletion of Stores
-     * @param string $id The unique id for the Stores
+     * PAGE: Store Image Delete
+     * GET: /backoffice/trainer-images/delete/:id
+     * This method handles the deletion of Store Image
+     * @param string $id The unique id for the Store Image
      */
-    public function delete($id){
+    public function delete($id, $parent_id = false){
         Auth::checkAdminLogin();
         // Set the Page Title ('pageName', 'pageSection', 'areaName')
-		$this->_view->pageTitle = array('Stores');
+		$this->_view->pageTitle = array('Trainers');
 		// Set Page Description
-		$this->_view->pageDescription = 'Stores Delete';
+		$this->_view->pageDescription = 'Trainers Index';
 		// Set Page Section
-		$this->_view->pageSection = 'Stores';
+		$this->_view->pageSection = 'Trainers';
 		// Set Page Sub Section
-		$this->_view->pageSubSection = 'Stores Index';
+		$this->_view->pageSubSection = 'Trainers Index';
 
         //Check we got ID
         if(!empty($id)){
 			$selectDataByID = $this->_model->selectDataByID($id);
             $this->_view->selectedData = $selectDataByID;
 
-            //Check ID returns an Stores
+            //Check ID returns an Store Image
 			if(isset($selectDataByID[0]['id']) && !empty($selectDataByID[0]['id'])){
                 if(isset($_POST) && !empty($_POST)) {
                     if (!empty($_POST['delete'])) {
-                        // Need to delete all the child images/files
-                        $this->_imagesModel = $this->loadModel('StoreImagesBackoffice', 'backoffice');
-                        $images = $this->_imagesModel->getAllData(false, false, false, $id);
-                        if(!empty($images)){
-                            foreach($images as $image){
-                                unlink(ROOT . UPLOAD_DIR . '/store/' . $image['image']);
-                            }
-                        }
-
                         $deleteAttempt = $this->_model->deleteData($id);
-                        //Check we have deleted Stores
+                        //Check we have deleted Store Image
                         if (!empty($deleteAttempt)) {
+                            unlink(ROOT.UPLOAD_DIR.'/trainers/'.$selectDataByID[0]['image']);
 
                             // Redirect to next page
-                            $this->_view->flash[] = "Stores deleted successfully.";
+                            $this->_view->flash[] = "Store Image deleted successfully.";
                             Session::set('backofficeFlash', array($this->_view->flash, 'success'));
-                            Url::redirect('backoffice/stores/');
+                            Url::redirect('backoffice/trainer-images/index/'.$parent_id.'/');
                         } else {
                             $this->_view->error[] = 'A problem has occurred when trying to delete this award.';
                         }
                     } elseif (!empty($_POST['cancel'])) {
-                        Url::redirect('backoffice/stores/');
+                        Url::redirect('backoffice/trainer-images/index/'.$parent_id.'/');
                     }
                 }
 			}else{
-                $this->_view->flash[] = "No Stores matches this id";
+                $this->_view->flash[] = "No Store Image matches this id";
                 Session::set('backofficeFlash', array($this->_view->flash, 'failure'));
-				Url::redirect('backoffice/stores/');
+				Url::redirect('backoffice/trainer-images/index/'.$parent_id.'/');
 			}
 		}else{
-            $this->_view->flash[] = "No ID provided for Stores";
+            $this->_view->flash[] = "No ID provided for Store Image";
             Session::set('backofficeFlash', array($this->_view->flash, 'failure'));
-			Url::redirect('backoffice/stores/');
+			Url::redirect('backoffice/trainer-images/index/'.$parent_id.'/');
 		}
         // Render the view ($renderBody, $layout, $area)
-		$this->_view->render('stores/delete', 'layout', 'backoffice');
+		$this->_view->render('trainer-images/delete', 'layout', 'backoffice');
     }
 
 
     /**
-     * PAGE: Stores Add
-     * GET: /backoffice/stores/add/:id
-     * This method handles the adding of stores
+     * PAGE: Store Image Add
+     * GET: /backoffice/trainer-images/add/:id
+     * This method handles the adding of trainer-images
+     * @param int $id
      */
-	public function add(){
+	public function add($id){
         Auth::checkAdminLogin();
 		// Set the Page Title ('pageName', 'pageSection', 'areaName')
-		$this->_view->pageTitle = array('Stores');
+		$this->_view->pageTitle = array('Trainers');
 		// Set Page Description
-		$this->_view->pageDescription = 'Stores Add';
+		$this->_view->pageDescription = 'Trainers Index';
 		// Set Page Section
-		$this->_view->pageSection = 'Stores';
+		$this->_view->pageSection = 'Trainers';
 		// Set Page Sub Section
-		$this->_view->pageSubSection = 'Stores Index';
+		$this->_view->pageSubSection = 'Trainers Index';
 
         $this->_view->error = array();
+
+        $this->_view->parent_id = $id;
+
 
         // If Form has been submitted process it
 		if(!empty($_POST)){
             //if user selected cancel
             if(!empty($_POST['cancel'])){
-			    Url::redirect('backoffice/stores/index');
+			    Url::redirect('backoffice/trainer-images/index/'.$id);
 		    }
 
-            // Create new Stores
+            if(!isset($_FILES) || empty($_FILES['image']['name'])){
+                $_POST['image'] = null;
+            }else{
+                $this->uploadFile($_FILES);
+            }
+
+            // Create new Store Image
             $createData = $this->_model->createData($_POST);
             if(isset($createData['error']) && $createData['error'] != null){
                 foreach($createData['error'] as $key => $error){
@@ -219,15 +249,15 @@ class StoresController extends BaseController {
                 }
             }else{
                 $maxOrder = $this->_model->getMaxOrder();
-                $this->_model->updateSortOrder($createData, ($maxOrder[0]['max_order']+1));
+                $this->_model->updateSortOrder($createData, ($maxOrder[0]['max_order']+1), $id);
 
-                $this->_view->flash[] = "Stores added successfully.";
+                $this->_view->flash[] = "Store Image added successfully.";
                 Session::set('backofficeFlash', array($this->_view->flash, 'success'));
-                Url::redirect('backoffice/stores/index');
+                Url::redirect('backoffice/trainer-images/index/'.$id);
             }
 		}
 		// Render the view ($renderBody, $layout, $area)
-		$this->_view->render('stores/add', 'layout', 'backoffice');
+		$this->_view->render('trainer-images/add', 'layout', 'backoffice');
 	}
 
     /**
@@ -240,7 +270,7 @@ class StoresController extends BaseController {
         // upload file
         try {
             if(isset($files['image'])){
-                $file = new Ps2_Upload(ROOT.UPLOAD_DIR.'/stores/', 'image', true);
+                $file = new Ps2_Upload(ROOT.UPLOAD_DIR.'/trainers/', 'image', true);
                 $file->addPermittedTypes(array(
                         'image/png', 'image/jpeg', 'image/gif',
                     )
@@ -257,8 +287,8 @@ class StoresController extends BaseController {
     }
 
     /**
-	 * PAGE: Stores image download
-	 * GET: /backoffice/stores/download/:id/
+	 * PAGE: Store Image image download
+	 * GET: /backoffice/trainer-images/download/:id/
 	 * This method handles the download image action.
 	 */
     public function download($id){
@@ -271,28 +301,28 @@ class StoresController extends BaseController {
                 header('Cache-Control: must-revalidate');
                 header('Content-Transfer-Encoding: binary');
                 header('Pragma: public');
-                header('Content-Length: ' . filesize(ROOT.'assets/uploads/stores/'.$selectedData[0]['image']));
-                readfile(ROOT.'assets/uploads/stores/'.$selectedData[0]['image']);
+                header('Content-Length: ' . filesize(ROOT.'assets/uploads/trainers/'.$selectedData[0]['image']));
+                readfile(ROOT.'assets/uploads/trainers/'.$selectedData[0]['image']);
                 exit;
             } else {
                 $this->_view->flash[] = "No data matches this ID";
                 Session::set('backofficeFlash', array($this->_view->flash, 'failure'));
-                Url::redirect('backoffice/stores/');
+                Url::redirect('backoffice/trainers/');
             }
         }else{
             $this->_view->flash[] = "No ID was provided";
             Session::set('backofficeFlash', array($this->_view->flash, 'failure'));
-            Url::redirect('backoffice/stores/');
+            Url::redirect('backoffice/trainers/');
         }
     }
 
     /**
-     * PAGE: stores types sort
-     * GET: /backoffice/stores/sort/:direction/:id
-     * This method handles the sorting of stores
+     * PAGE: trainer-images types sort
+     * GET: /backoffice/trainer-images/sort/:direction/:id
+     * This method handles the sorting of trainer-images
      * @param string $direction, int $id
      */
-    public function sort($direction = null, $id= null, $order = null){
+    public function sort($direction = null, $id= null, $order = null, $parent_id = null){
         if(!empty($id)){
             if($direction == 'up'){
                 $order = $order-1;
@@ -302,24 +332,24 @@ class StoresController extends BaseController {
                 }
 
                 // Update the previous item with the new order and add one to it.
-                $this->_model->updateOldSortOrder('add', $order);
+                $this->_model->updateOldSortOrder('add', $order, $parent_id);
 
                 // Update the selected item sort order.
-                $this->_model->updateSortOrder($id, $order);
+                $this->_model->updateSortOrder($id, $order, $parent_id);
 
             }elseif($direction == 'down'){
                 $order = $order+1;
 
                 // Update the previous item with the new order and add one to it.
-                $this->_model->updateOldSortOrder('subtract', $order);
+                $this->_model->updateOldSortOrder('subtract', $order, $parent_id);
 
                 // Update the selected item sort order.
-                $this->_model->updateSortOrder($id, $order);
+                $this->_model->updateSortOrder($id, $order, $parent_id);
 
             }
-            Url::redirect('backoffice/stores/');
+            Url::redirect('backoffice/trainer-images/index/'.$parent_id);
         }else{
-            Url::redirect('backoffice/stores/');
+            Url::redirect('backoffice/trainer-images/index/'.$parent_id);
         }
     }
 }

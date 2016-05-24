@@ -5,13 +5,13 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="header-section">
-                    <h1>Store Images</h1>
+                    <h1>Homepage Image</h1>
                 </div>
             </div>
             <div class="col-sm-6 hidden-xs">
                 <div class="header-section">
                     <ul class="breadcrumb breadcrumb-top">
-                        <li><a href="/backoffice/store-images/index">Store Images</a></li>
+                        <li><a href="/backoffice/homepage-images/index">Homepage Image</a></li>
                         <li><?php if(isset($this->stored_data['id'])){echo "Edit"; }else{ echo "Add";}?></li>
                     </ul>
                 </div>
@@ -23,7 +23,7 @@
     <div class="block">
         <!-- General Elements Title -->
         <div class="block-title">
-            <h2><?php if(isset($this->stored_data['id'])){echo "Edit"; }else{ echo "Add";}?> Store Images</h2>
+            <h2><?php if(isset($this->stored_data['id'])){echo "Edit"; }else{ echo "Add";}?> Homepage Image</h2>
         </div>
         <!-- END General Elements Title -->
         <?php if (!empty($this->error)) { ?>
@@ -37,7 +37,7 @@
         <?php } ?>
         <!-- General Elements Content -->
         <form action="" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
-            <input type="hidden" id="store_id" name="store_id" class="form-control" value="<?php echo $this->stored_id?>">
+            <input type="hidden" id="homepage_id" name="homepage_id" class="form-control" value="<?php echo $this->parent_id?>">
 
             <div class="form-group <?php if ((!empty($this->error)) && array_key_exists('title', $this->error)) { echo 'has-error'; }?>">
                 <label class="col-md-2 control-label" for="meta_title">Image Title <span class="text-danger">*</span></label>
@@ -51,12 +51,12 @@
                     <label class="col-md-2 control-label" for="current file">Current Store Image</label>
                     <div class="col-md-10 double-input">
                         <div class="col-md-5">
-                            <td><img src="/image.php?width=120&height=120&image=/assets/uploads/store/<?php echo $this->stored_data['image']?>" alt="<?php echo $this->stored_data['image']?>"></td>
+                            <td><img src="/image.php?width=120&height=120&image=/assets/uploads/homepages/<?php echo $this->stored_data['image']?>" alt="<?php echo $this->stored_data['image']?>"></td>
                         </div>
 
                         <div class="col-xs-6">
                             <div class="edit-download-wrap">
-                                <a href="/backoffice/store-images/download/<?php echo $this->stored_data['id'];?>/" class="btn btn-primary">Download Current Image Image <i class="fa fa-cloud-download"></i></a>
+                                <a href="/backoffice/homepage-images/download/<?php echo $this->stored_data['id'];?>/" class="btn btn-primary">Download Current Image Image <i class="fa fa-cloud-download"></i></a>
                             </div>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
             <?php } ?>
 
             <div class="form-group <?php if ((!empty($this->error)) && array_key_exists('image', $this->error)) { echo 'has-error'; }?>">
-                <label class="col-md-2 control-label" for="file">Store Image <span class="text-danger">*</span></label>
+                <label class="col-md-2 control-label" for="file">Homepage Image <span class="text-danger">*</span></label>
                 <div class="col-md-5">
                     <input type="file" name="image" id="image">
                     <?php if(isset($this->stored_data['image']) && !empty($this->stored_data['image'])){?>

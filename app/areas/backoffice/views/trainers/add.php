@@ -73,6 +73,34 @@
                 </div>
             </div>
 
+            <div class="form-group <?php if ((!empty($this->error)) && array_key_exists('facebook', $this->error)) { echo 'has-error'; }?>">
+                <label class="col-md-2 control-label" for="facebook">Facebook Link</label>
+                <div class="col-md-5">
+                    <input type="text" id="facebook" name="facebook" class="form-control" value="<?php if (!empty($this->error)) { echo Formatting::utf8_htmlentities($_POST['facebook']);} elseif(!empty($this->stored_data['facebook'])){echo $this->stored_data['facebook'];}?>">
+                </div>
+            </div>
+
+            <div class="form-group <?php if ((!empty($this->error)) && array_key_exists('twitter', $this->error)) { echo 'has-error'; }?>">
+                <label class="col-md-2 control-label" for="twitter">Twitter Link</label>
+                <div class="col-md-5">
+                    <input type="text" id="twitter" name="twitter" class="form-control" value="<?php if (!empty($this->error)) { echo Formatting::utf8_htmlentities($_POST['twitter']);} elseif(!empty($this->stored_data['twitter'])){echo $this->stored_data['twitter'];}?>">
+                </div>
+            </div>
+
+            <div class="form-group <?php if ((!empty($this->error)) && array_key_exists('google', $this->error)) { echo 'has-error'; }?>">
+                <label class="col-md-2 control-label" for="google">Google Plus Link</label>
+                <div class="col-md-5">
+                    <input type="text" id="google" name="google" class="form-control" value="<?php if (!empty($this->error)) { echo Formatting::utf8_htmlentities($_POST['google']);} elseif(!empty($this->stored_data['google'])){echo $this->stored_data['google'];}?>">
+                </div>
+            </div>
+
+            <div class="form-group <?php if ((!empty($this->error)) && array_key_exists('instagram', $this->error)) { echo 'has-error'; }?>">
+                <label class="col-md-2 control-label" for="instagram">Instagram Link</label>
+                <div class="col-md-5">
+                    <input type="text" id="instagram" name="instagram" class="form-control" value="<?php if (!empty($this->error)) { echo Formatting::utf8_htmlentities($_POST['instagram']);} elseif(!empty($this->stored_data['instagram'])){echo $this->stored_data['instagram'];}?>">
+                </div>
+            </div>
+
             <div class="form-group">
 				<label class="col-md-2 control-label" for="is_active">Is Active</label>
                     <input type="hidden" name="is_active" value="0">

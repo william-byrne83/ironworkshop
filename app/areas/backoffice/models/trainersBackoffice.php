@@ -66,7 +66,7 @@ class TrainersBackoffice extends Model{
 	 * @param int $id
 	 */
 	public function selectDataByID($id){
-		$sql = "SELECT t1.id, t1.name, t1.slug, t1.text, t1.phone, t1.email, t1.website, t1.sort, t1.is_active
+		$sql = "SELECT t1.id, t1.name, t1.slug, t1.text, t1.phone, t1.email, t1.website, t1.sort, t1.is_active, t1.facebook, t1.twitter, t1.google, t1.instagram
 				FROM trainers t1
 				WHERE t1.id = :id
                 ";
@@ -84,7 +84,8 @@ class TrainersBackoffice extends Model{
         $optActive = $active != false ? " AND t1.is_active = $active" : "";
         $optKeywords = $keywords != false ? " AND CONCAT(IF(isnull(t1.name),' ',CONCAT(LOWER(t1.name),' ')),IF(isnull(t1.phone),' ',CONCAT(LOWER(t1.phone),' ')),IF(isnull(t1.email),' ',CONCAT(LOWER(t1.email),' '))) LIKE '%$keywords%'" : "";
 
-		$sql = "SELECT t1.id, t1.name, t1.slug, t1.text, t1.phone, t1.email, t1.website, t1.sort, t1.is_active
+		$sql = "SELECT t1.id, t1.name, t1.slug, t1.text, t1.phone, t1.email, t1.website, t1.sort, t1.is_active, t1.facebook, t1.twitter, t1.google, t1.instagram
+
 				FROM trainers t1
 				WHERE 1 = 1
 				".$optKeywords."
@@ -129,7 +130,11 @@ class TrainersBackoffice extends Model{
                 'email' => $data['email'],
                 'phone' => $data['phone'],
                 'website' => $data['website'],
-                'is_active' => $data['is_active']
+                'is_active' => $data['is_active'],
+                'facebook' => $data['facebook'],
+                'twitter' => $data['twitter'],
+                'google' => $data['google'],
+                'instagram' => $data['instagram']
             );
 
             $this->_db->insert($dbTable, $postData);
@@ -158,7 +163,11 @@ class TrainersBackoffice extends Model{
                 'email' => $data['email'],
                 'phone' => $data['phone'],
                 'website' => $data['website'],
-                'is_active' => $data['is_active']
+                'is_active' => $data['is_active'],
+                'facebook' => $data['facebook'],
+                'twitter' => $data['twitter'],
+                'google' => $data['google'],
+                'instagram' => $data['instagram']
             );
             $where = "`id` = {$data['id']}";
 
@@ -250,7 +259,7 @@ class TrainersBackoffice extends Model{
 	 * @param string $name
 	 */
     public function selectDataByName($name){
-        $sql = "SELECT t1.id, t1.name, t1.slug, t1.text, t1.phone, t1.email, t1.website, t1.sort, t1.is_active
+        $sql = "SELECT t1.id, t1.name, t1.slug, t1.text, t1.phone, t1.email, t1.website, t1.sort, t1.is_active, t1.facebook, t1.twitter, t1.google, t1.instagram
 				FROM trainers t1
 				WHERE t1.name = :name
                 ";
@@ -258,10 +267,13 @@ class TrainersBackoffice extends Model{
 		return $this->_db->select($sql, array(':name' => $name));
     }
 
-    public function getHeroImage($trainer_id){
+    public function getHeroImage($trainer_id, $active = false){
+        $optActive = $active != false ? " AND t1.is_active = $active" : "" ;
+
         $sql = "SELECT t1.id, t1.image, t1.title
 				FROM trainer_images t1
 				WHERE t1.trainer_id = :trainer_id
+				".$optActive."
                 ";
 
 		return $this->_db->select($sql, array(':trainer_id' => $trainer_id));

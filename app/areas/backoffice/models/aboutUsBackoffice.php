@@ -14,7 +14,7 @@ class AboutUsBackoffice extends Model{
         $return = $data;
         foreach($data as $key => $input){
             $temp = null;
-            if ($key != 'text') {
+            if ($key != 'text' && $key != 'pricing') {
                 $input = is_array($input) ? FormInput::trimArray($input) : FormInput::checkInput($input);
             }
             $return[$key] = $input;
@@ -27,6 +27,70 @@ class AboutUsBackoffice extends Model{
                     $return['error'][$key] = 'Text cannot be empty';
                 }
             }
+
+            //monday
+            if($key == 'monday'){
+                //Required
+                if(empty($input) || $input == null){
+                    $return['error'][$key] = 'Monday Opening Time cannot be empty';
+                }
+            }
+
+            //tuesday
+            if($key == 'tuesday'){
+                //Required
+                if(empty($input) || $input == null){
+                    $return['error'][$key] = 'Tuesday Opening Time cannot be empty';
+                }
+            }
+
+            //wednesday
+            if($key == 'wednesday'){
+                //Required
+                if(empty($input) || $input == null){
+                    $return['error'][$key] = 'Wednesday Opening Time cannot be empty';
+                }
+            }
+
+            //thursday
+            if($key == 'thursday'){
+                //Required
+                if(empty($input) || $input == null){
+                    $return['error'][$key] = 'Thursday Opening Time cannot be empty';
+                }
+            }
+
+            //friday
+            if($key == 'friday'){
+                //Required
+                if(empty($input) || $input == null){
+                    $return['error'][$key] = 'Friday Opening Time cannot be empty';
+                }
+            }
+
+            //saturday
+            if($key == 'saturday'){
+                //Required
+                if(empty($input) || $input == null){
+                    $return['error'][$key] = 'Saturday Opening Time cannot be empty';
+                }
+            }
+
+            //sunday
+            if($key == 'sunday'){
+                //Required
+                if(empty($input) || $input == null){
+                    $return['error'][$key] = 'Sunday Opening Time cannot be empty';
+                }
+            }
+
+            //pricing
+            if($key == 'pricing'){
+                //Required
+                if(empty($input) || $input == null){
+                    $return['error'][$key] = 'Pricing cannot be empty';
+                }
+            }
         }
         return $return;
     }
@@ -37,7 +101,7 @@ class AboutUsBackoffice extends Model{
 	 * @param int $id
 	 */
 	public function selectDataByID($id){
-		$sql = "SELECT t1.id, t1.text
+		$sql = "SELECT t1.id, t1.text, t1.monday, t1.tuesday, t1.wednesday, t1.thursday, t1.friday, t1.saturday, t1.sunday, t1.pricing
 				FROM about_us t1
 				WHERE t1.id = :id";
 
@@ -53,7 +117,7 @@ class AboutUsBackoffice extends Model{
         $optLimit = $limit != false ? " LIMIT $limit" : "";
         $optKeywords = $keywords != false ? " AND CONCAT(IF(isnull(t1.text),' ',CONCAT(LOWER(t1.text),' '))) LIKE '%$keywords%'" : "";
 
-		$sql = "SELECT t1.id, t1.text
+		$sql = "SELECT t1.id, t1.text, t1.monday, t1.tuesday, t1.wednesday, t1.thursday, t1.friday, t1.saturday, t1.sunday, t1.pricing
 				FROM about_us t1
 				WHERE 1 = 1
 				".$optKeywords."
@@ -90,7 +154,15 @@ class AboutUsBackoffice extends Model{
         }else {
             $dbTable = 'about_us';
             $postData = array(
-                'text' => $data['text']
+                'text' => $data['text'],
+                'monday' => $data['monday'],
+                'tuesday' => $data['tuesday'],
+                'wednesday' => $data['wednesday'],
+                'thursday' => $data['thursday'],
+                'friday' => $data['friday'],
+                'saturday' => $data['saturday'],
+                'sunday' => $data['sunday'],
+                'pricing' => $data['pricing']
             );
 
             $this->_db->insert($dbTable, $postData);
@@ -112,7 +184,15 @@ class AboutUsBackoffice extends Model{
         }else {
             $dbTable = 'about_us';
             $postData = array(
-                'text' => $data['text']
+                'text' => $data['text'],
+                'monday' => $data['monday'],
+                'tuesday' => $data['tuesday'],
+                'wednesday' => $data['wednesday'],
+                'thursday' => $data['thursday'],
+                'friday' => $data['friday'],
+                'saturday' => $data['saturday'],
+                'sunday' => $data['sunday'],
+                'pricing' => $data['pricing']
             );
             $where = "`id` = {$data['id']}";
 
