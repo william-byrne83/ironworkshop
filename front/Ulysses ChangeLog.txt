@@ -1,0 +1,28 @@
+Ulysses Theme
+
+Update: 30.08.2015 - Ulysses v.1.5
+1) Fixed responsive issues
+
+Update: 11.02.2015 - Ulysses v.1.4
+Added 1 more pages:
+1) Minor fixes
+2) Fixed sticky header
+3) Small responsive issues
+
+Update: 30.11.2014 - Ulysses v.1.3
+Added 1 more pages:
+1) Timetable
+
+Update: 14.11.2014 - Ulysses v.1.2
+Added 2 more pages:
+1) Portfolio
+2) Shortcodes
++ minor fixes
+
+Update: 16.10.2014 - Ulysses v.1.1
+Added 3 more pages:
+1) Shop page
+2) Single product
+3) Cart - checkout page
+
+Created: 10.10.2014
