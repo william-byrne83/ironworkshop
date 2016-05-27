@@ -1,7 +1,14 @@
-<footer id="footer" class="clearfix">
-	<div class="container">
-        <p>Output Digital,<br> The Ideas Factory, Curlew Pavilion, <br>Portside Business Park, Airport Road West, <br>Belfast, BT3 9ED</p>
-        <p>Tel: (028) 9064 9313 &nbsp;&nbsp;&nbsp;Email: <a href="mailto:hello@outputdigital.com">hello@outputdigital.com</a></p>
-        <p class="small">Output and Output Digital are trading styles of Creative Online Media Ltd. Company Registration number NI046796</p>
+<!-- === START FOOTER === -->
+<footer class="footer wow fadeInUp">
+    <div class="container">
+        <div class="logo wow bounceInRight"><img src="/assets/images/IRON-WORKSHOP-BACK.gif" alt="logo"/></div>
+        <ul class="socials wow bounceInLeft">
+            <li><a href="<?php echo $this->contact[0]['facebook']?>" class="d-text-c-h d-border-c-h"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="<?php echo $this->contact[0]['twitter']?>" class="d-text-c-h d-border-c-h"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="<?php echo $this->contact[0]['instagram']?>" class="d-text-c-h d-border-c-h"><i class="fa fa-instagram"></i></a></li>
+            <li><a href="<?php echo $this->contact[0]['google']?>" class="d-text-c-h d-border-c-h"><i class="fa fa-google-plus"></i></a></li>
+        </ul>
+        <p class="copywrite">Copyright <?php echo date('Y')?> by Ironworkshop. All rights reserved.</p>
     </div>
 </footer>
+<!-- === END FOOTER === -->

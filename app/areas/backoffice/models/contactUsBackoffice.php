@@ -69,7 +69,7 @@ class ContactUsBackoffice extends Model{
 	 * @param int $id
 	 */
 	public function selectDataByID($id){
-		$sql = "SELECT t1.id, t1.location, t1.phone, t1.email, t1.lat, t1.lang, t1.text, t1.facebook, t1.instagram
+		$sql = "SELECT t1.id, t1.location, t1.phone, t1.email, t1.lat, t1.lang, t1.text, t1.facebook, t1.instagram, t1.google, t1.twitter
 				FROM contact_us t1
 				WHERE t1.id = :id
 				GROUP BY t1.id";
@@ -86,7 +86,7 @@ class ContactUsBackoffice extends Model{
         $optLimit = $limit != false ? " LIMIT $limit" : "";
         $optKeywords = $keywords != false ? " AND CONCAT(IF(isnull(t1.facebook),' ',CONCAT(LOWER(t1.facebook),' ')), IF(isnull(t1.instagram),' ',CONCAT(LOWER(t1.instagram),' ')), IF(isnull(t1.email),' ',CONCAT(LOWER(t1.email),' '))) LIKE '%$keywords%'" : "";
 
-		$sql = "SELECT t1.id, t1.location, t1.phone, t1.email, t1.lat, t1.lang, t1.text, t1.facebook, t1.instagram
+		$sql = "SELECT t1.id, t1.location, t1.phone, t1.email, t1.lat, t1.lang, t1.text, t1.facebook, t1.instagram, t1.google, t1.twitter
 				FROM contact_us t1
 				WHERE 1 = 1
 				".$optKeywords."
@@ -131,7 +131,9 @@ class ContactUsBackoffice extends Model{
                 'lat' => $data['lat'],
                 'lang' => $data['lang'],
                 'location' => $data['location'],
-                'text' => $data['text']
+                'text' => $data['text'],
+                'twitter' => $data['twitter'],
+                'google' => $data['google']
             );
 
             $this->_db->insert($dbTable, $postData);
@@ -160,7 +162,9 @@ class ContactUsBackoffice extends Model{
                 'lat' => $data['lat'],
                 'lang' => $data['lang'],
                 'location' => $data['location'],
-                'text' => $data['text']
+                'text' => $data['text'],
+                'twitter' => $data['twitter'],
+                'google' => $data['google']
             );
             $where = "`id` = {$data['id']}";
 

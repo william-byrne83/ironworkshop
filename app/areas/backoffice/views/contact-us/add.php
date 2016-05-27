@@ -58,6 +58,20 @@
                 </div>
             </div>
 
+            <div class="form-group <?php if ((!empty($this->error)) && array_key_exists('google', $this->error)) { echo 'has-error'; }?>">
+                <label class="col-md-2 control-label" for="google">Google Plus Link </label>
+                <div class="col-md-5">
+                    <input type="text" id="google" name="google" class="form-control" value="<?php if (!empty($this->error)) { echo Formatting::utf8_htmlentities($_POST['google']);} elseif(!empty($this->stored_data['google'])){echo $this->stored_data['google'];}?>">
+                </div>
+            </div>
+
+            <div class="form-group <?php if ((!empty($this->error)) && array_key_exists('twitter', $this->error)) { echo 'has-error'; }?>">
+                <label class="col-md-2 control-label" for="twitter">Twitter Link </label>
+                <div class="col-md-5">
+                    <input type="text" id="twitter" name="twitter" class="form-control" value="<?php if (!empty($this->error)) { echo Formatting::utf8_htmlentities($_POST['twitter']);} elseif(!empty($this->stored_data['twitter'])){echo $this->stored_data['twitter'];}?>">
+                </div>
+            </div>
+
             <div class="form-group <?php if ((!empty($this->error)) && array_key_exists('location', $this->error)) { echo 'has-error'; }?>">
                 <label class="col-md-2 control-label" for="location">Location <span class="text-danger">*</span></label>
                 <div class="col-md-5">

@@ -15,6 +15,16 @@ class BaseController{
 			$this->_view->flash = $_SESSION['backofficeFlash'];
 			Session::destroy('backofficeFlash');
 		}
+
+        $this->_contactModel = $this->loadModel('contactUs');
+        $this->_view->contact = $this->_contactModel->getAllData();
+        if(empty($this->_view->contact[0]['facebook'])){
+            $this->_view->contact[0]['facebook'] = 'https://www.facebook.com/Iron-Workshop-1479599665631954/';
+        }
+        if(empty($this->_view->contact[0]['instagram'])){
+            $this->_view->contact[0]['instagram'] = 'https://www.instagram.com/explore/tags/theironworkshop/';
+        }
+
     }
 	
     /**
@@ -45,6 +55,7 @@ class BaseController{
 			// Instantiate the Model
 			return new $modelName();
 		}
-	}	
+	}
+
 }
 ?>
