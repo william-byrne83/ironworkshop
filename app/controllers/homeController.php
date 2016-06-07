@@ -36,20 +36,28 @@ class HomeController extends BaseController {
         $this->_view->contact = $this->_contactUs->getAllData();
 
         // Shop items
-        $this->_store= $this->loadModel('stores');
+        $this->_store = $this->loadModel('stores');
         $this->_view->stores = $this->_store->getAllData(3, false, 1);
         foreach($this->_view->stores as $key => $store){
             $this->_view->stores[$key]['hero_image'] = $this->_store->getHeroImage($store['id'], 1);
         }
 
         // trainers
-        $this->_trainers= $this->loadModel('trainers');
-        $this->_view->trainers = $this->_trainers->getAllData(3, false, 1);
+        $this->_trainers = $this->loadModel('trainers');
+        $this->_view->trainers = $this->_trainers->getAllData(false, false, 1);
+        foreach($this->_view->trainers as $key => $trainer){
+            $this->_view->trainers[$key]['hero_image'] = $this->_trainers->getHeroImage($trainer['id'], 1);
+        }
 
+        //news
+        $this->_news = $this->loadModel('news');
+        $this->_view->news = $this->_news->getAllData(6, false, 1);
 
+        //results
+        $this->_results = $this->loadModel('results');
+        $this->_view->results = $this->_results->getAllData(false, false, 1);
 
-
-		// Render the view ($renderBody, $layout, $area)
+        // Render the view ($renderBody, $layout, $area)
 		$this->_view->render('home/index');
 
 

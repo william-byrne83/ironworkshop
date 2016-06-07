@@ -229,7 +229,7 @@ class NewsController extends BaseController {
 			    Url::redirect('backoffice/news/index');
 		    }
 
-             if(!isset($_FILES) || empty($_FILES['image']['name'])){
+            if(!isset($_FILES) || empty($_FILES['image']['name'])){
                 $_POST['image'] = null;
             }else{
                 $this->uploadFile($_FILES);

@@ -110,6 +110,16 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="is_active">Is Active</label>
+                <input type="hidden" name="is_active" value="0">
+                <div class="col-md-5">
+                    <div class="checkbox">
+                        <label for="is_active" class="switch switch-primary"><input type="checkbox" name="is_active" id="is_active" value="1" <?php if((!empty($_POST['is_active']) && $_POST['is_active'] != 0)  || (!empty($this->stored_data['is_active']) && $this->stored_data['is_active'] != 0) || (!isset($this->stored_data['id']))) {echo 'checked="checked"';}?>><span></span></label>
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group form-actions">
                 <div class="col-md-5 col-md-offset-2">
                     <input type="submit" name="save" class="btn btn-effect-ripple btn-primary loader" value="Save">

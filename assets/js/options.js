@@ -161,7 +161,8 @@ jQuery('.contact-form,.contact-form-2').each(function() {
         if (!validate_email(t_values['contact-email']))
             t_result.val('Please provide a valid e-mail.');
         else
-            jQuery.post("php/contacts.php", t.serialize(), function(result) {
+            jQuery.post("/emails/add/", t.serialize(), function(result) {
+                console.log(result);
                 t_result.val(result);
             });
         clearTimeout(t_timeout);

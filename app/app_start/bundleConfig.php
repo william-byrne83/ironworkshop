@@ -37,6 +37,12 @@ function renderDefaultJSBundle(){
 
 }
 
+function renderContactMap(){
+    echo '<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>';
+    echo '<script src="/assets/js/map.js"></script>';
+    echo '<script>initialize()</script>';
+}
+
 function renderAdminCssBundle(){
 	echo '<link rel="stylesheet" href="/app/areas/backoffice/assets/css/bootstrap.min.css?v=1.0">';
 	echo '<link rel="stylesheet" href="/app/areas/backoffice/assets/css/plugins.css?v=1.0">';

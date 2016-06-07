@@ -117,39 +117,45 @@ class Pagination{
         if($mode == 'front'){
             $iclassLeft = "fa fa-angle-left";
             $iclassRight = "fa fa-angle-right";
+            $ulClass = "shop-pagination";
+            $aClass = "d-text-c-h d-border-c-h";
         }else{
             $iclassLeft = "icon-angle-left";
             $iclassRight = "icon-angle-right";
+            $ulClass = "pagination";
+            $aClass = "";
         }
 
 	    $pagination = '';
 	
 		if($lastpage > 1){   
-		    $pagination .= '<ul class="pagination">';
+		    $pagination .= '<ul class="'.$ulClass.'">';
 			
 			// Prev
-			if ($this->_page > 1){
-				$pagination.= '<li class="prev"><a href="'.$path.$this->_instance.'='.$prev.$ext.'"><i class="'.$iclassLeft.'"></i></a></li>';
-			}else{
-				$pagination.= '<li class="prev disabled"><i class="'.$iclassLeft.'"></i></li>';
-			}
+            if($mode != 'front') {
+                if ($this->_page > 1) {
+                    $pagination .= '<li class="prev"><a href="' . $path . $this->_instance . '=' . $prev . $ext . '"><i class="' . $iclassLeft . '"></i></a></li>';
+                } else {
+                    $pagination .= '<li class="prev disabled"><i class="' . $iclassLeft . '"></i></li>';
+                }
+            }
 
 			// Pages
 			if ($lastpage < 7 + ($stages * 2)){
 				for ($counter = 1; $counter <= $lastpage; $counter++){
 					if ($counter == $this->_page){
-						$pagination.= '<li class="active"><a href="#">'.$counter.'</a></li>';
+						$pagination.= '<li class="active"><a href="#" class ="active '.$aClass.'">'.$counter.'</a></li>';
 					}else{
-						$pagination.= '<li><a href="'.$path.$this->_instance.'='.$counter.$ext.'">'.$counter.'</a></li>';}
+						$pagination.= '<li><a href="'.$path.$this->_instance.'='.$counter.$ext.'" class = "'.$aClass.'">'.$counter.'</a></li>';}
 				}
 			}elseif($lastpage > 5 + ($stages * 2)){
 				// Beginning only hide later pages
 				if($this->_page < 1 + ($stages * 2)){
 					for ($counter = 1; $counter < 4 + ($stages * 2); $counter++){
 						if ($counter == $this->_page){
-							$pagination.= '<li class="active"><a href="#">'.$counter.'</a></li>';
+							$pagination.= '<li class="active"><a href="#" class ="active '.$aClass.'">'.$counter.'</a></li>';
 						}else{
-							$pagination.= '<li><a href="'.$path.$this->_instance.'='.$counter.$ext.'">'.$counter.'</a></li>';}
+							$pagination.= '<li><a href="'.$path.$this->_instance.'='.$counter.$ext.'" class = "'.$aClass.'">'.$counter.'</a></li>';}
 					}
 					$pagination.= '<li class="pagination_break">...</li>';
 					$pagination.= '<li><a href="'.$path.$this->_instance.'='.$lpm1.$ext.'">'.$lpm1.'</a></li>';
@@ -185,11 +191,13 @@ class Pagination{
 			}
 
 			// Next
-			if ($this->_page < $counter - 1){
-				$pagination.= '<li class="next"><a href="' .$path.$this->_instance. '='.$next.$ext.'"><i class="'.$iclassRight.'"></i></a></li>';
-			}else{
-				$pagination.= '<li class="next disabled"><i class="'.$iclassRight.'"></i></li>';
-			}
+            if($mode != 'front') {
+                if ($this->_page < $counter - 1) {
+                    $pagination .= '<li class="next"><a href="' . $path . $this->_instance . '=' . $next . $ext . '"><i class="' . $iclassRight . '"></i></a></li>';
+                } else {
+                    $pagination .= '<li class="next disabled"><i class="' . $iclassRight . '"></i></li>';
+                }
+            }
 			
 		    $pagination.= '</ul>';
 		}

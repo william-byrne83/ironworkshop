@@ -9,17 +9,18 @@
                 <nav class="menu">
                     <div class="responsive-menu d-text-c-h"><i class="fa fa-bars"></i></div>
                     <ul>
-                        <li class="active"><a class="d-text-c-h" data-anchor="slider-section" href="#">Home</a></li>
-                        <li><a class="d-text-c-h" data-anchor="about-section" href="#">About</a></li>
-                        <li><a class="d-text-c-h" data-anchor="classes-section" href="#">Classes</a></li>
-                        <li><a class="d-text-c-h" data-anchor="trainers-section" href="#">Trainers</a></li>
+                        <li <?php echo isset($this->pageSection) && $this->pageSection == 'Home' ? ' class="activesadsadsa"' : ''; ?>><a class="d-text-c-h" data-anchor="slider-section" href="<?php echo isset($this->pageSection) && $this->pageSection != 'Home' ? '/' : '#'; ?>">Home</a></li>
+                        <li <?php echo isset($this->pageSection) && $this->pageSection == 'Gallery' ? ' class="active"' : ''; ?>><a class="d-text-c-h" data-anchor="gallery-section" href="/galleries/">Gallery</a></li>
+                        <li><a class="d-text-c-h" data-anchor="about-section" href="<?php echo isset($this->pageSection) && $this->pageSection != 'Home' ? '/' : '#'; ?>">About</a></li>
+                        <li><a class="d-text-c-h" data-anchor="results-section" href="<?php echo isset($this->pageSection) && $this->pageSection != 'Home' ? '/' : '#'; ?>">Results</a></li>
+                        <li><a class="d-text-c-h" data-anchor="trainers-section" href="<?php echo isset($this->pageSection) && $this->pageSection != 'Home' ? '/' : '#'; ?>">Trainers</a></li>
                         <li><a class="d-text-c-h" data-anchor="blog-section" href="#">Blog</a>
                             <ul>
                                 <li><a class="d-text-c-h" href="blog.html">Blog with sidebar</a></li>
                                 <li><a class="d-text-c-h" href="post.html">Blog post</a></li>
                             </ul>
                         </li>
-                        <li><a class="d-text-c-h" data-anchor="shop-section" href="#">Shop</a>
+                        <li ><a class="d-text-c-h" data-anchor="store-section" href="#">Shop</a>
                             <ul>
                                 <li><a class="d-text-c-h" href="shop.html">Shop</a></li>
                                 <li><a class="d-text-c-h" href="shop-item.html">Shop Item</a></li>
@@ -27,13 +28,7 @@
                             </ul>
                         </li>
                         <li><a class="d-text-c-h" data-anchor="contact-section" href="#">Contact</a></li>
-                        <li><a class="d-text-c-h" href="#">Pages</a>
-                            <ul>
-                                <li><a class="d-text-c-h" href="shortcodes.html">Shortcodes</a></li>
-                                <li><a class="d-text-c-h" href="portfolio.html">Portfolio</a></li>
-                                <li><a class="d-text-c-h" href="timetable.html">Timetable</a></li>
-                            </ul>
-                        </li>
+                        <li><a class="d-text-c-h" data-anchor="faq-section" href="/faqs/">Faq</a></li>
                     </ul>
                 </nav>
             </div>

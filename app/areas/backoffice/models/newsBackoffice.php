@@ -81,7 +81,7 @@ class NewsBackoffice extends Model{
 	 * @param int $id
 	 */
 	public function selectDataByID($id){
-		$sql = "SELECT t1.id, t1.title, t1.slug, t1.text, t1.image, t1.video, t1.date, GROUP_CONCAT(DISTINCT t3.id) AS categories
+		$sql = "SELECT t1.id, t1.title, t1.slug, t1.text, t1.image, t1.video, t1.date, GROUP_CONCAT(DISTINCT t3.id) AS categories, t1.is_active
 				FROM news t1
 				  LEFT JOIN news_categories t2 ON t1.id = t2.news_id
 				    LEFT JOIN categories t3 ON t2.category_id = t3.id AND t3.is_active = 1
@@ -101,7 +101,7 @@ class NewsBackoffice extends Model{
         $optLimit = $limit != false ? " LIMIT $limit" : "";
         $optKeywords = $keywords != false ? " AND CONCAT(IF(isnull(t1.title),' ',CONCAT(LOWER(t1.title),' ')), IF(isnull(t1.slug),' ',CONCAT(LOWER(t1.slug),' '))) LIKE '%$keywords%'" : "";
 
-		$sql = "SELECT t1.id, t1.title, t1.slug, t1.text, t1.image, t1.video, t1.date
+		$sql = "SELECT t1.id, t1.title, t1.slug, t1.text, t1.image, t1.video, t1.date, t1.is_active
 				FROM news t1
 				WHERE 1 = 1
 				".$optKeywords."
@@ -143,7 +143,9 @@ class NewsBackoffice extends Model{
                 'text' => $data['text'],
                 'image' => $data['image'][0],
                 'video' => $data['video'],
-                'date' => $data['date']
+                'date' => $data['date'],
+                'is_active' => $data['is_active']
+
             );
 
             $this->_db->insert($dbTable, $postData);
@@ -170,7 +172,8 @@ class NewsBackoffice extends Model{
                 'text' => $data['text'],
                 'image' => $data['image'][0],
                 'video' => $data['video'],
-                'date' => $data['date']
+                'date' => $data['date'],
+                'is_active' => $data['is_active']
             );
             $where = "`id` = {$data['id']}";
 

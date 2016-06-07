@@ -1,5 +1,5 @@
 <?php
-class TrainersBackoffice extends Model{
+class Trainers extends Model{
 	/** __construct */
 	public function __construct(){
 		parent::__construct();

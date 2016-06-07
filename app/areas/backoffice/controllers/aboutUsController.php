@@ -92,6 +92,15 @@ class AboutUsController extends BaseController {
 		if(!empty($_POST['save'])){
             $_POST['id'] = $id;
 
+            for($i = 1; $i <= 2; $i++){
+                if(!isset($_FILES) || $_FILES['image'.$i]['name'] == null) {
+                    $_POST['image'.$i][0] = $this->_view->stored_data['image'.$i];
+                }else{
+                    //calls function that moves resourced documents
+                    $this->uploadFile($_FILES, $i);
+                }
+            }
+
             // Update About Us details
             $updateData = $this->_model->updateData($_POST);
 
@@ -100,6 +109,13 @@ class AboutUsController extends BaseController {
                     $this->_view->error[$key] = $error;
                 }
             } else {
+                for($i = 1; $i <= 2; $i++) {
+                    if (isset($_FILES) && $_FILES['image'.$i]['name'] != null) {
+                        //remove old file
+                        unlink(ROOT . UPLOAD_DIR . '/homepages/' . $this->_view->stored_data['image'.$i]);
+                    }
+                }
+
                 $this->_view->flash[] = "About Us updated successfully.";
                 Session::set('backofficeFlash', array($this->_view->flash, 'success'));
                 Url::redirect('backoffice/about-us/index');
@@ -143,6 +159,9 @@ class AboutUsController extends BaseController {
                         $deleteAttempt = $this->_model->deleteData($id);
                         //Check we have deleted About Us
                         if (!empty($deleteAttempt)) {
+                            unlink(ROOT.UPLOAD_DIR.'/homepages/'.$selectDataByID[0]['image1']);
+                            unlink(ROOT.UPLOAD_DIR.'/homepages/'.$selectDataByID[0]['image2']);
+
                             // Redirect to next page
                             $this->_view->flash[] = "About Us deleted successfully.";
                             Session::set('backofficeFlash', array($this->_view->flash, 'success'));
@@ -200,6 +219,14 @@ class AboutUsController extends BaseController {
 			    Url::redirect('backoffice/about-us/index');
 		    }
 
+            for($i = 1; $i <=2; $i++){
+                if(!isset($_FILES) || $_FILES['image'.$i]['name'] == null){
+                    $_POST['image'.$i] = null;
+                }else{
+                    $this->uploadFile($_FILES, $i);
+                }
+            }
+
             // Create new About Us
             $createData = $this->_model->createData($_POST);
             if(isset($createData['error']) && $createData['error'] != null){
@@ -216,6 +243,61 @@ class AboutUsController extends BaseController {
 		$this->_view->render('about-us/add', 'layout', 'backoffice');
 	}
 
+    /**
+     * UploadFile
+     * This method handles the upload and moving of docs on backoffice
+     * @param array $files is the $_FILES
+     */
+    public function uploadFile($files, $i){
+        require_once(ROOT.'system/helpers/Upload.php');
+        // upload file
+        try {
+            if(isset($files['image'.$i])){
+                $file = new Ps2_Upload(ROOT.UPLOAD_DIR.'/homepages/', 'image'.$i, true);
+                $file->addPermittedTypes(array(
+                        'image/png', 'image/jpeg', 'image/gif',
+                    )
+                );
+                $file->setMaxSize(MAX_FILE_SIZE);
+                $file->move();
+                $_POST['image'.$i] = $file->getFilenames();
+
+                return $this->_view->error = array_merge($this->_view->error, $file->getMessages());
+            }
+        } catch (Exception $e) {
+            return $this->_view->error[] = $e->getMessage();
+        }
+    }
+
+    /**
+     * PAGE: news-items image download
+     * GET: /backoffice/about-us/download/:id/
+     * This method handles the download image action.
+     */
+    public function download($id){
+        if(!empty($id)) {
+            $selectedData = $this->_model->selectDataByID($id);
+            if (isset($selectedData) && !empty($selectedData)) {
+                header('Content-Description: File Transfer');
+                header('Content-Disposition: attachment; filename="'.basename(ROOT.UPLOAD_DIR.$selectedData[0]['image']).'"');
+                header('Expires: 0');
+                header('Cache-Control: must-revalidate');
+                header('Content-Transfer-Encoding: binary');
+                header('Pragma: public');
+                header('Content-Length: ' . filesize(ROOT.'assets/uploads/homepages/'.$selectedData[0]['image']));
+                readfile(ROOT.'assets/uploads/homepages/'.$selectedData[0]['image']);
+                exit;
+            } else {
+                $this->_view->flash[] = "No data matches this ID";
+                Session::set('backofficeFlash', array($this->_view->flash, 'failure'));
+                Url::redirect('backoffice/about-us/');
+            }
+        }else{
+            $this->_view->flash[] = "No ID was provided";
+            Session::set('backofficeFlash', array($this->_view->flash, 'failure'));
+            Url::redirect('backoffice/about-us/');
+        }
+    }
 
 }
 ?>

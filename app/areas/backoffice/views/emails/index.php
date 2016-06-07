@@ -52,6 +52,9 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Email</th>
+                                    <th>Name</th>
+                                    <th>Subject</th>
+                                    <th>Message</th>
                                     <th>Created</th>
                                     <th style="width: 45px; min-width:45px;" class="text-center"><i class="fa fa-flash"></i></th>
                                 </tr>
@@ -61,6 +64,9 @@
                                     <tr>
                                         <td><?php echo $data['id']?></td>
                                         <td><?php echo $data['email']?></td>
+                                        <td><?php echo $data['name']?></td>
+                                        <td><?php echo $data['subject']?></td>
+                                        <td><?php echo $data['message']?></td>
                                         <td><?php echo date('d-m-Y', strtotime($data['created']))?></td>
                                         <td class="text-left">
                                             <a href="/backoffice/emails/delete/<?php echo $data['id']; ?>/" data-toggle="tooltip" title="Delete Category" class="btn btn-effect-ripple btn-sm btn-danger"><i class="fa fa-times"></i></a>

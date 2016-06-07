@@ -60,7 +60,7 @@
                             </thead>
                             <tbody>
                                 <?php foreach($this->getAllData as $data) {?>
-                                    <tr>
+                                    <tr <?php if($data['is_active'] == 0){ echo 'class="danger"'; } ?>>
                                         <td><?php echo $data['id']?></td>
                                         <td><?php echo $data['title']?></td>
                                         <td><?php echo date('d-m-Y', strtotime($data['date']));?></td>

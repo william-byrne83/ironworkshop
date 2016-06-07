@@ -12,7 +12,7 @@ class AboutUs extends Model{
 	 * @param int $id
 	 */
 	public function selectDataByID($id){
-		$sql = "SELECT t1.id, t1.text, t1.monday, t1.tuesday, t1.wednesday, t1.thursday, t1.friday, t1.saturday, t1.sunday, t1.pricing
+		$sql = "SELECT t1.id, t1.text, t1.monday, t1.tuesday, t1.wednesday, t1.thursday, t1.friday, t1.saturday, t1.sunday, t1.pricing, t1.image1, t1.image2
 				FROM about_us t1
 				WHERE t1.id = :id";
 
@@ -28,7 +28,7 @@ class AboutUs extends Model{
         $optLimit = $limit != false ? " LIMIT $limit" : "";
         $optKeywords = $keywords != false ? " AND CONCAT(IF(isnull(t1.text),' ',CONCAT(LOWER(t1.text),' '))) LIKE '%$keywords%'" : "";
 
-		$sql = "SELECT t1.id, t1.text, t1.monday, t1.tuesday, t1.wednesday, t1.thursday, t1.friday, t1.saturday, t1.sunday, t1.pricing
+		$sql = "SELECT t1.id, t1.text, t1.monday, t1.tuesday, t1.wednesday, t1.thursday, t1.friday, t1.saturday, t1.sunday, t1.pricing, t1.image1, t1.image2
 				FROM about_us t1
 				WHERE 1 = 1
 				".$optKeywords."

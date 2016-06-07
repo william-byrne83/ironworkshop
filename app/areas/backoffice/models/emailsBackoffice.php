@@ -11,7 +11,7 @@ class EmailsBackoffice extends Model{
 	 * @param int $id
 	 */
 	public function selectDataByID($id){
-        $sql = "SELECT t1.id, t1.email, t1.created
+        $sql = "SELECT t1.*
 				FROM emails t1
 				WHERE t1.id = :id";
 
@@ -28,7 +28,7 @@ class EmailsBackoffice extends Model{
         $optActive = $active != false ? " AND t1.is_active = 1" : "";
         $optKeywords = $keywords != false ? " AND CONCAT(IF(isnull(t1.email),' ',CONCAT(LOWER(t1.email),' '))) LIKE '%$keywords%'" : "";
 
-        $sql = "SELECT t1.id, t1.email, t1.created
+        $sql = "SELECT t1.*
 				FROM emails t1
 				WHERE 1 = 1
 				".$optKeywords."

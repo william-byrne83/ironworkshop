@@ -22,9 +22,9 @@
                 </ul>
 
                 <ul class="slider-dots" data-theme-plugin="bullets">
-                    <li class="d-border-c-h"></li>
-                    <li class="d-border-c-h"></li>
-                    <li class="d-border-c-h"></li>
+                    <?php foreach ($this->homepage[0]['images'] as $image){?>
+                        <li class="d-border-c-h"></li>
+                    <?php }?>
                 </ul>
             </div>
         </section>
@@ -57,7 +57,7 @@
                 <div class="col-md-4">
                     <div class="info-details info-details-center d-bg-c wow flipInX">
                         <h4>Membership</h4>
-                        <div class="info-image"><img src="/assets/images/info-img.jpg" alt="image" /></div>
+                        <div class="info-image"><img src="/assets/uploads/homepages/<?php echo $this->about[0]['image1']?>" alt="<?php echo $this->about[0]['image1']?>" /></div>
                         <ul class="ul-calendar">
                             <?php if(!empty($this->about[0]['pricing'])){?>
                                 <li>
@@ -110,7 +110,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 wow bounceInLeft">
-                        <div class="img-box"><img src="/assets/images/presentation.png" alt="presentation" /></div>
+                        <div class="img-box"><img src="/assets/uploads/homepages/<?php echo $this->about[0]['image2']?>" alt="<?php echo $this->about[0]['image2']?>" /></div>
                     </div>
                     <div class="col-md-6">
                         <div class="services-mark-1">
@@ -121,9 +121,11 @@
 <!--                            </div>-->
                             <div class="one-service wow bounceInRight">
                                 <img src="/assets/images/class-2.png" alt="class" />
+
 <!--                                <h4>POWER LIFTING</h4>-->
 
                                 <p><?php echo $this->about[0]['text']?></p>
+
                             </div>
 <!--                            <div class="one-service wow bounceInRight">-->
 <!--                                <img src="/assets/images/class-3.png" alt="class" />-->
@@ -137,14 +139,15 @@
         </div>
         <!-- === END ABOUT === -->
 
-        <!-- === START STATISTICS === -->
-        <div class="statistics-section">
+        <!-- === START SHOP === -->
+        <div class="statistics-section" id="store-section">
             <div class="container">
                 <div class="site-title wow bounceInLeft">
                     <p>Take a look at</p>
                     <h1>our shop</h1>
-                    <a href="/stores/"class="">View All</a>
+                    <a href="/stores/" class="button-box d-border-c d-bg-c-h d-text-c">View More</a>
                 </div>
+
                 <div class="row">
                     <div class="col-md-4 wow bounceInLeft">
                         <?php if (!empty($this->stores[0]['hero_image'])){?>
@@ -187,207 +190,55 @@
                 </div>
             </div>
         </div>
-        <!-- === END STATISTICS === -->
-
-
-        <!-- === START CLASSES === -->
-<!--        <div class="classes-section" id="classes-section" data-theme-plugin="slider" data-theme-item=".slide" data-theme-next=".slide-next" data-theme-prev=".slide-prev" data-theme-container=".slide-wrapper">-->
-<!--            <div class="container">-->
-<!--                <div class="site-title wow bounceInRight">-->
-<!--                    <p>Take a look at</p>-->
-<!--                    <h1>our classes</h1>-->
-<!--                    <div class="site-dots d-text-c"><i class="fa slide-prev fa-angle-left"></i> <i class="fa fa-times-2"></i><i class="fa fa-times-2"></i> <i class="fa slide-next fa-angle-right"></i></div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="container relative">-->
-<!--                <ul class="slider-dots" data-theme-plugin="bullets">-->
-<!--                    <li>01</li>-->
-<!--                    <li>02</li>-->
-<!--                    <li>03</li>-->
-<!--                    <li>04</li>-->
-<!--                    <li>05</li>-->
-<!--                </ul>-->
-<!--            </div>-->
-<!--            <ul class="slide-wrapper">-->
-<!--                <li class="slide">-->
-<!--                    <div class="slide-text">-->
-<!--                        <div class="white-box">-->
-<!--                            <h4>Power Lifting</h4>-->
-<!--                            <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents.</p>-->
-<!--                            <a href="#" class="button-box d-border-c d-bg-c-h d-text-c">view timetable</a>-->
-<!--                        </div>-->
-<!--                        <div class="box-2 d-bg-c">-->
-<!--                            <ul>-->
-<!--                                <li class="i-1">Mon-Fri 9.00 - 10.00</li>-->
-<!--                                <li class="i-2">Jane Austin</li>-->
-<!--                                <li class="i-3">Room B</li>-->
-<!--                                <li class="i-4">Starting with 100/mth</li>-->
-<!--                            </ul>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <img src="images/m-slide-1.jpg" alt="slide">-->
-<!--                </li>-->
-<!--                <li class="slide">-->
-<!--                    <div class="slide-text">-->
-<!--                        <div class="white-box">-->
-<!--                            <h4>Boxing</h4>-->
-<!--                            <p>Serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents.</p>-->
-<!--                            <a href="#" class="button-box d-border-c d-bg-c-h d-text-c">view timetable</a>-->
-<!--                        </div>-->
-<!--                        <div class="box-2 d-bg-c">-->
-<!--                            <ul>-->
-<!--                                <li class="i-1">Mon-Fri 9.00 - 10.00</li>-->
-<!--                                <li class="i-2">Jane Austin</li>-->
-<!--                                <li class="i-3">Room B</li>-->
-<!--                                <li class="i-4">Starting with 100/mth</li>-->
-<!--                            </ul>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <img src="images/m-slide-2.jpg" alt="slide">-->
-<!--                </li>-->
-<!--                <li class="slide">-->
-<!--                    <div class="slide-text">-->
-<!--                        <div class="white-box">-->
-<!--                            <h4>Fitness</h4>-->
-<!--                            <p>Serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents.</p>-->
-<!--                            <a href="#" class="button-box d-border-c d-bg-c-h d-text-c">view timetable</a>-->
-<!--                        </div>-->
-<!--                        <div class="box-2 d-bg-c">-->
-<!--                            <ul>-->
-<!--                                <li class="i-1">Mon-Fri 9.00 - 10.00</li>-->
-<!--                                <li class="i-2">Jane Austin</li>-->
-<!--                                <li class="i-3">Room B</li>-->
-<!--                                <li class="i-4">Starting with 100/mth</li>-->
-<!--                            </ul>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <img src="images/m-slide-3.jpg" alt="slide">-->
-<!--                </li>-->
-<!--                <li class="slide">-->
-<!--                    <div class="slide-text">-->
-<!--                        <div class="white-box">-->
-<!--                            <h4>Body Building</h4>-->
-<!--                            <p>Serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents.</p>-->
-<!--                            <a href="#" class="button-box d-border-c d-bg-c-h d-text-c">view timetable</a>-->
-<!--                        </div>-->
-<!--                        <div class="box-2 d-bg-c">-->
-<!--                            <ul>-->
-<!--                                <li class="i-1">Mon-Fri 9.00 - 10.00</li>-->
-<!--                                <li class="i-2">Jane Austin</li>-->
-<!--                                <li class="i-3">Room B</li>-->
-<!--                                <li class="i-4">Starting with 100/mth</li>-->
-<!--                            </ul>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <img src="images/m-slide-4.jpg" alt="slide">-->
-<!--                </li>-->
-<!--                <li class="slide">-->
-<!--                    <div class="slide-text">-->
-<!--                        <div class="white-box">-->
-<!--                            <h4>Shapping</h4>-->
-<!--                            <p>Wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents.</p>-->
-<!--                            <a href="#" class="button-box d-border-c d-bg-c-h d-text-c">view timetable</a>-->
-<!--                        </div>-->
-<!--                        <div class="box-2 d-bg-c">-->
-<!--                            <ul>-->
-<!--                                <li class="i-1">Mon-Fri 9.00 - 10.00</li>-->
-<!--                                <li class="i-2">Jane Austin</li>-->
-<!--                                <li class="i-3">Room B</li>-->
-<!--                                <li class="i-4">Starting with 100/mth</li>-->
-<!--                            </ul>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <img src="images/m-slide-5.jpg" alt="slide">-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </div>-->
-        <!-- === END CLASSES === -->
-
+        <!-- === END SHOP === -->
 
         <!-- === START TRAINERS === -->
         <div class="trainers-section carousel" id="trainers-section" data-theme-plugin="carousel" data-theme-container=".carousel-items" data-theme-item="&gt;div" data-theme-rotate="false" data-theme-autoplay="false" data-theme-hide-effect="false">
             <div class="container">
-                <div class="site-title wow bounceInLeft">
+                <div class="site-title wow fadeInDown">
                     <p>Take a look at</p>
                     <h1>our trainers</h1>
                     <div class="site-dots d-text-c carousel-arrows"><i class="fa prev fa-angle-left"></i> <i class="fa fa-times-2"></i><i class="fa fa-times-2"></i> <i class="fa next fa-angle-right"></i></div>
                 </div>
                 <div class="row carousel-items">
-                    <div class="col-md-4">
-                        <div class="trainer wow bounceInLeft">
-                            <ul class="socials d-bg-c wow fadeInUp">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            </ul>
-                            <img src="images/trainer-1.jpg" alt="trainer" />
-                            <div class="trainer-info">
-                                <h4>rachel adams<span>Yoga instructor</span></h4>
-                                <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence.</p>
+                    <?php foreach ($this->trainers as $key => $trainer){?>
+                        <?php $class = "fadeInUp";?>
+                        <?php if ($key == 0){$class = "bounceInLeft";}?>
+                        <?php if ($key == 1){$class = "fadeInDown";}?>
+                        <?php if ($key == 2){$class = "bounceInRight";}?>
+
+
+                        <div class="col-md-4">
+                            <div class="trainer wow <?php echo $class?>">
+                                <ul class="socials d-bg-c wow fadeInUp">
+                                    <?php if(!empty($trainer['facebook'])){?>
+                                        <li><a href="<?php echo $trainer['facebook'];?>" target = _blank><i class="fa fa-facebook"></i></a></li>
+                                    <?php } ?>
+
+                                    <?php if(!empty($trainer['twitter'])){?>
+                                        <li><a href="<?php echo $trainer['twitter'];?>" target = _blank><i class="fa fa-twitter"></i></a></li>
+                                    <?php } ?>
+
+                                    <?php if(!empty($trainer['instagram'])){?>
+                                        <li><a href="<?php echo $trainer['instagram'];?>" target = _blank><i class="fa fa-instagram"></i></a></li>
+                                    <?php } ?>
+
+                                    <?php if(!empty($trainer['google'])){?>
+                                        <li><a href="<?php echo $trainer['google'];?>" target = _blank><i class="fa fa-google-plus"></i></a></li>
+                                    <?php } ?>
+                                </ul>
+
+                                <a href = "/trainers/view/<?php echo $trainer['slug'];?>"/>
+                                    <img src="/assets/uploads/trainers/<?php echo $trainer['hero_image'][0]['image']?>" alt="<?php echo $trainer['hero_image'][0]['title']?>" />
+
+                                    <div class="trainer-info">
+                                        <h4><?php echo $trainer['name']?></h4>
+                                        <p><?php echo substr($trainer['text'], 0, 50)?>...</p>
+                                    </div>
+                                </a>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="trainer wow fadeInDown">
-                            <ul class="socials d-bg-c wow fadeInUp">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            </ul>
-                            <img src="images/trainer-2.jpg" alt="trainer" />
-                            <div class="trainer-info">
-                                <h4>Alexande Bergunov<span>Box instructor</span></h4>
-                                <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="trainer wow bounceInRight">
-                            <ul class="socials d-bg-c wow fadeInUp">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            </ul>
-                            <img src="images/trainer-3.jpg" alt="trainer" />
-                            <div class="trainer-info">
-                                <h4>Xenia James<span>Bodybuilding instructor</span></h4>
-                                <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="trainer">
-                            <ul class="socials d-bg-c wow fadeInUp">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            </ul>
-                            <img src="images/trainer-4.jpg" alt="trainer" />
-                            <div class="trainer-info">
-                                <h4>Alexande Bergunov<span>Box instructor</span></h4>
-                                <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="trainer">
-                            <ul class="socials d-bg-c wow fadeInUp">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            </ul>
-                            <img src="images/trainer-5.jpg" alt="trainer" />
-                            <div class="trainer-info">
-                                <h4>Xenia James<span>Bodybuilding instructor</span></h4>
-                                <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence.</p>
-                            </div>
-                        </div>
-                    </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -395,18 +246,36 @@
 
 
 
-        <!-- === START PURCHASE === -->
-<!--        <div class="purchase-section wow fadeInDown">-->
-<!--            <div class="bg-cover">-->
-<!--                <div class="container">-->
-<!--                    <div class="site-title">-->
-<!--                        <p>Already excited with the seen?</p>-->
-<!--                        <h1>Purchase ulysses now</h1>-->
-<!--                        <a href="http://themeforest.net/user/geothemes/portfolio?ref=geothemes">Buy it now</a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
+        <!-- === Results === -->
+        <div class="results-section wow fadeInDown carousel" id="results-section" data-theme-plugin="carousel" data-theme-container=".carousel-items" data-theme-item="&gt;div" data-theme-rotate="false" data-theme-autoplay="false" data-theme-hide-effect="false">
+            <div class="bg-cover">
+                <div class="container">
+                    <div class="site-title wow bounceInLeft">
+                        <p>Take a look at</p>
+                        <h1>our Results</h1>
+                        <div class="site-dots d-text-c carousel-arrows"><i class="fa prev fa-angle-left"></i> <i class="fa fa-times-2"></i><i class="fa fa-times-2"></i> <i class="fa next fa-angle-right"></i></div>
+                    </div>
+                    <div class="row carousel-items">
+                        <?php foreach ($this->results as $key => $result){?>
+                            <?php $class = "fadeInUp";?>
+                            <?php if ($key == 0){$class = "bounceInLeft";}?>
+                            <?php if ($key == 1){$class = "fadeInDown";}?>
+                            <?php if ($key == 2){$class = "bounceInRight";}?>
+
+                            <div class="col-md-4">
+                                <div class="trainer wow <?php echo $class?>">
+                                    <img src="/assets/uploads/results/<?php echo $result['image']?>" alt="<?php echo $result['image']?>" />
+
+                                    <div class="trainer-info">
+                                        <p><?php echo $result['text']?></p>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- === END PURCHASE === -->
 
 
@@ -417,60 +286,28 @@
                     <p>Our thoughts</p>
                     <h1>Latest from the blog</h1>
                     <div class="site-dots d-text-c carousel-arrows"><i class="fa prev fa-angle-left"></i> <i class="fa fa-times-2"></i><i class="fa fa-times-2"></i> <i class="fa next fa-angle-right"></i></div>
+                    <a href="/news/" class="button-box d-border-c d-bg-c-h d-text-c">View All</a>
                 </div>
+
                 <div class="row carousel-items">
-                    <div class="col-md-6">
-                        <div class="blog-entry wow bounceInLeft">
-                            <div class="entry-date"><span class="d-text-c">15</span> may</div>
-                            <div class="entry-cover">
-                                <a href="post.html"><img src="images/blog-1.jpg" alt="blog image" /></a>
-                            </div>
-                            <div class="entry-hover d-bg-c">
-                                <img src="images/photo-format.png" alt="photo" />
-                                <h2><a href="post.html">Having fun at the lake</a></h2>
-                                <p>Nature / Photography</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="blog-entry wow bounceInRight">
-                            <div class="entry-date"><span class="d-text-c">22</span> Sep </div>
-                            <div class="entry-cover">
-                                <a href="post.html"><img src="images/blog-3.jpg" alt="blog image" /></a>
-                            </div>
-                            <div class="entry-hover d-bg-c">
-                                <img src="images/photo-format.png" alt="photo" />
-                                <h2><a href="post.html">Having fun at the lake</a></h2>
-                                <p>Nature / Photography</p>
+                    <?php $count = 0?>
+                    <?php foreach($this->news as $news){?>
+                        <?php if ($count == 0){$class = "bounceInLeft";}else{$class = "bounceInRight";}?>
+                        <div class="col-md-6">
+                            <div class="blog-entry wow <?php echo $class?>">
+                                <div class="entry-date"><span class="d-text-c"><?php echo date('d', strtotime($news['date']))?></span> <?php echo date('M', strtotime($news['date']))?></div>
+                                <div class="entry-cover">
+                                    <a href="/news/<?php echo $news['slug']?>"><img src="/assets/uploads/news/<?php echo $news['image']?>" alt="<?php echo $news['title']?>" /></a>
+                                </div>
+                                <div class="entry-hover d-bg-c">
+                                    <img src="/assets/images/photo-format.png" alt="photo" />
+                                    <h2><a href="/news/<?php echo $news['slug']?>"><?php echo $news['title']?></a></h2>
+                                    <p><?php echo ucfirst(str_replace(',', ' / ', $news['categories']))?></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="blog-entry wow bounceInRight">
-                            <div class="entry-date"><span class="d-text-c">06</span> Oct </div>
-                            <div class="entry-cover">
-                                <a href="post.html"><img src="images/blog-2.jpg" alt="blog image" /></a>
-                            </div>
-                            <div class="entry-hover d-bg-c">
-                                <img src="images/photo-format.png" alt="photo" />
-                                <h2><a href="post.html">Having fun at the lake</a></h2>
-                                <p>Nature / Photography</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="blog-entry wow bounceInRight">
-                            <div class="entry-date"><span class="d-text-c">12</span> Dec </div>
-                            <div class="entry-cover">
-                                <a href="post.html"><img src="images/blog-4.jpg" alt="blog image" /></a>
-                            </div>
-                            <div class="entry-hover d-bg-c">
-                                <img src="images/photo-format.png" alt="photo" />
-                                <h2><a href="post.html">Having fun at the lake</a></h2>
-                                <p>Nature / Photography</p>
-                            </div>
-                        </div>
-                    </div>
+                        <?php $count++;?>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -478,61 +315,27 @@
 
 
 
-        <!-- START PRICING TABLES -->
+        <!-- START SOCIAL MEDIA -->
         <div class="pricing-section" id="shop-section">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4 wow bounceInLeft">
+                    <div class="col-md-6 wow bounceInLeft">
                         <div class="pricing-table">
-                            <h2 class="pricing-table-name">Silver</h2>
-                            <div class="pricing-table-price d-bg-c">$25 / <span>per month</span></div>
-                            <ul class="pricing-table-stuff">
-                                <li>Cardio</li>
-                                <li>Swimming Pool</li>
-                                <li>Massage</li>
-                                <li>Yoga</li>
-                                <li>Aerobics</li>
-                                <li>Solar</li>
-                            </ul>
-                            <p><a href="#" class="button d-bg-c-h">Buy now</a></p>
+                            <div class="pricing-table-price d-bg-c"><span>Facebook</span></div>
+                            <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FIron-Workshop-1479599665631954&tabs=timeline&width=500&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="500" height="500" style="border:none;overflow:hidden;margin-left:25px; " scrolling="no" frameborder="0" allowTransparency="true"></iframe>
                         </div>
                     </div>
-                    <div class="col-md-4 wow fadeInDown">
+                    <div class="col-md-6 wow fadeInDown">
                         <div class="pricing-table popular-table d-bg-c">
-                            <h2 class="pricing-table-name">Gold</h2>
-                            <div class="pricing-table-price d-text-c">$25 / <span>per month</span></div>
-                            <ul class="pricing-table-stuff">
-                                <li>Cardio</li>
-                                <li>Swimming Pool</li>
-                                <li>Massage</li>
-                                <li>Yoga</li>
-                                <li>Aerobics</li>
-                                <li>Solar</li>
-                            </ul>
-                            <p><a href="#" class="button">Buy now</a></p>
-                        </div>
-                    </div>
-                    <div class="col-md-4 wow bounceInRight">
-                        <div class="pricing-table">
-                            <h2 class="pricing-table-name">Platium</h2>
-                            <div class="pricing-table-price d-bg-c">$25 / <span>per month</span></div>
-                            <ul class="pricing-table-stuff">
-                                <li>Cardio</li>
-                                <li>Swimming Pool</li>
-                                <li>Massage</li>
-                                <li>Yoga</li>
-                                <li>Aerobics</li>
-                                <li>Solar</li>
-                            </ul>
-                            <p><a href="#" class="button d-bg-c-h">Buy now</a></p>
+                            <div class="pricing-table-price d-text-c"><span>Twitter</span></div>
+                            <a class="twitter-timeline" href="https://twitter.com/gwam831" data-widget-id="740072657144696833"  width="500" height="500" style = "margin-left:25px;">Tweets by @gwam831</a>
+                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script><!--                            <ul class="pricing-table-stuff">-->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- END PRICING TABLES -->
-
-
+        <!-- END SOCIAL MEDIA -->
 
         <!-- START CONTACT SECTION -->
         <div class="contact-section" id="contact-section">
@@ -551,7 +354,7 @@
                 </form>
             </div>
 
-            <div class="map-location wow fadeInDown">
+            <div class="map-location" id = "map-location" data-title = "<?php echo $this->contact[0]['text']?>" data-location = "<?php echo $this->contact[0]['location']?>" data-lat = "<?php echo $this->contact[0]['lat']?>" data-lang = "<?php echo $this->contact[0]['lang']?>">
             </div>
         </div>
         <!-- END CONTACT SECTION -->

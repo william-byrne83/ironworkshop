@@ -23,7 +23,7 @@
 <body class="home-page">
     <div class="load-complete">
         <div class="load-position">
-            <div class="logo"><img src="images/logo.png" alt="logo"/></div>
+            <div class="logo"><img src="/assets/images/IRON-WORKSHOP-BACK.gif" alt="logo"/></div>
             <h6>Please wait, loading...</h6>
             <div class="loading">
                 <div class="loading-line"></div>
@@ -36,8 +36,7 @@
 
     <div class="box-wide">
         <?php $this->renderPartial('shared/_header');?>
-            <div id="container">
-
+            <div id="container" class = "content">
                 <!--IF Flash Message then display it-->
                 <?php if (!empty($this->flash)) { ?>
                     <div class="alert-<?php echo $this->flash[1];?> alert-dismissable">
@@ -64,6 +63,9 @@
     </div>
     <?php 
 	    renderDefaultJSBundle();
+        if($this->pageSection == 'Home') {
+            renderContactMap();
+        }
 	?>
 	<?php echo isset($this->pageJs) ? Page::getPageJs($this->pageJs) : ''; ?>
 </body>

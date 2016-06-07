@@ -56,6 +56,8 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Text</th>
+                                    <th>Image</th>
+                                    <th>Image 2</th>
                                     <th style="width: 90px; min-width:90px;" class="text-center"><i class="fa fa-flash"></i></th>
                                 </tr>
                             </thead>
@@ -64,6 +66,12 @@
                                     <tr>
                                         <td><?php echo $data['id']?></td>
                                         <td><?php echo substr($data['text'], 0, 50)?>...</td>
+                                        <td>
+                                            <img src="/assets/uploads/homepages/<?php echo $data['image1']?>" alt="<?php echo $data['image1']?>" style = "width:64px;">
+                                        </td>
+                                        <td>
+                                            <img src="/assets/uploads/homepages/<?php echo $data['image2']?>" alt="<?php echo $data['image2']?>" style = "width:64px;">
+                                        </td>
                                         <td class="text-left">
                                             <a href="/backoffice/about-us/edit/<?php echo $data['id']; ?>/" data-toggle="tooltip" title="Edit About Us" class="btn btn-effect-ripple btn-sm btn-success"><i class="fa fa-pencil"></i></a>
                                             <a href="/backoffice/about-us/delete/<?php echo $data['id']; ?>/" data-toggle="tooltip" title="Delete About Us" class="btn btn-effect-ripple btn-sm btn-danger"><i class="fa fa-times"></i></a>
