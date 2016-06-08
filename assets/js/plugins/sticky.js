@@ -40,6 +40,7 @@
               .css('position', '')
               .css('top', '');
             s.stickyElement.parent().removeClass(s.className);
+              $(".to-top img").attr("src","/assets/images/IRON-WORKSHOP-BACK.png");
             s.currentTop = null;
           }
         }
@@ -61,7 +62,8 @@
             }
 
             s.stickyElement.parent().addClass(s.className);
-            s.currentTop = newTop;
+              $(".to-top img").attr("src","/assets/images/IRON-WORKSHOP-BACK-SMALL.png");
+              s.currentTop = newTop;
           }
         }
       }

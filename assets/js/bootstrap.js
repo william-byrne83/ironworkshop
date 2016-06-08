@@ -469,12 +469,13 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
 
 +function ($) {
   'use strict';
-
   // COLLAPSE PUBLIC CLASS DEFINITION
   // ================================
 
   var Collapse = function (element, options) {
-    this.$element      = $(element)
+      console.log(element, options);
+
+      this.$element      = $(element)
     this.options       = $.extend({}, Collapse.DEFAULTS, options)
     this.transitioning = null
 
@@ -609,6 +610,7 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
   // =================
 
   $(document).on('click.bs.collapse.data-api', '[data-toggle=collapse]', function (e) {
+      console.log('test');
     var $this   = $(this), href
     var target  = $this.attr('data-target')
         || e.preventDefault()

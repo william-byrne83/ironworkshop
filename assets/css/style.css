@@ -759,6 +759,17 @@ a {
 .sidebar .widget .socials li a:hover {
     color: #fff;
 }
+
+.gallery-image {
+    margin: 0 auto;
+    display: block;
+}
+
+
+#gallery-section iframe {
+    margin:0 auto;
+    display: block;
+}
 /* =========================== END SIDEBAR SECTION ===================== */
 
 /* =========================== START COMMENTS SECTION ===================== */

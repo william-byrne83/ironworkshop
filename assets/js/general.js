@@ -1,3 +1,5 @@
+/*
+
 jQuery(document).ready(function() {
     // Smooth Scroll
     jQuery('a[href*=#]').click(function () {
@@ -15,3 +17,4 @@ jQuery(document).ready(function() {
         }
     });
 });
+*/

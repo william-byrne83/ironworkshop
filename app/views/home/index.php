@@ -151,7 +151,7 @@
                 <div class="row">
                     <div class="col-md-4 wow bounceInLeft">
                         <?php if (!empty($this->stores[0]['hero_image'])){?>
-                            <a href = "/store/<?php echo $this->stores[0]['slug']?>">
+                            <a href = "/stores/view/<?php echo $this->stores[0]['slug']?>">
                                 <div class="statistic" style = "background: url('/assets/uploads/store/<?php echo $this->stores[0]['hero_image'][0]['image'] ?>') top right no-repeat; background-size: cover;">
                                     <div class="bg-cover"></div>
                                     <div class="statistic-cut"></div>
@@ -164,7 +164,7 @@
 
                     <div class="col-md-4 wow fadeInUp">
                         <?php if (!empty($this->stores[1]['hero_image'])){?>
-                            <a href = "/store/<?php echo $this->stores[1]['slug']?>">
+                            <a href = "/stores/view/<?php echo $this->stores[1]['slug']?>">
                                 <div class="statistic" style = "background: url('/assets/uploads/store/<?php echo $this->stores[1]['hero_image'][0]['image'] ?>') top right no-repeat; background-size: cover;">
                                     <div class="bg-cover"></div>
                                     <div class="statistic-cut"></div>
@@ -177,7 +177,7 @@
 
                     <div class="col-md-4 wow bounceInRight">
                         <?php if (!empty($this->stores[2]['hero_image'])){?>
-                            <a href = "/store/<?php echo $this->stores[2]['slug']?>">
+                            <a href = "/stores/view/<?php echo $this->stores[2]['slug']?>">
                                 <div class="statistic" style = "background: url('/assets/uploads/store/<?php echo $this->stores[2]['hero_image'][0]['image'] ?>') top right no-repeat; background-size: cover;">
                                     <div class="bg-cover"></div>
                                     <div class="statistic-cut"></div>
@@ -206,8 +206,6 @@
                         <?php if ($key == 0){$class = "bounceInLeft";}?>
                         <?php if ($key == 1){$class = "fadeInDown";}?>
                         <?php if ($key == 2){$class = "bounceInRight";}?>
-
-
                         <div class="col-md-4">
                             <div class="trainer wow <?php echo $class?>">
                                 <ul class="socials d-bg-c wow fadeInUp">
@@ -225,6 +223,18 @@
 
                                     <?php if(!empty($trainer['google'])){?>
                                         <li><a href="<?php echo $trainer['google'];?>" target = _blank><i class="fa fa-google-plus"></i></a></li>
+                                    <?php } ?>
+
+                                    <?php if(!empty($trainer['email'])){?>
+                                        <li><a href = "mailto:<?php echo $trainer['email'];?>"><i class="fa fa-envelope-o"></i></a></li>
+                                    <?php } ?>
+
+                                    <?php if(!empty($trainer['website'])){?>
+                                        <li><a href = "<?php echo $trainer['website'];?>" target = _blank><i class="fa fa-globe"></i></a></li>
+                                    <?php } ?>
+
+                                    <?php if(!empty($trainer['phone'])){?>
+                                        <li><a href = "tel:<?php echo $trainer['phone'];?>"><i class="fa fa-phone"></i></a></li>
                                     <?php } ?>
                                 </ul>
 
@@ -254,6 +264,8 @@
                         <p>Take a look at</p>
                         <h1>our Results</h1>
                         <div class="site-dots d-text-c carousel-arrows"><i class="fa prev fa-angle-left"></i> <i class="fa fa-times-2"></i><i class="fa fa-times-2"></i> <i class="fa next fa-angle-right"></i></div>
+                        <a href="/results/" class="button-box d-border-c d-bg-c-h d-text-c">View More</a>
+
                     </div>
                     <div class="row carousel-items">
                         <?php foreach ($this->results as $key => $result){?>
@@ -264,11 +276,14 @@
 
                             <div class="col-md-4">
                                 <div class="trainer wow <?php echo $class?>">
-                                    <img src="/assets/uploads/results/<?php echo $result['image']?>" alt="<?php echo $result['image']?>" />
+                                    <a href = "/results/view/<?php echo $result['id'];?>"/>
 
-                                    <div class="trainer-info">
-                                        <p><?php echo $result['text']?></p>
-                                    </div>
+                                        <img src="/assets/uploads/results/<?php echo $result['image']?>" alt="<?php echo $result['image']?>" />
+
+                                        <div class="trainer-info">
+                                            <p><?php echo $result['text']?></p>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
                         <?php } ?>
@@ -284,10 +299,17 @@
             <div class="container">
                 <div class="site-title wow bounceInRight">
                     <p>Our thoughts</p>
-                    <h1>Latest from the blog</h1>
+                    <h1>Latest News</h1>
                     <div class="site-dots d-text-c carousel-arrows"><i class="fa prev fa-angle-left"></i> <i class="fa fa-times-2"></i><i class="fa fa-times-2"></i> <i class="fa next fa-angle-right"></i></div>
-                    <a href="/news/" class="button-box d-border-c d-bg-c-h d-text-c">View All</a>
+                    <a href="/news/" class="button-box d-border-c d-bg-c-h d-text-c">View More</a>
                 </div>
+
+                <?php if (isset($data['image']) && !empty($data['image'])){?>
+                    <img src="/assets/uploads/galleries/<?php echo $data['image']?>" alt="<?php echo $data['title']?>" style ="width:300px; height:300px"/>
+                <?php }elseif(isset($data['video']) && !empty($data['video'])) {?>
+                    <?php $link = explode('v=', $data['video'])?>
+                    <img src="http://img.youtube.com/vi/<?php echo $link[1]?>/mqdefault.jpg" alt="<?php echo $data['title']?>" style ="width:300px; height:300px">
+                <?php }?>
 
                 <div class="row carousel-items">
                     <?php $count = 0?>
@@ -297,11 +319,16 @@
                             <div class="blog-entry wow <?php echo $class?>">
                                 <div class="entry-date"><span class="d-text-c"><?php echo date('d', strtotime($news['date']))?></span> <?php echo date('M', strtotime($news['date']))?></div>
                                 <div class="entry-cover">
-                                    <a href="/news/<?php echo $news['slug']?>"><img src="/assets/uploads/news/<?php echo $news['image']?>" alt="<?php echo $news['title']?>" /></a>
+                                    <?php if (isset($news['image']) && !empty($news['image'])){?>
+                                        <a href="/news/view/<?php echo $news['slug']?>/"><img src="/assets/uploads/news/<?php echo $news['image']?>" alt="<?php echo $news['title']?>" /></a>
+                                    <?php }elseif(isset($news['video']) && !empty($news['video'])) {?>
+                                    <?php $link = explode('v=', $news['video'])?>
+                                        <a href="/news/view/<?php echo $news['slug']?>/"><img src="http://img.youtube.com/vi/<?php echo $link[1]?>/mqdefault.jpg" alt="<?php echo $news['title']?>" style ="width:495px; height:575px"></a>
+                                    <?php }?>
                                 </div>
                                 <div class="entry-hover d-bg-c">
                                     <img src="/assets/images/photo-format.png" alt="photo" />
-                                    <h2><a href="/news/<?php echo $news['slug']?>"><?php echo $news['title']?></a></h2>
+                                    <h2><a href="/news/view/<?php echo $news['slug']?>/"><?php echo $news['title']?></a></h2>
                                     <p><?php echo ucfirst(str_replace(',', ' / ', $news['categories']))?></p>
                                 </div>
                             </div>

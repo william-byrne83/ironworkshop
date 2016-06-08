@@ -250,35 +250,35 @@ $Electra.form.inputError = function inputError(input) {
 
 
 // Instantiate theme collapse element object
-$theme_accordion = {};
-$theme_accordion.collapse = {};
+//$theme_accordion = {};
+//$theme_accordion.collapse = {};
 
 /* ACCORDION */
-$(".accordion-toggle").click(function() {
-    "use strict";
-    if ($(this).parent().hasClass('active')) {
-        $theme_accordion.collapse.close($(this).parent().parent());
-        return;
-    }
-    $('#accordion').children('.accordion-group').each(function(i, elem) {
-        $theme_accordion.collapse.close(elem);
-    });
-    $theme_accordion.collapse.open(this);
-});
-
-
-/* ACCORDION STATE MANAGER */
-$theme_accordion.collapse.close = function close(element) {
-    "use strict";
-    jQuery(element).children('.accordion-heading').removeClass('active');
-    jQuery(element).children('.accordion-body').removeClass('in');
-    jQuery(element).children('.accordion-heading').find('.plus').html('+');
-};
-$theme_accordion.collapse.open = function open(element) {
-    "use strict";
-    jQuery(element).parent().toggleClass('active');
-    jQuery(element).find('.plus').html('-');
-};
+//$(".accordion-toggle").click(function() {
+//    "use strict";
+//    if ($(this).parent().hasClass('active')) {
+//        $theme_accordion.collapse.close($(this).parent().parent());
+//        return;
+//    }
+//    $('#accordion').children('.accordion-group').each(function(i, elem) {
+//        $theme_accordion.collapse.close(elem);
+//    });
+//    $theme_accordion.collapse.open(this);
+//});
+//
+//
+///* ACCORDION STATE MANAGER */
+//$theme_accordion.collapse.close = function close(element) {
+//    "use strict";
+//    jQuery(element).children('.accordion-heading').removeClass('active');
+//    jQuery(element).children('.accordion-body').removeClass('in');
+//    jQuery(element).children('.accordion-heading').find('.plus').html('+');
+//};
+//$theme_accordion.collapse.open = function open(element) {
+//    "use strict";
+//    jQuery(element).parent().toggleClass('active');
+//    jQuery(element).find('.plus').html('-');
+//};
 /* --------------------------- */
 
 

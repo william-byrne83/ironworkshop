@@ -20,7 +20,7 @@
                     <div class="slider" data-theme-plugin="slider" data-theme-item=".slide"  data-theme-container=".slide-wrapper">
                         <ul class="slide-wrapper  wow bounceInLeft">
                             <li class="slide">
-                                    <img src="/assets/uploads/galleries/<?php echo $this->data[0]['image'] ?>" alt="<?php echo $this->data[0]['title'] ?>">
+                                <img src="/assets/uploads/galleries/<?php echo $this->data[0]['image'] ?>" alt="<?php echo $this->data[0]['title'] ?>" class = "gallery-image">
                             </li>
                         </ul>
                     </div>

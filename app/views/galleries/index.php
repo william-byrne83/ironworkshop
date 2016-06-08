@@ -35,7 +35,7 @@
                             <?php } ?>
                         </div>
                             <?php if(!empty($this->page_links)){ ?>
-                                    <?php echo $this->page_links; ?>
+                                <?php echo $this->page_links; ?>
                             <?php } ?>
                     </div>
                 </div>

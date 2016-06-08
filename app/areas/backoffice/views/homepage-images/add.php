@@ -67,7 +67,7 @@
                 <label class="col-md-2 control-label" for="file">Homepage Image <span class="text-danger">*</span></label>
                 <div class="col-md-5">
                     <input type="file" name="image" id="image">
-                        <span class = "help-block">Note: 1920 x 975 recommended.</span>
+                        <span class = "help-block">Note: Width:1920px x Height:975px recommended.</span>
 
                     <?php if(isset($this->stored_data['image']) && !empty($this->stored_data['image'])){?>
                         <span class = "help-block">Note: Uploading a new Image will remove the previous one.</span>

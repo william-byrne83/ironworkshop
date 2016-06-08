@@ -99,4 +99,31 @@ class Stores extends Model{
 		return $this->_db->select($sql, array(':id' => $id));
     }
 
+    /**
+     * FUNCTION: selectDataBySlug
+     * This function gets data based on title
+     * @param string $slug
+     */
+    public function selectDataBySlug($slug){
+        $sql = "SELECT t1.*
+				FROM stores t1
+				WHERE t1.slug = :slug AND t1.is_active = 1";
+
+        return $this->_db->select($sql, array(':slug' => $slug));
+    }
+
+    /**
+     * FUNCTION: getStoreImagesByStoreId
+     * This function gets data based on title
+     * @param int $id
+     */
+    public function getStoreImagesByStoreId($id){
+        $sql = "SELECT t1.*
+				FROM store_images t1
+				WHERE t1.store_id = :id AND t1.is_active = 1
+				ORDER BY t1.sort ASC";
+
+        return $this->_db->select($sql, array(':id' => $id));
+    }
+
 }?>

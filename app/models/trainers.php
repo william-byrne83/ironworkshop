@@ -83,4 +83,46 @@ class Trainers extends Model{
 		return $this->_db->select($sql, array(':trainer_id' => $trainer_id));
     }
 
+    /**
+     * FUNCTION: selectDataBySlug
+     * This function gets data based on title
+     * @param string $slug
+     */
+    public function selectDataBySlug($slug){
+        $sql = "SELECT t1.*
+				FROM trainers t1
+				WHERE t1.slug = :slug AND t1.is_active = 1";
+
+        return $this->_db->select($sql, array(':slug' => $slug));
+    }
+
+    /**
+     * FUNCTION: getTrainerImagesByTrainerId
+     * This function gets data based on title
+     * @param int $id
+     */
+    public function getTrainerImagesByTrainerId($id){
+        $sql = "SELECT t1.*
+				FROM trainer_images t1
+				WHERE t1.trainer_id = :id AND t1.is_active = 1
+				ORDER BY t1.sort ASC";
+
+        return $this->_db->select($sql, array(':id' => $id));
+    }
+
+
+    /**
+     * FUNCTION: getResultsByTrainerId
+     * This function gets data based on title
+     * @param int $id
+     */
+    public function getResultsByTrainerId($id){
+        $sql = "SELECT t1.*
+				FROM results t1
+				WHERE t1.trainer_id = :id AND t1.is_active = 1
+				ORDER BY t1.sort ASC";
+
+        return $this->_db->select($sql, array(':id' => $id));
+    }
+
 }?>

@@ -2,7 +2,7 @@
     <!-- Sidebar Brand -->
 
     <div id="sidebar-brand" class="themed-background">
-        <a href="/backoffice/users/" class="sidebar-title">
+        <a href="/" class="sidebar-title">
 	        <i class="fa fa-cube"></i><span class="sidebar-nav-mini-hide"><?php echo SITE_NAME; ?></span>
 	    </a>
     </div><!-- END Sidebar Brand -->
