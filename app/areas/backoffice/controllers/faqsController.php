@@ -7,7 +7,7 @@ class FaqsController extends BaseController {
 	public function __construct(){
 		parent::__construct();
 		// Load the User Model ($modelName, $area)
-		$this->_model = $this->loadModel('FaqsBackoffice', 'backoffice');
+		$this->_model = $this->loadModel('faqsBackoffice', 'backoffice');
 	}
 
     /**
@@ -68,7 +68,7 @@ class FaqsController extends BaseController {
 		if(!empty($_POST)){
             //if user selected cancel
             if(!empty($_POST['cancel'])){
-			    Url::redirect('backoffice/Faqs/index');
+			    Url::redirect('backoffice/faqs/index');
 		    }
 
             // Create new Faqs
@@ -83,11 +83,11 @@ class FaqsController extends BaseController {
 
                 $this->_view->flash[] = "Faq added successfully.";
                 Session::set('backofficeFlash', array($this->_view->flash, 'success'));
-                Url::redirect('backoffice/Faqs/index');
+                Url::redirect('backoffice/faqs/index');
             }
 		}
 		// Render the view ($renderBody, $layout, $area)
-		$this->_view->render('Faqs/add', 'layout', 'backoffice');
+		$this->_view->render('faqs/add', 'layout', 'backoffice');
 	}
 
     /**
@@ -105,12 +105,12 @@ class FaqsController extends BaseController {
 			}else{
                 $this->_view->flash[] = "No Faqs matches this id";
                 Session::set('backofficeFlash', array($this->_view->flash, 'failure'));
-				Url::redirect('backoffice/Faqs/index');
+				Url::redirect('backoffice/faqs/index');
 			}
 		}else{
             $this->_view->flash[] = "No ID provided for Faqs";
             Session::set('backofficeFlash', array($this->_view->flash, 'failure'));
-			Url::redirect('backoffice/Faqs/index');
+			Url::redirect('backoffice/faqs/index');
 		}
 
 		// Set the Page Title ('pageName', 'pageSection', 'areaName')
@@ -145,16 +145,16 @@ class FaqsController extends BaseController {
             } else {
                 $this->_view->flash[] = "Faqs updated successfully.";
                 Session::set('backofficeFlash', array($this->_view->flash, 'success'));
-                Url::redirect('backoffice/Faqs/index');
+                Url::redirect('backoffice/faqs/index');
             }
 		}
 
 		if(!empty($_POST['cancel'])){
-			Url::redirect('backoffice/Faqs/index');
+			Url::redirect('backoffice/faqs/index');
 		}
 
 		// Render the view ($renderBody, $layout, $area)
-		$this->_view->render('Faqs/add', 'layout', 'backoffice');
+		$this->_view->render('faqs/add', 'layout', 'backoffice');
 	}
 
     /**

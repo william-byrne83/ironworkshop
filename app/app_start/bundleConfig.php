@@ -49,6 +49,8 @@ function renderAdminCssBundle(){
 	echo '<link rel="stylesheet" href="/app/areas/backoffice/assets/css/main.css?v=1.0">';
 	echo '<link rel="stylesheet" href="/app/areas/backoffice/assets/css/themes.css?v=1.0">';
 	echo '<link rel="stylesheet" href="/app/areas/backoffice/assets/css/custom.css?v=1.0">';
+    echo '<link rel="stylesheet" href="/app/areas/backoffice/assets/js/croppie/croppie.css?v=1.0">';
+
 }
 function renderAdminHeadJSBundle(){
     echo '<script src="/app/areas/backoffice/assets/js/modernizr-2.8.3.min.js"></script>';
@@ -62,5 +64,7 @@ function renderAdminJSBundle(){
     echo '<script src="/app/areas/backoffice/assets/js/app.js"></script>';
     echo '<script src="/app/areas/backoffice/assets/js/general.js"></script>';
     echo '<script src="/app/areas/backoffice/assets/js/ckeditor/ckeditor.js"></script>';
+    echo '<script src="/app/areas/backoffice/assets/js/croppie/croppie.js"></script>';
+
 }
 ?>

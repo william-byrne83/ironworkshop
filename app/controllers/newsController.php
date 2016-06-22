@@ -7,7 +7,7 @@ class NewsController extends BaseController {
     public function __construct(){
         parent::__construct();
         // Load the User Model ($modelName, $area)
-        $this->_model = $this->loadModel('News');
+        $this->_model = $this->loadModel('news');
     }
 
     /**

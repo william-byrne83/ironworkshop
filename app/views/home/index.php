@@ -139,6 +139,173 @@
         </div>
         <!-- === END ABOUT === -->
 
+        <!-- === START BLOG POSTS === -->
+        <div class="blog-post-section carousel grey" id="blog-section" data-theme-plugin="carousel" data-theme-container=".carousel-items" data-theme-item="&gt;div" data-theme-rotate="false" data-theme-autoplay="false" data-theme-hide-effect="false">
+            <div class="container">
+                <div class="site-title wow bounceInRight">
+                    <p>Our thoughts</p>
+                    <h1>Latest News</h1>
+                    <div class="site-dots d-text-c carousel-arrows"><i class="fa prev fa-angle-left"></i> <i class="fa fa-times-2"></i><i class="fa fa-times-2"></i> <i class="fa next fa-angle-right"></i></div>
+                    <a href="/news/" class="button-box d-border-c d-bg-c-h d-text-c">View More</a>
+                </div>
+
+                <?php if (isset($data['image']) && !empty($data['image'])){?>
+                    <img src="/assets/uploads/galleries/<?php echo $data['image']?>" alt="<?php echo $data['title']?>" style ="width:300px; height:300px"/>
+                <?php }elseif(isset($data['video']) && !empty($data['video'])) {?>
+                    <?php $link = explode('v=', $data['video'])?>
+                    <img src="http://img.youtube.com/vi/<?php echo $link[1]?>/mqdefault.jpg" alt="<?php echo $data['title']?>" style ="width:300px; height:300px">
+                <?php }?>
+
+                <div class="row carousel-items">
+                    <?php $count = 0?>
+                    <?php foreach($this->news as $news){?>
+                        <?php if ($count == 0){$class = "bounceInLeft";}else{$class = "bounceInRight";}?>
+                        <div class="col-md-6">
+                            <div class="blog-entry wow <?php echo $class?>">
+                                <div class="entry-date"><span class="d-text-c"><?php echo date('d', strtotime($news['date']))?></span> <?php echo date('M', strtotime($news['date']))?></div>
+                                <div class="entry-cover">
+                                    <?php if (isset($news['image']) && !empty($news['image'])){?>
+                                        <a href="/news/view/<?php echo $news['slug']?>/"><img src="/assets/uploads/news/<?php echo $news['image']?>" alt="<?php echo $news['title']?>" style = "width:495px;" /></a>
+                                    <?php }elseif(isset($news['video']) && !empty($news['video'])) {?>
+                                        <?php $link = explode('v=', $news['video'])?>
+                                        <a href="/news/view/<?php echo $news['slug']?>/"><img src="http://img.youtube.com/vi/<?php echo $link[1]?>/mqdefault.jpg" alt="<?php echo $news['title']?>" style ="width:495px; height:575px"></a>
+                                    <?php }?>
+                                </div>
+                                <div class="entry-hover d-bg-c">
+                                    <img src="/assets/images/photo-format.png" alt="photo" />
+                                    <h2><a href="/news/view/<?php echo $news['slug']?>/"><?php echo $news['title']?></a></h2>
+                                    <p><?php echo ucfirst(str_replace(',', ' / ', $news['categories']))?></p>
+                                </div>
+                            </div>
+                        </div>
+                        <?php $count++;?>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+        <!-- === END BLOG POSTS === -->
+
+        <!-- === START TRAINERS === -->
+        <div class="trainers-section carousel" id="trainers-section" data-theme-plugin="carousel" data-theme-container=".carousel-items" data-theme-item="&gt;div" data-theme-rotate="false" data-theme-autoplay="false" data-theme-hide-effect="false">
+            <div class="container">
+                <div class="site-title wow fadeInDown">
+                    <p>Take a look at</p>
+                    <h1>our trainers</h1>
+                    <div class="site-dots d-text-c carousel-arrows"><i class="fa prev fa-angle-left"></i> <i class="fa fa-times-2"></i><i class="fa fa-times-2"></i> <i class="fa next fa-angle-right"></i></div>
+                </div>
+                <div class="row carousel-items">
+                    <?php foreach ($this->trainers as $key => $trainer){?>
+                        <?php $class = "fadeInUp";?>
+                        <?php if ($key == 0){$class = "bounceInLeft";}?>
+                        <?php if ($key == 1){$class = "fadeInDown";}?>
+                        <?php if ($key == 2){$class = "bounceInRight";}?>
+                        <div class="col-md-4">
+                            <div class="trainer wow <?php echo $class?>">
+                                <ul class="socials d-bg-c wow fadeInUp">
+                                    <?php if(!empty($trainer['facebook'])){?>
+                                        <li><a href="<?php echo $trainer['facebook'];?>" target = _blank><i class="fa fa-facebook"></i></a></li>
+                                    <?php } ?>
+
+                                    <?php if(!empty($trainer['twitter'])){?>
+                                        <li><a href="<?php echo $trainer['twitter'];?>" target = _blank><i class="fa fa-twitter"></i></a></li>
+                                    <?php } ?>
+
+                                    <?php if(!empty($trainer['instagram'])){?>
+                                        <li><a href="<?php echo $trainer['instagram'];?>" target = _blank><i class="fa fa-instagram"></i></a></li>
+                                    <?php } ?>
+
+                                    <?php if(!empty($trainer['google'])){?>
+                                        <li><a href="<?php echo $trainer['google'];?>" target = _blank><i class="fa fa-google-plus"></i></a></li>
+                                    <?php } ?>
+
+                                    <?php if(!empty($trainer['email'])){?>
+                                        <li><a href = "mailto:<?php echo $trainer['email'];?>"><i class="fa fa-envelope-o"></i></a></li>
+                                    <?php } ?>
+
+                                    <?php if(!empty($trainer['website'])){?>
+                                        <li><a href = "<?php echo $trainer['website'];?>" target = _blank><i class="fa fa-globe"></i></a></li>
+                                    <?php } ?>
+
+                                    <?php if(!empty($trainer['phone'])){?>
+                                        <li><a href = "tel:<?php echo $trainer['phone'];?>"><i class="fa fa-phone"></i></a></li>
+                                    <?php } ?>
+                                </ul>
+
+                                <a href = "/trainers/view/<?php echo $trainer['slug'];?>"/>
+                                <img src="/assets/uploads/trainers/<?php echo $trainer['hero_image'][0]['image']?>" alt="<?php echo $trainer['hero_image'][0]['title']?>" />
+
+                                <div class="trainer-info">
+                                    <h4><?php echo $trainer['name']?></h4>
+                                    <p><?php echo substr($trainer['text'], 0, 50)?>...</p>
+                                </div>
+                                </a>
+                            </div>
+                        </div>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+        <!-- === END TRAINERS === -->
+
+        <!-- === Results === -->
+        <div class="results-section wow fadeInDown carousel" id="results-section" data-theme-plugin="carousel" data-theme-container=".carousel-items" data-theme-item="&gt;div" data-theme-rotate="false" data-theme-autoplay="false" data-theme-hide-effect="false">
+            <div class="bg-cover">
+                <div class="container">
+                    <div class="site-title wow bounceInLeft">
+                        <p>Take a look at</p>
+                        <h1>our Results</h1>
+                        <div class="site-dots d-text-c carousel-arrows"><i class="fa prev fa-angle-left"></i> <i class="fa fa-times-2"></i><i class="fa fa-times-2"></i> <i class="fa next fa-angle-right"></i></div>
+                        <a href="/results/" class="button-box d-border-c d-bg-c-h d-text-c">View More</a>
+
+                    </div>
+                    <div class="row carousel-items">
+                        <?php foreach ($this->results as $key => $result){?>
+                            <?php $class = "fadeInUp";?>
+                            <?php if ($key == 0){$class = "bounceInLeft";}?>
+                            <?php if ($key == 1){$class = "fadeInDown";}?>
+                            <?php if ($key == 2){$class = "bounceInRight";}?>
+
+                            <div class="col-md-4">
+                                <div class="trainer wow <?php echo $class?>">
+                                    <a href = "/results/view/<?php echo $result['id'];?>"/>
+
+                                    <img src="/assets/uploads/results/<?php echo $result['image']?>" alt="<?php echo $result['image']?>" />
+
+                                    <div class="trainer-info">
+                                        <p><?php echo $result['text']?></p>
+                                    </div>
+                                    </a>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- === END PURCHASE === -->
+
+        <!-- START SOCIAL MEDIA -->
+        <div class="pricing-section white" id="shop-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 wow bounceInLeft">
+                        <div class="pricing-table">
+                            <div class="pricing-table-price d-bg-c"><span>Facebook</span></div>
+                            <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FIron-Workshop-1479599665631954&tabs=timeline&width=500&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="500" height="500" style="border:none;overflow:hidden;margin-left:25px; " scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+                        </div>
+                    </div>
+                    <div class="col-md-6 wow fadeInDown">
+                        <div class="pricing-table popular-table d-bg-c">
+                            <div class="pricing-table-price d-text-c"><span>Twitter</span></div>
+                            <a class="twitter-timeline" href="https://twitter.com/gwam831" data-widget-id="740072657144696833"  width="500" height="500" style = "margin-left:25px;">Tweets by @gwam831</a>
+                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script><!--                            <ul class="pricing-table-stuff">-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END SOCIAL MEDIA -->
+
         <!-- === START SHOP === -->
         <div class="statistics-section" id="store-section">
             <div class="container">
@@ -191,178 +358,6 @@
             </div>
         </div>
         <!-- === END SHOP === -->
-
-        <!-- === START TRAINERS === -->
-        <div class="trainers-section carousel" id="trainers-section" data-theme-plugin="carousel" data-theme-container=".carousel-items" data-theme-item="&gt;div" data-theme-rotate="false" data-theme-autoplay="false" data-theme-hide-effect="false">
-            <div class="container">
-                <div class="site-title wow fadeInDown">
-                    <p>Take a look at</p>
-                    <h1>our trainers</h1>
-                    <div class="site-dots d-text-c carousel-arrows"><i class="fa prev fa-angle-left"></i> <i class="fa fa-times-2"></i><i class="fa fa-times-2"></i> <i class="fa next fa-angle-right"></i></div>
-                </div>
-                <div class="row carousel-items">
-                    <?php foreach ($this->trainers as $key => $trainer){?>
-                        <?php $class = "fadeInUp";?>
-                        <?php if ($key == 0){$class = "bounceInLeft";}?>
-                        <?php if ($key == 1){$class = "fadeInDown";}?>
-                        <?php if ($key == 2){$class = "bounceInRight";}?>
-                        <div class="col-md-4">
-                            <div class="trainer wow <?php echo $class?>">
-                                <ul class="socials d-bg-c wow fadeInUp">
-                                    <?php if(!empty($trainer['facebook'])){?>
-                                        <li><a href="<?php echo $trainer['facebook'];?>" target = _blank><i class="fa fa-facebook"></i></a></li>
-                                    <?php } ?>
-
-                                    <?php if(!empty($trainer['twitter'])){?>
-                                        <li><a href="<?php echo $trainer['twitter'];?>" target = _blank><i class="fa fa-twitter"></i></a></li>
-                                    <?php } ?>
-
-                                    <?php if(!empty($trainer['instagram'])){?>
-                                        <li><a href="<?php echo $trainer['instagram'];?>" target = _blank><i class="fa fa-instagram"></i></a></li>
-                                    <?php } ?>
-
-                                    <?php if(!empty($trainer['google'])){?>
-                                        <li><a href="<?php echo $trainer['google'];?>" target = _blank><i class="fa fa-google-plus"></i></a></li>
-                                    <?php } ?>
-
-                                    <?php if(!empty($trainer['email'])){?>
-                                        <li><a href = "mailto:<?php echo $trainer['email'];?>"><i class="fa fa-envelope-o"></i></a></li>
-                                    <?php } ?>
-
-                                    <?php if(!empty($trainer['website'])){?>
-                                        <li><a href = "<?php echo $trainer['website'];?>" target = _blank><i class="fa fa-globe"></i></a></li>
-                                    <?php } ?>
-
-                                    <?php if(!empty($trainer['phone'])){?>
-                                        <li><a href = "tel:<?php echo $trainer['phone'];?>"><i class="fa fa-phone"></i></a></li>
-                                    <?php } ?>
-                                </ul>
-
-                                <a href = "/trainers/view/<?php echo $trainer['slug'];?>"/>
-                                    <img src="/assets/uploads/trainers/<?php echo $trainer['hero_image'][0]['image']?>" alt="<?php echo $trainer['hero_image'][0]['title']?>" />
-
-                                    <div class="trainer-info">
-                                        <h4><?php echo $trainer['name']?></h4>
-                                        <p><?php echo substr($trainer['text'], 0, 50)?>...</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    <?php } ?>
-                </div>
-            </div>
-        </div>
-        <!-- === END TRAINERS === -->
-
-
-
-        <!-- === Results === -->
-        <div class="results-section wow fadeInDown carousel" id="results-section" data-theme-plugin="carousel" data-theme-container=".carousel-items" data-theme-item="&gt;div" data-theme-rotate="false" data-theme-autoplay="false" data-theme-hide-effect="false">
-            <div class="bg-cover">
-                <div class="container">
-                    <div class="site-title wow bounceInLeft">
-                        <p>Take a look at</p>
-                        <h1>our Results</h1>
-                        <div class="site-dots d-text-c carousel-arrows"><i class="fa prev fa-angle-left"></i> <i class="fa fa-times-2"></i><i class="fa fa-times-2"></i> <i class="fa next fa-angle-right"></i></div>
-                        <a href="/results/" class="button-box d-border-c d-bg-c-h d-text-c">View More</a>
-
-                    </div>
-                    <div class="row carousel-items">
-                        <?php foreach ($this->results as $key => $result){?>
-                            <?php $class = "fadeInUp";?>
-                            <?php if ($key == 0){$class = "bounceInLeft";}?>
-                            <?php if ($key == 1){$class = "fadeInDown";}?>
-                            <?php if ($key == 2){$class = "bounceInRight";}?>
-
-                            <div class="col-md-4">
-                                <div class="trainer wow <?php echo $class?>">
-                                    <a href = "/results/view/<?php echo $result['id'];?>"/>
-
-                                        <img src="/assets/uploads/results/<?php echo $result['image']?>" alt="<?php echo $result['image']?>" />
-
-                                        <div class="trainer-info">
-                                            <p><?php echo $result['text']?></p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        <?php } ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- === END PURCHASE === -->
-
-
-        <!-- === START BLOG POSTS === -->
-        <div class="blog-post-section carousel" id="blog-section" data-theme-plugin="carousel" data-theme-container=".carousel-items" data-theme-item="&gt;div" data-theme-rotate="false" data-theme-autoplay="false" data-theme-hide-effect="false">
-            <div class="container">
-                <div class="site-title wow bounceInRight">
-                    <p>Our thoughts</p>
-                    <h1>Latest News</h1>
-                    <div class="site-dots d-text-c carousel-arrows"><i class="fa prev fa-angle-left"></i> <i class="fa fa-times-2"></i><i class="fa fa-times-2"></i> <i class="fa next fa-angle-right"></i></div>
-                    <a href="/news/" class="button-box d-border-c d-bg-c-h d-text-c">View More</a>
-                </div>
-
-                <?php if (isset($data['image']) && !empty($data['image'])){?>
-                    <img src="/assets/uploads/galleries/<?php echo $data['image']?>" alt="<?php echo $data['title']?>" style ="width:300px; height:300px"/>
-                <?php }elseif(isset($data['video']) && !empty($data['video'])) {?>
-                    <?php $link = explode('v=', $data['video'])?>
-                    <img src="http://img.youtube.com/vi/<?php echo $link[1]?>/mqdefault.jpg" alt="<?php echo $data['title']?>" style ="width:300px; height:300px">
-                <?php }?>
-
-                <div class="row carousel-items">
-                    <?php $count = 0?>
-                    <?php foreach($this->news as $news){?>
-                        <?php if ($count == 0){$class = "bounceInLeft";}else{$class = "bounceInRight";}?>
-                        <div class="col-md-6">
-                            <div class="blog-entry wow <?php echo $class?>">
-                                <div class="entry-date"><span class="d-text-c"><?php echo date('d', strtotime($news['date']))?></span> <?php echo date('M', strtotime($news['date']))?></div>
-                                <div class="entry-cover">
-                                    <?php if (isset($news['image']) && !empty($news['image'])){?>
-                                        <a href="/news/view/<?php echo $news['slug']?>/"><img src="/assets/uploads/news/<?php echo $news['image']?>" alt="<?php echo $news['title']?>" /></a>
-                                    <?php }elseif(isset($news['video']) && !empty($news['video'])) {?>
-                                    <?php $link = explode('v=', $news['video'])?>
-                                        <a href="/news/view/<?php echo $news['slug']?>/"><img src="http://img.youtube.com/vi/<?php echo $link[1]?>/mqdefault.jpg" alt="<?php echo $news['title']?>" style ="width:495px; height:575px"></a>
-                                    <?php }?>
-                                </div>
-                                <div class="entry-hover d-bg-c">
-                                    <img src="/assets/images/photo-format.png" alt="photo" />
-                                    <h2><a href="/news/view/<?php echo $news['slug']?>/"><?php echo $news['title']?></a></h2>
-                                    <p><?php echo ucfirst(str_replace(',', ' / ', $news['categories']))?></p>
-                                </div>
-                            </div>
-                        </div>
-                        <?php $count++;?>
-                    <?php } ?>
-                </div>
-            </div>
-        </div>
-        <!-- === END BLOG POSTS === -->
-
-
-
-        <!-- START SOCIAL MEDIA -->
-        <div class="pricing-section" id="shop-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 wow bounceInLeft">
-                        <div class="pricing-table">
-                            <div class="pricing-table-price d-bg-c"><span>Facebook</span></div>
-                            <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FIron-Workshop-1479599665631954&tabs=timeline&width=500&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="500" height="500" style="border:none;overflow:hidden;margin-left:25px; " scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-                        </div>
-                    </div>
-                    <div class="col-md-6 wow fadeInDown">
-                        <div class="pricing-table popular-table d-bg-c">
-                            <div class="pricing-table-price d-text-c"><span>Twitter</span></div>
-                            <a class="twitter-timeline" href="https://twitter.com/gwam831" data-widget-id="740072657144696833"  width="500" height="500" style = "margin-left:25px;">Tweets by @gwam831</a>
-                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script><!--                            <ul class="pricing-table-stuff">-->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- END SOCIAL MEDIA -->
 
         <!-- START CONTACT SECTION -->
         <div class="contact-section" id="contact-section">

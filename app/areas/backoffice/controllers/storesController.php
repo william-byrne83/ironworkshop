@@ -7,7 +7,7 @@ class StoresController extends BaseController {
 	public function __construct(){
 		parent::__construct();
 		// Load the User Model ($modelName, $area)
-		$this->_model = $this->loadModel('StoresBackoffice', 'backoffice');
+		$this->_model = $this->loadModel('storesBackoffice', 'backoffice');
 	}
 
     /**
@@ -148,7 +148,7 @@ class StoresController extends BaseController {
                 if(isset($_POST) && !empty($_POST)) {
                     if (!empty($_POST['delete'])) {
                         // Need to delete all the child images/files
-                        $this->_imagesModel = $this->loadModel('StoreImagesBackoffice', 'backoffice');
+                        $this->_imagesModel = $this->loadModel('storeImagesBackoffice', 'backoffice');
                         $images = $this->_imagesModel->getAllData(false, false, false, $id);
                         if(!empty($images)){
                             foreach($images as $image){

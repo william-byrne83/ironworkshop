@@ -94,6 +94,7 @@ class Bootstrap{
                         if(!empty($value->routeArea)){
 	                        // Check area exists
 	                        $areaPath = 'app/areas/' . $value->routeArea;
+
 	                        if (file_exists($areaPath)) {
 	                            // Set the Area Name
 	                            $this->_areaName = $value->routeArea;
@@ -136,7 +137,6 @@ class Bootstrap{
 								$param_start = 2;
 							}
 						}
-
 						 // Set parameters if they exist
                         $i = 1;
                         $a = $param_start;
@@ -147,9 +147,11 @@ class Bootstrap{
                         	}
                         ++$i; ++$a;}
 
+
                         if(file_exists($controllerPath)){
 
-	                        $match = true;
+
+                            $match = true;
 
                             // Require the Controller
                             require_once($controllerPath);

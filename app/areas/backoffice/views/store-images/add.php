@@ -67,10 +67,16 @@
                 <label class="col-md-2 control-label" for="file">Store Image <span class="text-danger">*</span></label>
                 <div class="col-md-5">
                     <input type="file" name="image" id="image">
-                    <span class = "help-block">Note: Width:1200px Height:800px</span>
+                    <input type="hidden" id="imagebase64" name="imagebase64">
+
+                    <span class = "help-block">Note: Width:800px Height:800px</span>
                     <?php if(isset($this->stored_data['image']) && !empty($this->stored_data['image'])){?>
                         <span class = "help-block">Note: Uploading a new Image will remove the previous one.</span>
                     <?php } ?>
+                </div>
+
+                <div class="col-md-5">
+                    <div id = "store-image"></div>
                 </div>
             </div>
 
@@ -86,7 +92,7 @@
 
             <div class="form-group form-actions">
                 <div class="col-md-5 col-md-offset-2">
-                    <input type="submit" name="save" class="btn btn-effect-ripple btn-primary loader" value="Save">
+                    <input id = "save" type="submit" name="save" class="btn btn-effect-ripple btn-primary loader" value="Save">
                     <input type="submit" name="cancel" class="btn btn-effect-ripple btn-danger loader" value="Cancel">
                 </div>
             </div>

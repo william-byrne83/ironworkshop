@@ -34,10 +34,10 @@ define('SITE_URL', $baseURL);
 /** Database Connection (LOCAL, DEV or LIVE) */
 define('DB_TYPE', 'mysql');
 if(SITE_STATUS == 'LIVE'){
-	define('DB_USER', 'luxuryle_admin');
- 	define('DB_PASSWORD', 'bXAjJpV5P8CbUu8n');
- 	define('DB_HOST', 'localhost');
- 	define('DB_NAME', 'luxuryle_backoffice_live');
+	define('DB_USER', 'works-glw-u-055155');
+ 	define('DB_PASSWORD', 'xRHqRB.cb');
+ 	define('DB_HOST', '10.16.16.4');
+ 	define('DB_NAME', 'works-glw-u-055155');
 
 }elseif(SITE_STATUS == 'DEV'){
 	define('DB_USER', 'root');
@@ -50,6 +50,11 @@ if(SITE_STATUS == 'LIVE'){
  	define('DB_PASSWORD', '');
  	define('DB_HOST', 'localhost');
  	define('DB_NAME', 'ironworkshop');
+
+//    define('DB_USER', 'works-glw-u-055155');
+//    define('DB_PASSWORD', 'xRHqRB.cb');
+//    define('DB_HOST', '10.16.16.4');
+//    define('DB_NAME', 'works-glw-u-055155');
 }
 
 /** Format URL */

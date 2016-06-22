@@ -14,29 +14,30 @@
 $routeArray = array();
 $routeArray[] = Route::addRoute("Login",
                  "/backoffice/login",
-                 "Backoffice",
-                 "AdminUsers",
+                 "backoffice",
+                 "adminUsers",
                  "login"
 );
 
 $routeArray[] = Route::addRoute("Login",
                  "/backoffice/logout",
-                 "Backoffice",
-                 "AdminUsers",
+                 "backoffice",
+                 "adminUsers",
                  "logout"
 );
 
-$routeArray[] = Route::addRoute("Login",
-                 "/login",
-                 NULL,
-                 "Users",
-                 "login"
-);
 
-$routeArray[] = Route::addRoute("Login",
-                 "/logout",
-                 NULL,
-                 "Users",
-                 "logout"
-);
+//$routeArray[] = Route::addRoute("Login",
+//                 "/login",
+//                 NULL,
+//                 "users",
+//                 "login"
+//);
+//
+//$routeArray[] = Route::addRoute("Login",
+//                 "/logout",
+//                 NULL,
+//                 "users",
+//                 "logout"
+//);
 

@@ -10,6 +10,8 @@ require_once('app/app_start/bundleConfig.php');
 spl_autoload_register('AppAutoloader::coreLoader');
 spl_autoload_register('AppAutoloader::helperLoader');
 
+//DEBUG::printr('test');die;
+
 class AppAutoloader{
 	/**
 	 * Core Loader
@@ -36,6 +38,7 @@ class AppAutoloader{
 
 // Create new instance of the app
 $app = new Bootstrap();
+
 
 // End Output Buffering
 ob_flush();

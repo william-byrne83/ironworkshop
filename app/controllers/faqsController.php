@@ -7,7 +7,7 @@ class FaqsController extends BaseController {
     public function __construct(){
         parent::__construct();
         // Load the User Model ($modelName, $area)
-        $this->_model = $this->loadModel('Faqs');
+        $this->_model = $this->loadModel('faqs');
     }
 
     /**
@@ -16,7 +16,6 @@ class FaqsController extends BaseController {
      * This method handles the view awards page
      */
     public function index(){
-        Auth::checkAdminLogin();
 
         // Set the Page Title ('pageName', 'pageSection', 'areaName')
         $this->_view->pageTitle = array('Faq');

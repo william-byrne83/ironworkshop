@@ -7,7 +7,7 @@ class GalleriesController extends BaseController {
     public function __construct(){
         parent::__construct();
         // Load the User Model ($modelName, $area)
-        $this->_model = $this->loadModel('Galleries');
+        $this->_model = $this->loadModel('galleries');
     }
 
     /**

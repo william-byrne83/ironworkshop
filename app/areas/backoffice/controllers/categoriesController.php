@@ -7,7 +7,7 @@ class CategoriesController extends BaseController {
 	public function __construct(){
 		parent::__construct();
 		// Load the User Model ($modelName, $area)
-		$this->_model = $this->loadModel('CategoriesBackoffice', 'backoffice');
+		$this->_model = $this->loadModel('categoriesBackoffice', 'backoffice');
 	}
 
     /**

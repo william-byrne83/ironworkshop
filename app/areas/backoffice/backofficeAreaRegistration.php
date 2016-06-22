@@ -2,9 +2,9 @@
 class BackofficeArea{
 	public static function registerArea(){    
 		$areaArray = array(
-			"areaName" => "Backoffice",
+			"areaName" => "backoffice",
 			"areaUrl" => "backoffice/",
-			"areaController" => "adminusers",
+			"areaController" => "adminUsers",
 			"areaAction" => "index"
 		);
 		return $areaArray;

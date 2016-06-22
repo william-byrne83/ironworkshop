@@ -7,8 +7,8 @@ class HomepageImagesController extends BaseController {
 	public function __construct(){
 		parent::__construct();
 		// Load the User Model ($modelName, $area)
-		$this->_model = $this->loadModel('HomepageImagesBackoffice', 'backoffice');
-        $this->_homepagesModel = $this->loadModel('HomepagesBackoffice', 'backoffice');
+		$this->_model = $this->loadModel('homepageImagesBackoffice', 'backoffice');
+        $this->_homepagesModel = $this->loadModel('homepagesBackoffice', 'backoffice');
 
 	}
 
@@ -120,6 +120,14 @@ class HomepageImagesController extends BaseController {
             }else{
                 //calls function that moves resourced documents
                 $this->uploadFile($_FILES);
+
+                if(isset($_POST['imagebase64'])){
+                    $data = $_POST['imagebase64'];
+                    list($type, $data) = explode(';', $data);
+                    list(, $data)      = explode(',', $data);
+                    $data = base64_decode($data);
+                    file_put_contents('assets/uploads/homepages/'. $_POST['image'][0], $data);
+                }
             }
 
             // Update Store Image details
@@ -235,10 +243,19 @@ class HomepageImagesController extends BaseController {
 			    Url::redirect('backoffice/homepage-images/index/'.$id);
 		    }
 
+
             if(!isset($_FILES) || empty($_FILES['image']['name'])){
                 $_POST['image'] = null;
             }else{
                 $this->uploadFile($_FILES);
+
+                if(isset($_POST['imagebase64'])){
+                    $data = $_POST['imagebase64'];
+                    list($type, $data) = explode(';', $data);
+                    list(, $data)      = explode(',', $data);
+                    $data = base64_decode($data);
+                    file_put_contents('assets/uploads/homepages/'. $_POST['image'][0], $data);
+                }
             }
 
             // Create new Store Image

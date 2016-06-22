@@ -48,7 +48,7 @@
 
             <?php if(isset($this->stored_data['id']) && $this->stored_data['id'] != null && !empty($this->stored_data['image'])){?>
                 <div class="form-group">
-                    <label class="col-md-2 control-label" for="current file">Current Store Image</label>
+                    <label class="col-md-2 control-label" for="current file">Current Trainer Image</label>
                     <div class="col-md-10 double-input">
                         <div class="col-md-5">
                             <td><img src="/image.php?width=120&height=120&image=/assets/uploads/trainers/<?php echo $this->stored_data['image']?>" alt="<?php echo $this->stored_data['image']?>"></td>
@@ -64,13 +64,19 @@
             <?php } ?>
 
             <div class="form-group <?php if ((!empty($this->error)) && array_key_exists('image', $this->error)) { echo 'has-error'; }?>">
-                <label class="col-md-2 control-label" for="file">Store Image <span class="text-danger">*</span></label>
+                <label class="col-md-2 control-label" for="file">Trainer Image <span class="text-danger">*</span></label>
                 <div class="col-md-5">
                     <input type="file" name="image" id="image">
+                    <input type="hidden" id="imagebase64" name="imagebase64">
+
                     <span class = "help-block">Note: Width:450px x Height:600px recommended.</span>
                     <?php if(isset($this->stored_data['image']) && !empty($this->stored_data['image'])){?>
                         <span class = "help-block">Note: Uploading a new Image will remove the previous one.</span>
                     <?php } ?>
+                </div>
+
+                <div class="col-md-5">
+                    <div id = "trainer-image"></div>
                 </div>
             </div>
 
@@ -86,7 +92,7 @@
 
             <div class="form-group form-actions">
                 <div class="col-md-5 col-md-offset-2">
-                    <input type="submit" name="save" class="btn btn-effect-ripple btn-primary loader" value="Save">
+                    <input id = "save" type="submit" name="save" class="btn btn-effect-ripple btn-primary loader" value="Save">
                     <input type="submit" name="cancel" class="btn btn-effect-ripple btn-danger loader" value="Cancel">
                 </div>
             </div>

@@ -7,7 +7,7 @@ class TrainersController extends BaseController {
     public function __construct(){
         parent::__construct();
         // Load the User Model ($modelName, $area)
-        $this->_model = $this->loadModel('Trainers');
+        $this->_model = $this->loadModel('trainers');
     }
 
     /**

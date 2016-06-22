@@ -79,10 +79,16 @@
                 <label class="col-md-2 control-label" for="file">About Image </label>
                 <div class="col-md-5">
                     <input type="file" name="image1" id="image1">
+                    <input type="hidden" id="imagebase64" name="imagebase64">
+
                     <span class = "help-block">Note: 700px Width 355px Height</span>
                     <?php if(isset($this->stored_data['image1']) && !empty($this->stored_data['image1'])){?>
                         <span class = "help-block">Note: Uploading a new Image will remove the previous one.</span>
                     <?php } ?>
+                </div>
+
+                <div class="col-md-5">
+                    <div id = "about-us-image"></div>
                 </div>
             </div>
 
@@ -107,10 +113,16 @@
                 <label class="col-md-2 control-label" for="file">About Image 2</label>
                 <div class="col-md-5">
                     <input type="file" name="image2" id="image2">
+                    <input type="hidden" id="imagebase642" name="imagebase642">
+
                     <span class = "help-block">Note: 570px Width 530px Height</span>
                     <?php if(isset($this->stored_data['image2']) && !empty($this->stored_data['image2'])){?>
                         <span class = "help-block">Note: Uploading a new Image 2 will remove the previous one.</span>
                     <?php } ?>
+                </div>
+
+                <div class="col-md-5">
+                    <div id = "about-us2-image"></div>
                 </div>
             </div>
 
@@ -165,7 +177,7 @@
 
             <div class="form-group form-actions">
                 <div class="col-md-5 col-md-offset-2">
-                    <input type="submit" name="save" class="btn btn-effect-ripple btn-primary loader" value="Save">
+                    <input id="save" type="submit" name="save" class="btn btn-effect-ripple btn-primary loader" value="Save">
                     <input type="submit" name="cancel" class="btn btn-effect-ripple btn-danger loader" value="Cancel">
                 </div>
             </div>

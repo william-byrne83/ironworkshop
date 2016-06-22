@@ -217,7 +217,7 @@ class AdminUsersController extends BaseController {
 		if(Session::get('AdminLoggedIn') == true){
             $this->_view->flash[] = "You are already logged in";
             Session::set('backofficeFlash', array($this->_view->flash, 'failure'));
-			Url::redirect('backoffice/users');
+			Url::redirect('backoffice/adminUsers');
 		}
         // Set the Page Title ('pageName', 'pageSection', 'areaName')
 		$this->_view->pageTitle = array('Login', 'Login');

@@ -7,7 +7,7 @@ class ContactUsController extends BaseController {
 	public function __construct(){
 		parent::__construct();
 		// Load the User Model ($modelName, $area)
-		$this->_model = $this->loadModel('ContactUsBackoffice', 'backoffice');
+		$this->_model = $this->loadModel('contactUsBackoffice', 'backoffice');
 	}
 
     /**

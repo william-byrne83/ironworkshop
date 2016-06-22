@@ -7,7 +7,7 @@ class ResultsController extends BaseController {
 	public function __construct(){
 		parent::__construct();
 		// Load the User Model ($modelName, $area)
-		$this->_model = $this->loadModel('ResultsBackoffice', 'backoffice');
+		$this->_model = $this->loadModel('resultsBackoffice', 'backoffice');
 	}
 
     /**
@@ -89,7 +89,7 @@ class ResultsController extends BaseController {
 		// Set default variables
 		$this->_view->error = array();
 
-        $this->_trainerModel = $this->loadModel('TrainersBackoffice', 'backoffice');
+        $this->_trainerModel = $this->loadModel('trainersBackoffice', 'backoffice');
         $this->_view->trainers = $this->_trainerModel->getAllData(false, false, 1);
 
         // If Form has been submitted process it
@@ -102,6 +102,14 @@ class ResultsController extends BaseController {
             }else{
                 //calls function that moves resourced documents
                 $this->uploadFile($_FILES);
+
+                if(isset($_POST['imagebase64'])){
+                    $data = $_POST['imagebase64'];
+                    list($type, $data) = explode(';', $data);
+                    list(, $data)      = explode(',', $data);
+                    $data = base64_decode($data);
+                    file_put_contents('assets/uploads/results/'. $_POST['image'][0], $data);
+                }
             }
 
             // Update Results details
@@ -206,7 +214,7 @@ class ResultsController extends BaseController {
 
         $this->_view->error = array();
 
-        $this->_trainerModel = $this->loadModel('TrainersBackoffice', 'backoffice');
+        $this->_trainerModel = $this->loadModel('trainersBackoffice', 'backoffice');
         $this->_view->trainers = $this->_trainerModel->getAllData(false, false, 1);
 
         // If Form has been submitted process it
@@ -220,6 +228,14 @@ class ResultsController extends BaseController {
                 $_POST['image'] = null;
             }else{
                 $this->uploadFile($_FILES);
+
+                if(isset($_POST['imagebase64'])){
+                    $data = $_POST['imagebase64'];
+                    list($type, $data) = explode(';', $data);
+                    list(, $data)      = explode(',', $data);
+                    $data = base64_decode($data);
+                    file_put_contents('assets/uploads/results/'. $_POST['image'][0], $data);
+                }
             }
 
             // Create new Results

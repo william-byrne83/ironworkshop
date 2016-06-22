@@ -7,8 +7,8 @@ class StoreImagesController extends BaseController {
 	public function __construct(){
 		parent::__construct();
 		// Load the User Model ($modelName, $area)
-		$this->_model = $this->loadModel('StoreImagesBackoffice', 'backoffice');
-        $this->_storeModel = $this->loadModel('StoresBackoffice', 'backoffice');
+		$this->_model = $this->loadModel('storeImagesBackoffice', 'backoffice');
+        $this->_storeModel = $this->loadModel('storesBackoffice', 'backoffice');
 
 	}
 
@@ -120,6 +120,14 @@ class StoreImagesController extends BaseController {
             }else{
                 //calls function that moves resourced documents
                 $this->uploadFile($_FILES);
+
+                if(isset($_POST['imagebase64'])){
+                    $data = $_POST['imagebase64'];
+                    list($type, $data) = explode(';', $data);
+                    list(, $data)      = explode(',', $data);
+                    $data = base64_decode($data);
+                    file_put_contents('assets/uploads/store/'. $_POST['image'][0], $data);
+                }
             }
 
             // Update Store Image details
@@ -239,6 +247,14 @@ class StoreImagesController extends BaseController {
                 $_POST['image'] = null;
             }else{
                 $this->uploadFile($_FILES);
+
+                if(isset($_POST['imagebase64'])){
+                    $data = $_POST['imagebase64'];
+                    list($type, $data) = explode(';', $data);
+                    list(, $data)      = explode(',', $data);
+                    $data = base64_decode($data);
+                    file_put_contents('assets/uploads/store/'. $_POST['image'][0], $data);
+                }
             }
 
             // Create new Store Image

@@ -7,7 +7,7 @@ class HomepagesController extends BaseController {
 	public function __construct(){
 		parent::__construct();
 		// Load the User Model ($modelName, $area)
-		$this->_model = $this->loadModel('HomepagesBackoffice', 'backoffice');
+		$this->_model = $this->loadModel('homepagesBackoffice', 'backoffice');
 	}
 
     /**
@@ -141,7 +141,7 @@ class HomepagesController extends BaseController {
                 if(isset($_POST) && !empty($_POST)) {
                     if (!empty($_POST['delete'])) {
                         // Need to delete all the child images/files
-                        $this->_imagesModel = $this->loadModel('HomepageImagesBackoffice', 'backoffice');
+                        $this->_imagesModel = $this->loadModel('homepageImagesBackoffice', 'backoffice');
                         $images = $this->_imagesModel->getAllData(false, false, false, $id);
                         if(!empty($images)){
                             foreach($images as $image){

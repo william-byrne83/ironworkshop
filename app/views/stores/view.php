@@ -20,7 +20,7 @@
                     <ul class="slide-wrapper  wow bounceInLeft">
                         <?php foreach($this->data[0]['images'] as $image){?>
                             <li class="slide">
-                                <img src="/assets/uploads/store/<?php echo $image['image']?>" alt="<?php echo $image['title']?>">
+                                <img src="/assets/uploads/store/<?php echo $image['image']?>" alt="<?php echo $image['title']?>" style = "width:1200px">
                             </li>
                         <?php } ?>
                     </ul>

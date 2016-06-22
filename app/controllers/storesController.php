@@ -7,7 +7,7 @@ class StoresController extends BaseController {
     public function __construct(){
         parent::__construct();
         // Load the User Model ($modelName, $area)
-        $this->_model = $this->loadModel('Stores');
+        $this->_model = $this->loadModel('stores');
     }
 
     /**

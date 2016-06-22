@@ -21,7 +21,7 @@
                             <div class="entry-date"><span class="d-text-c"><?php echo date('d', strtotime($this->data[0]['date']))?></span> <?php echo date('M', strtotime($this->data[0]['date']))?></div>
                             <div class="entry-cover">
                                 <?php if(isset($this->data[0]['image']) && !empty($this->data[0]['image'])){?>
-                                    <img src="/assets/images/blog-f1.jpg" alt="blog image" />
+                                    <img src="/assets/uploads/news/<?php echo $this->data[0]['image']?>" alt="<?php echo $this->data[0]['image']?>" />
                                 <?php }elseif(isset($this->data[0]['video']) && !empty($this->data[0]['video'])){?>
                                     <?php $link = explode('v=',$this->data[0]['video'])?>
                                     <iframe id="ytplayer" type="text/html" width="900" height="600"

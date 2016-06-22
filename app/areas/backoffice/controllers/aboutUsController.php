@@ -7,7 +7,7 @@ class AboutUsController extends BaseController {
 	public function __construct(){
 		parent::__construct();
 		// Load the User Model ($modelName, $area)
-		$this->_model = $this->loadModel('AboutUsBackoffice', 'backoffice');
+		$this->_model = $this->loadModel('aboutUsBackoffice', 'backoffice');
 	}
 
     /**
@@ -98,6 +98,22 @@ class AboutUsController extends BaseController {
                 }else{
                     //calls function that moves resourced documents
                     $this->uploadFile($_FILES, $i);
+
+                    if(isset($_POST['imagebase64'])){
+                        $data = $_POST['imagebase64'];
+                        list($type, $data) = explode(';', $data);
+                        list(, $data)      = explode(',', $data);
+                        $data = base64_decode($data);
+                        file_put_contents('assets/uploads/homepages/'. $_POST['image'.$i][0], $data);
+                    }
+
+                    if(isset($_POST['imagebase642']) && $i == 2){
+                        $data2 = $_POST['imagebase642'];
+                        list($type, $data2) = explode(';', $data2);
+                        list(, $data2)      = explode(',', $data2);
+                        $data2 = base64_decode($data2);
+                        file_put_contents('assets/uploads/homepages/'. $_POST['image'.$i][0], $data2);
+                    }
                 }
             }
 
@@ -224,6 +240,22 @@ class AboutUsController extends BaseController {
                     $_POST['image'.$i] = null;
                 }else{
                     $this->uploadFile($_FILES, $i);
+
+                    if(isset($_POST['imagebase64'])){
+                        $data = $_POST['imagebase64'];
+                        list($type, $data) = explode(';', $data);
+                        list(, $data)      = explode(',', $data);
+                        $data = base64_decode($data);
+                        file_put_contents('assets/uploads/homepages/'. $_POST['image'.$i][0], $data);
+                    }
+
+                    if(isset($_POST['imagebase642'])){
+                        $data = $_POST['imagebase642'];
+                        list($type, $data) = explode(';', $data);
+                        list(, $data)      = explode(',', $data);
+                        $data = base64_decode($data);
+                        file_put_contents('assets/uploads/homepages/'. $_POST['image'.$i][0], $data);
+                    }
                 }
             }
 

@@ -16,7 +16,7 @@
 
             <ul class="sidebar-nav">
                 <li>
-                	<a href="/backoffice/adminusers/" <?php echo isset($this->pageSection) && $this->pageSection == 'Admin Users' ? ' class="active"' : ''; ?>>
+                	<a href="/backoffice/admin-users/" <?php echo isset($this->pageSection) && $this->pageSection == 'Admin Users' ? ' class="active"' : ''; ?>>
 						<i class="fa fa-user sidebar-nav-icon"></i>
 						<span class="sidebar-nav-mini-hide">Admin Users</span>
 					</a>

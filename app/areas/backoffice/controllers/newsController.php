@@ -7,7 +7,7 @@ class NewsController extends BaseController {
 	public function __construct(){
 		parent::__construct();
 		// Load the User Model ($modelName, $area)
-		$this->_model = $this->loadModel('NewsBackoffice', 'backoffice');
+		$this->_model = $this->loadModel('newsBackoffice', 'backoffice');
 	}
 
     /**
@@ -91,7 +91,7 @@ class NewsController extends BaseController {
 		$this->_view->error = array();
 
         // Need to get Categories for select
-        $this->_categoriesModel = $this->loadModel('CategoriesBackoffice', 'backoffice');
+        $this->_categoriesModel = $this->loadModel('categoriesBackoffice', 'backoffice');
         $this->_view->categories = $this->_categoriesModel->getAllData(false, false, 1);
 
         // If Form has been submitted process it
@@ -105,6 +105,14 @@ class NewsController extends BaseController {
             }else{
                 //calls function that moves resourced documents
                 $this->uploadFile($_FILES);
+
+                if(isset($_POST['imagebase64'])){
+                    $data = $_POST['imagebase64'];
+                    list($type, $data) = explode(';', $data);
+                    list(, $data)      = explode(',', $data);
+                    $data = base64_decode($data);
+                    file_put_contents('assets/uploads/news/'. $_POST['image'][0], $data);
+                }
             }
 
             // Update News details
@@ -219,7 +227,7 @@ class NewsController extends BaseController {
         $this->_view->error = array();
 
         // Need to get Categories for select
-        $this->_categoriesModel = $this->loadModel('CategoriesBackoffice', 'backoffice');
+        $this->_categoriesModel = $this->loadModel('categoriesBackoffice', 'backoffice');
         $this->_view->categories = $this->_categoriesModel->getAllData(false, false, 1);
 
         // If Form has been submitted process it
@@ -233,6 +241,14 @@ class NewsController extends BaseController {
                 $_POST['image'] = null;
             }else{
                 $this->uploadFile($_FILES);
+
+                if(isset($_POST['imagebase64'])){
+                    $data = $_POST['imagebase64'];
+                    list($type, $data) = explode(';', $data);
+                    list(, $data)      = explode(',', $data);
+                    $data = base64_decode($data);
+                    file_put_contents('assets/uploads/news/'. $_POST['image'][0], $data);
+                }
             }
 
             // Create new News

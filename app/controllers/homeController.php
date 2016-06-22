@@ -14,7 +14,9 @@ class HomeController extends BaseController {
 	 * This method handles the sites home page
 	 */
 	public function index(){
-		// Set the Page Title ('pageName', 'pageSection', 'areaName')
+        Auth::checkAdminLogin();
+
+        // Set the Page Title ('pageName', 'pageSection', 'areaName')
 		$this->_view->pageTitle = array('Iron Work Shop');
 		// Set Page Description
 		$this->_view->pageDescription = 'Iron Work Shop, Belfast Gym';
@@ -59,9 +61,6 @@ class HomeController extends BaseController {
 
         // Render the view ($renderBody, $layout, $area)
 		$this->_view->render('home/index');
-
-
-
 	}
 
 }
