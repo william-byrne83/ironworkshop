@@ -898,7 +898,8 @@ a {
     position: absolute;
     z-index: 13;
     max-width: 1140px;
-    margin: 350px auto 0;
+    /*margin: 350px auto 0;*/
+    margin: 350px 0 0;
     left: 0;
     text-align: center;
     right: 0;

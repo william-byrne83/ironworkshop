@@ -52,7 +52,7 @@
             </div>
 
             <div class="form-group <?php if ((!empty($this->error)) && array_key_exists('instagram', $this->error)) { echo 'has-error'; }?>">
-                <label class="col-md-2 control-label" for="instagram">Instagram Link <span class="text-danger">*</span></label>
+                <label class="col-md-2 control-label" for="instagram">Instagram Link</label>
                 <div class="col-md-5">
                     <input type="text" id="instagram" name="instagram" class="form-control" value="<?php if (!empty($this->error)) { echo Formatting::utf8_htmlentities($_POST['instagram']);} elseif(!empty($this->stored_data['instagram'])){echo $this->stored_data['instagram'];}?>">
                 </div>

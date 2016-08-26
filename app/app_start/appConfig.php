@@ -8,7 +8,7 @@ define('SITE_NAME', "Iron Workshop");
 define('SITE_EMAIL', "info@temp.com");
 define('ERROR_EMAIL', "will_byrne56@hotmail.com"); // Used for error reporting
 define('ROOT', $_SERVER['DOCUMENT_ROOT'].'/'); // Site Document Root
-define('MAX_FILE_SIZE', 8388608); // Maximum Upload Size 8MB
+define('MAX_FILE_SIZE', 83886080); // Maximum Upload Size 80MB
 define('CURRENT_PAGE', basename($_SERVER['SCRIPT_NAME'])); // Used for nav active states
 define('CURRENT_URL', $_SERVER['REQUEST_URI']); // Used for nav active states
 define("DAYS", "Mon,Tues,Wed,Thurs,Fri,Sat,Sun");

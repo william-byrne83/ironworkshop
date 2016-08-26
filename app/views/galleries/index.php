@@ -21,7 +21,7 @@
                                         <div class="item-image d-border-c">
                                             <div class="item-hover">
                                                 <div class="item-hover-bg d-bg-c"></div>
-                                                <h5><a href="/galleries/view/<?php echo $data['slug']?>"><img src="/assets/images/photo-format.png" alt="photo" />View</a></h5>
+                                                <h5><a href="/galleries/view/<?php echo $data['id']?>"><img src="/assets/images/photo-format.png" alt="photo" />View</a></h5>
                                             </div>
                                             <?php if (isset($data['image']) && !empty($data['image'])){?>
                                                 <img src="/assets/uploads/galleries/<?php echo $data['image']?>" alt="<?php echo $data['title']?>" style ="width:300px; height:300px"/>

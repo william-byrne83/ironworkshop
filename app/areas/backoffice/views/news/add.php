@@ -36,7 +36,7 @@
         </div>
         <?php } ?>
         <!-- General Elements Content -->
-        <form action="" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
+        <form id="form" action="" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
 
             <div class="form-group <?php if ((!empty($this->error)) && array_key_exists('title', $this->error)) { echo 'has-error'; }?>">
                 <label class="col-md-2 control-label" for="meta_title">News Title <span class="text-danger">*</span></label>

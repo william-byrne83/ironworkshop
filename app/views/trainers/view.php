@@ -58,7 +58,7 @@
         <h1 class="styled">Find More About <?php echo $this->data[0]['name']?></h1>
         <ul class="socials">
             <?php if(!empty($this->data[0]['facebook'])){?>
-                <li><a href="<?php echo $this->data[0]['facebook'];?>" target = _blank class="d-text-c d-border-c"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://<?php echo $this->data[0]['facebook'];?>" target = _blank class="d-text-c d-border-c"><i class="fa fa-facebook"></i></a></li>
             <?php } ?>
 
             <?php if(!empty($this->data[0]['twitter'])){?>
@@ -66,7 +66,7 @@
             <?php } ?>
 
             <?php if(!empty($this->data[0]['instagram'])){?>
-                <li><a href="<?php echo $this->data[0]['instagram'];?>" target = _blank class="d-text-c d-border-c"><i class="fa fa-instagram"></i></a></li>
+                <li><a href="https://www.instagram.com/<?php echo $this->data[0]['instagram'];?>" target = _blank class="d-text-c d-border-c"><i class="fa fa-instagram"></i></a></li>
             <?php } ?>
 
             <?php if(!empty($this->data[0]['google'])){?>

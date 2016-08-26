@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-<!--                <div class="logo"><a class="to-top" href="index.html"><img src="/assets/images/IRON-WORKSHOP-BACK.png" alt="logo"/></a></div>-->
+                <div class="logo"><a class="to-top" href="index.html"><img src="/assets/images/logo-for-wall.png" alt="logo"/></a></div>
             </div>
             <div class="col-md-9">
                 <nav class="menu">

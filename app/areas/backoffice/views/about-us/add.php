@@ -36,7 +36,7 @@
         </div>
         <?php } ?>
         <!-- General Elements Content -->
-        <form action="" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
+        <form id="form" action="" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
 <!--            <div class="form-group">-->
 <!--                <label class="col-md-2 control-label" for="view">View Page</label>-->
 <!--                <div class="col-md-5">-->

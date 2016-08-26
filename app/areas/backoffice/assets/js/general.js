@@ -118,6 +118,7 @@ jQuery(document).ready(function(){
 
 
         $('#save').on('click', function (ev) {
+            ev.preventDefault();
             $uploadCrop.croppie('result', {
                 type: 'canvas',
                 size: 'original'
@@ -195,6 +196,7 @@ jQuery(document).ready(function(){
 
 
             $('#save').on('click', function (ev) {
+                ev.preventDefault();
                 $uploadCrop2.croppie('result', {
                     type: 'canvas',
                     size: 'original'

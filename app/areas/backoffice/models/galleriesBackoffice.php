@@ -18,33 +18,33 @@ class GalleriesBackoffice extends Model{
             $return[$key] = $input;
 
             //title
-            if($key == 'title'){
-                //required
-                if(empty($input) || $input == null){
-                    $return['error'][$key] = 'Image Title cannot be empty';
-                }else{
-                    // Creating slug based off formatted title.
-                    $temp = Formatting::removeAccents($input);
-					$temp = FormatUrl($temp);
-                    $return['slug'] = $temp;
-                }
-
-                //unique
-                if($type != 'edit') {
-                    $temp = $this->selectDataByTitle($input);
-                    if (!empty($temp) || $temp != null) {
-                        $return['error'][$key] = "This Title already exists";
-                    }
-                }else{
-                    //if the edited title is different than their previous one, check its unique.
-                    if($input != $return['stored_title']){
-                        $temp = $this->selectDataByTitle($input);
-                        if (!empty($temp) || $temp != null) {
-                            $return['error'][$key] = "This Title already exists";
-                        }
-                    }
-                }
-            }
+//            if($key == 'title'){
+//                //required
+//                if(empty($input) || $input == null){
+//                    $return['error'][$key] = 'Image Title cannot be empty';
+//                }else{
+//                    // Creating slug based off formatted title.
+//                    $temp = Formatting::removeAccents($input);
+//					$temp = FormatUrl($temp);
+//                    $return['slug'] = $temp;
+//                }
+//
+//                //unique
+//                if($type != 'edit') {
+//                    $temp = $this->selectDataByTitle($input);
+//                    if (!empty($temp) || $temp != null) {
+//                        $return['error'][$key] = "This Title already exists";
+//                    }
+//                }else{
+//                    //if the edited title is different than their previous one, check its unique.
+//                    if($input != $return['stored_title']){
+//                        $temp = $this->selectDataByTitle($input);
+//                        if (!empty($temp) || $temp != null) {
+//                            $return['error'][$key] = "This Title already exists";
+//                        }
+//                    }
+//                }
+//            }
 
         }
         return $return;

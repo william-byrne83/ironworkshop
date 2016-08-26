@@ -36,7 +36,7 @@
         </div>
         <?php } ?>
         <!-- General Elements Content -->
-        <form action="" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
+        <form id="form" action="" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
             <input type="hidden" id="trainer_id" name="trainer_id" class="form-control" value="<?php echo $this->parent_id?>">
 
             <div class="form-group <?php if ((!empty($this->error)) && array_key_exists('title', $this->error)) { echo 'has-error'; }?>">

@@ -23,7 +23,7 @@
 <body class="home-page">
     <div class="load-complete">
         <div class="load-position">
-            <div class="logo"><img src="/assets/images/IRON-WORKSHOP-BACK.gif" alt="logo"/></div>
+            <div class="logo"><img src="/assets/images/logo-for-wall.png" alt="logo"/></div>
             <h6>Please wait, loading...</h6>
             <div class="loading">
                 <div class="loading-line"></div>

@@ -165,7 +165,7 @@
                                 <div class="entry-date"><span class="d-text-c"><?php echo date('d', strtotime($news['date']))?></span> <?php echo date('M', strtotime($news['date']))?></div>
                                 <div class="entry-cover">
                                     <?php if (isset($news['image']) && !empty($news['image'])){?>
-                                        <a href="/news/view/<?php echo $news['slug']?>/"><img src="/assets/uploads/news/<?php echo $news['image']?>" alt="<?php echo $news['title']?>" style = "width:495px;" /></a>
+                                        <a href="/news/view/<?php echo $news['slug']?>/"><img src="/assets/uploads/news/<?php echo $news['image']?>" alt="<?php echo $news['title']?>" style = "width:495px;" ></a>
                                     <?php }elseif(isset($news['video']) && !empty($news['video'])) {?>
                                         <?php $link = explode('v=', $news['video'])?>
                                         <a href="/news/view/<?php echo $news['slug']?>/"><img src="http://img.youtube.com/vi/<?php echo $link[1]?>/mqdefault.jpg" alt="<?php echo $news['title']?>" style ="width:495px; height:575px"></a>
@@ -203,7 +203,7 @@
                             <div class="trainer wow <?php echo $class?>">
                                 <ul class="socials d-bg-c wow fadeInUp">
                                     <?php if(!empty($trainer['facebook'])){?>
-                                        <li><a href="<?php echo $trainer['facebook'];?>" target = _blank><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="http://<?php echo $trainer['facebook'];?>" target = _blank><i class="fa fa-facebook"></i></a></li>
                                     <?php } ?>
 
                                     <?php if(!empty($trainer['twitter'])){?>
@@ -211,7 +211,7 @@
                                     <?php } ?>
 
                                     <?php if(!empty($trainer['instagram'])){?>
-                                        <li><a href="<?php echo $trainer['instagram'];?>" target = _blank><i class="fa fa-instagram"></i></a></li>
+                                        <li><a href="https://www.instagram.com/<?php echo $trainer['instagram'];?>" target = _blank><i class="fa fa-instagram"></i></a></li>
                                     <?php } ?>
 
                                     <?php if(!empty($trainer['google'])){?>
@@ -291,16 +291,16 @@
                     <div class="col-md-6 wow bounceInLeft">
                         <div class="pricing-table">
                             <div class="pricing-table-price d-bg-c"><span>Facebook</span></div>
-                            <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FIron-Workshop-1479599665631954&tabs=timeline&width=500&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="500" height="500" style="border:none;overflow:hidden;margin-left:25px; " scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+                            <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FIron-Workshop-1479599665631954&tabs=timeline&width=5000&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="500" height="500" style="border:none;overflow:hidden;margin-left:25px; " scrolling="no" frameborder="0" allowTransparency="true"></iframe>
                         </div>
                     </div>
-                    <div class="col-md-6 wow fadeInDown">
-                        <div class="pricing-table popular-table d-bg-c">
-                            <div class="pricing-table-price d-text-c"><span>Twitter</span></div>
-                            <a class="twitter-timeline" href="https://twitter.com/gwam831" data-widget-id="740072657144696833"  width="500" height="500" style = "margin-left:25px;">Tweets by @gwam831</a>
-                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script><!--                            <ul class="pricing-table-stuff">-->
-                        </div>
-                    </div>
+<!--                    <div class="col-md-6 wow fadeInDown">-->
+<!--                        <div class="pricing-table popular-table d-bg-c">-->
+<!--                            <div class="pricing-table-price d-text-c"><span>Twitter</span></div>-->
+<!--                            <a class="twitter-timeline" href="https://twitter.com/gwam831" data-widget-id="740072657144696833"  width="500" height="500" style = "margin-left:25px;">Tweets by @gwam831</a>-->
+<!--                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script><!--                            <ul class="pricing-table-stuff">-->-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
             </div>
         </div>

@@ -40,7 +40,7 @@
               .css('position', '')
               .css('top', '');
             s.stickyElement.parent().removeClass(s.className);
-              $(".to-top img").attr("src","/assets/images/IRON-WORKSHOP-BACK.png");
+              //$(".to-top img").attr("src","/assets/images/IRON-WORKSHOP-BACK.png");
             s.currentTop = null;
           }
         }
@@ -62,7 +62,7 @@
             }
 
             s.stickyElement.parent().addClass(s.className);
-              $(".to-top img").attr("src","/assets/images/IRON-WORKSHOP-BACK-SMALL.png");
+              //$(".to-top img").attr("src","/assets/images/IRON-WORKSHOP-BACK-SMALL.png");
               s.currentTop = newTop;
           }
         }

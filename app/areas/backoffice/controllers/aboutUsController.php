@@ -104,6 +104,8 @@ class AboutUsController extends BaseController {
                         list($type, $data) = explode(';', $data);
                         list(, $data)      = explode(',', $data);
                         $data = base64_decode($data);
+                        $mimes = array('.jpg', '.gif', '.jpeg');
+                        $_POST['image'.$i][0] = str_replace($mimes, '.png', $_POST['image'.$i][0]);
                         file_put_contents('assets/uploads/homepages/'. $_POST['image'.$i][0], $data);
                     }
 
@@ -112,6 +114,8 @@ class AboutUsController extends BaseController {
                         list($type, $data2) = explode(';', $data2);
                         list(, $data2)      = explode(',', $data2);
                         $data2 = base64_decode($data2);
+                        $mimes = array('.jpg', '.gif', '.jpeg');
+                        $_POST['image'.$i][0] = str_replace($mimes, '.png', $_POST['image'.$i][0]);
                         file_put_contents('assets/uploads/homepages/'. $_POST['image'.$i][0], $data2);
                     }
                 }
@@ -246,6 +250,8 @@ class AboutUsController extends BaseController {
                         list($type, $data) = explode(';', $data);
                         list(, $data)      = explode(',', $data);
                         $data = base64_decode($data);
+                        $mimes = array('.jpg', '.gif', '.jpeg');
+                        $_POST['image'.$i][0] = str_replace($mimes, '.png', $_POST['image'.$i][0]);
                         file_put_contents('assets/uploads/homepages/'. $_POST['image'.$i][0], $data);
                     }
 
@@ -254,6 +260,8 @@ class AboutUsController extends BaseController {
                         list($type, $data) = explode(';', $data);
                         list(, $data)      = explode(',', $data);
                         $data = base64_decode($data);
+                        $mimes = array('.jpg', '.gif', '.jpeg');
+                        $_POST['image'.$i][0] = str_replace($mimes, '.png', $_POST['image'.$i][0]);
                         file_put_contents('assets/uploads/homepages/'. $_POST['image'.$i][0], $data);
                     }
                 }

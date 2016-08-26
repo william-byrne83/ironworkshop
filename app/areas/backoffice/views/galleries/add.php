@@ -36,10 +36,10 @@
         </div>
         <?php } ?>
         <!-- General Elements Content -->
-        <form action="" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
+        <form id="form" action="" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
 
             <div class="form-group <?php if ((!empty($this->error)) && array_key_exists('title', $this->error)) { echo 'has-error'; }?>">
-                <label class="col-md-2 control-label" for="meta_title">Image Title <span class="text-danger">*</span></label>
+                <label class="col-md-2 control-label" for="meta_title">Image Title <!--<span class="text-danger">*</span>--></label>
                 <div class="col-md-5">
                     <input type="text" id="title" name="title" class="form-control" value="<?php if (!empty($this->error)) { echo Formatting::utf8_htmlentities($_POST['title']);} elseif(!empty($this->stored_data['title'])){echo $this->stored_data['title'];}?>">
                 </div>

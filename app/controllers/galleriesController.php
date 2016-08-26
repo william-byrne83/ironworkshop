@@ -53,7 +53,7 @@ class GalleriesController extends BaseController {
      * @param string $slug
      * This method handles the view awards page
      */
-    public function view($slug){
+    public function view($id){
         // Set the Page Title ('pageName', 'pageSection', 'areaName')
         $this->_view->pageTitle = array('Gallery');
         // Set Page Description
@@ -63,7 +63,7 @@ class GalleriesController extends BaseController {
         // Set Page Sub Section
         $this->_view->pageSubSection = 'Gallery Index';
 
-        $this->_view->data = $this->_model->selectDataBySlug($slug);
+        $this->_view->data = $this->_model->selectDataById($id);
 
         // Render the view ($renderBody, $layout, $area)
         $this->_view->render('galleries/view', 'layout');

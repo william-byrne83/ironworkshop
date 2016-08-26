@@ -126,6 +126,8 @@ class TrainerImagesController extends BaseController {
                     list($type, $data) = explode(';', $data);
                     list(, $data)      = explode(',', $data);
                     $data = base64_decode($data);
+                    $mimes = array('.jpg', '.gif', '.jpeg');
+                    $_POST['image'][0] = str_replace($mimes, '.png', $_POST['image'][0]);
                     file_put_contents('assets/uploads/trainers/'. $_POST['image'][0], $data);
                 }
             }
@@ -253,6 +255,8 @@ class TrainerImagesController extends BaseController {
                     list($type, $data) = explode(';', $data);
                     list(, $data)      = explode(',', $data);
                     $data = base64_decode($data);
+                    $mimes = array('.jpg', '.gif', '.jpeg');
+                    $_POST['image'][0] = str_replace($mimes, '.png', $_POST['image'][0]);
                     file_put_contents('assets/uploads/trainers/'. $_POST['image'][0], $data);
                 }
             }

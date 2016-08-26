@@ -28,12 +28,12 @@ class ContactUsBackoffice extends Model{
             }
 
             //instagram
-            if($key == 'instagram'){
-                //required
-                if(empty($input) || $input == null){
-                    $return['error'][$key] = 'Instagram cannot be empty';
-                }
-            }
+//            if($key == 'instagram'){
+//                //required
+//                if(empty($input) || $input == null){
+//                    $return['error'][$key] = 'Instagram cannot be empty';
+//                }
+//            }
 
             //location
             if($key == 'location'){
